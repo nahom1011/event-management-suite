@@ -9,25 +9,33 @@ interface LayoutProps {
 
 const Layout = ({ children, showNav = true }: LayoutProps) => {
     return (
-        <div className="min-h-screen relative overflow-hidden flex flex-col">
-            {/* Background blobs for depth */}
-            <div className="fixed top-[-10%] right-[-5%] w-[40%] h-[40%] bg-indigo-600/10 blur-[120px] rounded-full -z-10" />
-            <div className="fixed bottom-[-10%] left-[-5%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full -z-10" />
+        <div className="min-h-screen relative overflow-hidden flex flex-col selection:bg-primary/30 selection:text-white">
+            {/* Soft Ambient Glows */}
+            <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/5 blur-[120px] rounded-full -z-10 animate-pulse" />
+            <div className="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/5 blur-[120px] rounded-full -z-10" />
+            <div className="fixed top-[20%] right-[10%] w-[30%] h-[30%] bg-blue-600/5 blur-[100px] rounded-full -z-10" />
 
             {showNav && <Navbar />}
 
-            <main className={`flex-grow container mx-auto px-6 ${showNav ? 'pt-24 pb-12' : ''}`}>
+            <main className={`flex-grow container mx-auto px-4 md:px-8 ${showNav ? 'pt-28 pb-16' : ''}`}>
                 <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    initial={{ opacity: 0, scale: 0.99 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
                     {children}
                 </motion.div>
             </main>
 
-            <footer className="py-8 text-center text-text-dim text-sm mt-auto border-t border-white/5">
-                &copy; {new Date().getFullYear()} Eventify. Built with passion.
+            <footer className="py-12 border-t border-white/[0.03] backdrop-blur-sm">
+                <div className="container mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-text-dim text-xs uppercase tracking-widest font-medium">
+                    <div>&copy; {new Date().getFullYear()} Eventify. Digital Experience.</div>
+                    <div className="flex gap-8">
+                        <span className="hover:text-text cursor-pointer transition-colors">Privacy</span>
+                        <span className="hover:text-text cursor-pointer transition-colors">Terms</span>
+                        <span className="hover:text-text cursor-pointer transition-colors">Contact</span>
+                    </div>
+                </div>
             </footer>
         </div>
     );

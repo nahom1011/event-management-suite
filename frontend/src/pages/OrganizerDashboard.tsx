@@ -4,7 +4,7 @@ import api from '../services/api';
 import {
     Ticket, DollarSign, Activity,
     PlusCircle, ExternalLink, Edit3,
-    BarChart3, Layers, Clock, Send
+    BarChart3, Layers, Clock, Send, Users, TrendingUp, Sparkles
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -40,77 +40,94 @@ const OrganizerDashboard = () => {
     };
 
     const statCards = [
-        { title: 'Total Events', value: stats?.totalEvents || 0, icon: <Layers />, color: 'text-indigo-500', bg: 'bg-indigo-500/10' },
-        { title: 'Tickets Sold', value: stats?.totalTicketsSold || 0, icon: <Ticket />, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
-        { title: 'Total Revenue', value: `$${stats?.totalRevenue?.toLocaleString() || 0}`, icon: <DollarSign />, color: 'text-amber-500', bg: 'bg-amber-500/10' },
-        { title: 'Active Events', value: stats?.eventStatusBreakdown?.live || 0, icon: <Activity />, color: 'text-rose-500', bg: 'bg-rose-500/10' },
+        { title: 'Cluster Volume', value: stats?.totalEvents || 0, icon: <Layers size={20} />, color: 'text-indigo-400', bg: 'bg-indigo-500/10', trend: '+12%' },
+        { title: 'Node Adoption', value: stats?.totalTicketsSold || 0, icon: <Ticket size={20} />, color: 'text-emerald-400', bg: 'bg-emerald-500/10', trend: '+24%' },
+        { title: 'Credit Inflow', value: `$${stats?.totalRevenue?.toLocaleString() || 0}`, icon: <DollarSign size={20} />, color: 'text-amber-400', bg: 'bg-amber-500/10', trend: '+8%' },
+        { title: 'Active Streams', value: stats?.eventStatusBreakdown?.live || 0, icon: <Activity size={20} />, color: 'text-rose-400', bg: 'bg-rose-500/10', trend: 'Stable' },
     ];
 
     return (
         <Layout>
-            <div className="py-8">
+            <div className="max-w-7xl mx-auto space-y-12 pb-20">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
-                    <div>
-                        <h1 className="text-5xl font-black mb-2 tracking-tight">Organizer Dashboard</h1>
-                        <p className="text-text-dim text-lg">Manage your business and track event performance.</p>
+                <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-2 text-primary font-black uppercase tracking-[0.2em] text-[10px]">
+                            <TrendingUp size={14} />
+                            Strategic Operations
+                        </div>
+                        <h1 className="text-6xl font-black tracking-tighter">Organizer Hub</h1>
+                        <p className="text-text-dim font-medium text-lg">Centralized command for your event ecosystem.</p>
                     </div>
                     <button
                         onClick={() => navigate('/events/create')}
-                        className="bg-primary hover:bg-indigo-600 text-white px-6 py-4 rounded-radius-lg font-bold flex items-center gap-2 transition-all active:scale-95 shadow-xl shadow-primary/25"
+                        className="btn-primary group flex items-center justify-center gap-3 py-5 px-8 shadow-2xl shadow-primary/20"
                     >
-                        <PlusCircle size={20} />
-                        Create New Event
+                        <PlusCircle size={20} className="group-hover:rotate-90 transition-transform duration-500" />
+                        <span className="text-[10px] uppercase tracking-[0.2em]">Deploy New Event</span>
                     </button>
-                </div>
+                </header>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {loading ? (
-                        [1, 2, 3, 4].map(i => <div key={i} className="h-32 glass-morphism rounded-radius-lg animate-pulse" />)
+                        [1, 2, 3, 4].map(i => <div key={i} className="h-40 glass-morphism rounded-radius-xl animate-pulse" />)
                     ) : (
                         statCards.map((card, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                className="glass-morphism p-6 rounded-radius-lg flex flex-col justify-between"
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                                className="glass-morphism p-8 rounded-radius-xl group hover:border-primary/30 transition-all relative overflow-hidden"
                             >
-                                <div className="flex items-center justify-between mb-4">
-                                    <span className="text-sm font-bold text-text-dim uppercase tracking-wider">{card.title}</span>
-                                    <div className={`p-2 rounded-lg ${card.bg} ${card.color}`}>
+                                <div className="flex items-center justify-between mb-8">
+                                    <div className={`w-12 h-12 rounded-2xl ${card.bg} ${card.color} flex items-center justify-center`}>
                                         {card.icon}
                                     </div>
+                                    <span className="text-[10px] font-black text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-lg">
+                                        {card.trend}
+                                    </span>
                                 </div>
-                                <p className="text-3xl font-black">{card.value}</p>
+                                <div className="space-y-1">
+                                    <p className="text-[10px] font-black text-text-dim uppercase tracking-widest">{card.title}</p>
+                                    <p className="text-3xl font-black tracking-tighter">{card.value}</p>
+                                </div>
+                                <div className="absolute -bottom-6 -right-6 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
+                                    {card.icon}
+                                </div>
                             </motion.div>
                         ))
                     )}
                 </div>
 
-                {/* Events Table / List */}
-                <div className="glass-morphism rounded-radius-xl overflow-hidden shadow-2xl">
-                    <div className="p-6 border-b border-white/5 flex items-center justify-between">
-                        <h2 className="text-2xl font-bold flex items-center gap-2">
-                            <BarChart3 className="text-primary" /> Your Events
+                {/* Events Table */}
+                <div className="glass-morphism rounded-radius-xl overflow-hidden border border-white/5 shadow-2xl">
+                    <div className="p-8 border-b border-white/[0.03] flex items-center justify-between bg-white/[0.01]">
+                        <h2 className="text-2xl font-black tracking-tighter flex items-center gap-3">
+                            <BarChart3 className="text-primary" /> Active Clusters
                         </h2>
+                        <div className="flex gap-2">
+                            <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-text-dim">
+                                <Sparkles size={14} />
+                            </div>
+                        </div>
                     </div>
 
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-white/5 text-xs font-bold uppercase tracking-widest text-text-dim">
+                            <thead className="bg-white/[0.02] text-[10px] font-black uppercase tracking-[0.2em] text-text-dim">
                                 <tr>
-                                    <th className="px-6 py-4">Event Title</th>
-                                    <th className="px-6 py-4">Start Date</th>
-                                    <th className="px-6 py-4">Status</th>
-                                    <th className="px-6 py-4">Tickets Sold</th>
-                                    <th className="px-6 py-4 text-right">Actions</th>
+                                    <th className="px-8 py-6">Entity Identifier</th>
+                                    <th className="px-8 py-6">Time Window</th>
+                                    <th className="px-8 py-6">Activation Status</th>
+                                    <th className="px-8 py-6">Adoption Node</th>
+                                    <th className="px-8 py-6 text-right">Access Controls</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/5">
+                            <tbody className="divide-y divide-white/[0.03]">
                                 {loading ? (
-                                    <tr><td colSpan={5} className="p-12 text-center text-text-dim animate-pulse">Loading events...</td></tr>
+                                    <tr><td colSpan={5} className="p-20 text-center text-text-dim font-bold uppercase tracking-widest animate-pulse">Scanning Grid...</td></tr>
                                 ) : stats?.events.length > 0 ? (
                                     stats.events.map((event: any, i: number) => (
                                         <motion.tr
@@ -118,43 +135,52 @@ const OrganizerDashboard = () => {
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                             transition={{ delay: i * 0.05 }}
-                                            className="hover:bg-white/[0.02] transition-colors group"
+                                            className="hover:bg-white/[0.02] transition-all group"
                                         >
-                                            <td className="px-6 py-4 font-bold text-lg group-hover:text-primary transition-colors">{event.title}</td>
-                                            <td className="px-6 py-4 text-sm text-text-dim">
-                                                <div className="flex items-center gap-2">
-                                                    <Clock size={14} />
-                                                    {new Date(event.startDate).toLocaleDateString()}
+                                            <td className="px-8 py-6">
+                                                <div className="flex flex-col">
+                                                    <span className="font-black text-lg group-hover:text-primary transition-colors">{event.title}</span>
+                                                    <span className="text-[10px] font-mono text-text-dim opacity-50 font-bold">{event.id.split('-')[0]}</span>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4">
-                                                <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${event.status === 'live' ? 'bg-emerald-500 text-white' :
-                                                    event.status === 'draft' ? 'bg-white/10 text-white' : 'bg-amber-500 text-white'
+                                            <td className="px-8 py-6">
+                                                <div className="flex items-center gap-3 text-text-dim font-bold text-sm">
+                                                    <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
+                                                        <Clock size={14} />
+                                                    </div>
+                                                    {new Date(event.startDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                </div>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${event.status === 'live' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
+                                                    event.status === 'draft' ? 'bg-white/5 text-text-dim border-white/10' : 'bg-amber-500/10 text-amber-500 border-amber-500/20'
                                                     }`}>
                                                     {event.status}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4">
-                                                <div className="flex items-center gap-2 font-semibold">
-                                                    <UsersIcon /> {event.ticketsSold}
+                                            <td className="px-8 py-6">
+                                                <div className="flex items-center gap-2 font-black text-lg tracking-tighter">
+                                                    <Users size={18} className="text-primary opacity-50" /> {event.ticketsSold}
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 text-right">
-                                                <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <td className="px-8 py-6 text-right">
+                                                <div className="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
                                                     {event.status === 'draft' && (
                                                         <button
                                                             onClick={(e) => { e.stopPropagation(); submitForReview(event.id); }}
-                                                            className="p-2 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-lg text-emerald-500 transition-all flex items-center gap-1 text-xs font-bold"
-                                                            title="Submit for Review"
+                                                            className="px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-xl text-emerald-500 transition-all flex items-center gap-2 text-[10px] font-black uppercase tracking-widest border border-emerald-500/10 shadow-lg shadow-emerald-500/5"
                                                         >
-                                                            <Send size={14} /> Submit
+                                                            <Send size={12} /> Sync
                                                         </button>
                                                     )}
-                                                    <button className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-text-dim hover:text-white transition-all">
-                                                        <Edit3 size={18} />
+                                                    <button className="w-10 h-10 bg-white/5 hover:bg-white/10 rounded-xl text-text-dim hover:text-white transition-all flex items-center justify-center border border-white/5">
+                                                        <Edit3 size={16} />
                                                     </button>
-                                                    <button className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-text-dim hover:text-primary transition-all">
-                                                        <ExternalLink size={18} />
+                                                    <button
+                                                        onClick={() => navigate(`/events/${event.id}`)}
+                                                        className="w-10 h-10 bg-white/5 hover:bg-primary/20 rounded-xl text-text-dim hover:text-primary transition-all flex items-center justify-center border border-white/5"
+                                                    >
+                                                        <ExternalLink size={16} />
                                                     </button>
                                                 </div>
                                             </td>
@@ -162,16 +188,18 @@ const OrganizerDashboard = () => {
                                     ))
                                 ) : (
                                     <tr>
-                                        <td colSpan={5} className="p-20 text-center">
-                                            <div className="flex flex-col items-center">
-                                                <PlusCircle size={48} className="text-white/10 mb-4" />
-                                                <h3 className="text-xl font-bold mb-1">No events yet</h3>
-                                                <p className="text-text-dim mb-6">Start growing your audience by creating your first event.</p>
+                                        <td colSpan={5} className="p-32 text-center">
+                                            <div className="flex flex-col items-center max-w-sm mx-auto">
+                                                <div className="w-20 h-20 bg-white/5 rounded-[2rem] flex items-center justify-center mb-8 shadow-2xl">
+                                                    <PlusCircle size={32} className="text-text-dim/20" />
+                                                </div>
+                                                <h3 className="text-3xl font-black tracking-tighter mb-4">Grid Inactive</h3>
+                                                <p className="text-text-dim font-medium mb-12">No clusters detected for this organizer. Initialize your first event to start data aggregation.</p>
                                                 <button
                                                     onClick={() => navigate('/events/create')}
-                                                    className="bg-primary px-6 py-2 rounded-lg font-bold"
+                                                    className="btn-primary w-full py-5 text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-primary/20"
                                                 >
-                                                    Create Event
+                                                    Deploy Primary Cluster
                                                 </button>
                                             </div>
                                         </td>
@@ -185,11 +213,5 @@ const OrganizerDashboard = () => {
         </Layout>
     );
 };
-
-const UsersIcon = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-);
 
 export default OrganizerDashboard;

@@ -3,7 +3,8 @@ import Layout from '../components/Layout';
 import api from '../services/api';
 import {
     Activity, Settings, AlertTriangle, Search,
-    UserCog, Database, Server, ShieldAlert, FileSearch
+    UserCog, Database, Server, ShieldAlert, FileSearch,
+    Fingerprint, Cpu, Globe, Lock, ShieldCheck
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -66,27 +67,30 @@ const SuperAdminDashboard = () => {
 
     return (
         <Layout>
-            <div className="py-8">
+            <div className="max-w-7xl mx-auto space-y-12 pb-20">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
-                    <div>
-                        <h1 className="text-5xl font-black mb-2 tracking-tight flex items-center gap-4">
-                            <ShieldAlert className="text-rose-500" size={48} />
-                            Platform Authority
-                        </h1>
-                        <p className="text-text-dim text-lg uppercase tracking-widest font-bold">Super Admin Terminal</p>
+                <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-2 text-rose-500 font-black uppercase tracking-[0.2em] text-[10px]">
+                            <ShieldAlert size={14} />
+                            Root Access Authority
+                        </div>
+                        <h1 className="text-6xl font-black tracking-tighter">System Terminal</h1>
+                        <p className="text-text-dim font-medium text-lg">Platform-wide infrastructure and permission override.</p>
                     </div>
 
-                    <div className="flex bg-white/5 p-1 rounded-radius-lg border border-white/5">
+                    <div className="flex bg-rose-500/5 p-1.5 rounded-2xl border border-rose-500/10 backdrop-blur-3xl shadow-2xl">
                         {[
-                            { id: 'users', label: 'Access Control', icon: <UserCog size={16} /> },
-                            { id: 'logs', label: 'Audit Trail', icon: <FileSearch size={16} /> },
-                            { id: 'config', label: 'System Config', icon: <Settings size={16} /> }
+                            { id: 'users', label: 'Nodes', icon: <UserCog size={14} /> },
+                            { id: 'logs', label: 'Telemetry', icon: <FileSearch size={14} /> },
+                            { id: 'config', label: 'Kernel', icon: <Cpu size={14} /> }
                         ].map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id as any)}
-                                className={`px-6 py-3 rounded-lg font-bold text-sm transition-all flex items-center gap-2 ${activeTab === tab.id ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/20' : 'text-text-dim hover:text-white'
+                                className={`px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all flex items-center gap-3 ${activeTab === tab.id
+                                        ? 'bg-rose-500 text-white shadow-xl shadow-rose-500/20'
+                                        : 'text-text-dim hover:text-rose-400 hover:bg-rose-500/5'
                                     }`}
                             >
                                 {tab.icon}
@@ -94,7 +98,7 @@ const SuperAdminDashboard = () => {
                             </button>
                         ))}
                     </div>
-                </div>
+                </header>
 
                 <div className="grid grid-cols-1 gap-8">
                     <AnimatePresence mode="wait">
@@ -104,59 +108,72 @@ const SuperAdminDashboard = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
-                                className="space-y-6"
+                                className="space-y-8"
                             >
-                                <div className="glass-morphism p-4 rounded-radius-lg border border-white/5 relative">
-                                    <Search className="absolute left-8 top-1/2 -translate-y-1/2 text-text-dim" size={18} />
+                                <div className="relative group">
+                                    <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-text-dim group-focus-within:text-rose-500 transition-colors" size={20} />
                                     <input
                                         type="text"
-                                        placeholder="Search across all platform users..."
+                                        placeholder="Scan Global Registry by Identifier or Secure Mail..."
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg pl-12 pr-4 py-4 outline-none focus:border-rose-500/30 transition-all font-medium"
+                                        className="w-full bg-white/[0.03] border border-white/5 rounded-2xl pl-14 pr-6 py-5 outline-none focus:border-rose-500/50 focus:bg-white/[0.05] transition-all font-black text-lg"
                                     />
                                 </div>
 
-                                <div className="glass-morphism rounded-radius-xl overflow-hidden border border-white/5">
-                                    <div className="bg-white/5 p-4 border-b border-white/5 grid grid-cols-12 gap-4 text-xs font-bold uppercase tracking-widest text-text-dim">
-                                        <div className="col-span-1 text-center">ID</div>
-                                        <div className="col-span-5">User Account</div>
-                                        <div className="col-span-3 text-center">Current Role</div>
-                                        <div className="col-span-3 text-right">Assign Authority</div>
+                                <div className="glass-morphism rounded-radius-xl overflow-hidden border border-white/5 shadow-2xl bg-white/[0.01]">
+                                    <div className="bg-white/[0.02] p-8 border-b border-white/[0.03] grid grid-cols-12 gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-text-dim">
+                                        <div className="col-span-1 text-center">Protocol</div>
+                                        <div className="col-span-5">Subject Identity</div>
+                                        <div className="col-span-3 text-center">Clearance Grade</div>
+                                        <div className="col-span-3 text-right">Authority Override</div>
                                     </div>
                                     {loading ? (
                                         <LoadingState />
                                     ) : (
-                                        <div className="divide-y divide-white/5">
+                                        <div className="divide-y divide-white/[0.03]">
                                             {filteredUsers.map((u, i) => (
-                                                <div key={u.id} className="p-6 grid grid-cols-12 gap-4 items-center hover:bg-white/[0.02] transition-colors">
-                                                    <div className="col-span-1 text-center text-[10px] text-text-dim font-mono">{i + 1}</div>
-                                                    <div className="col-span-5 flex items-center gap-3">
-                                                        <div className="w-10 h-10 rounded-full bg-rose-500/10 flex items-center justify-center font-bold text-rose-500">{u.name.charAt(0)}</div>
+                                                <div key={u.id} className="p-8 grid grid-cols-12 gap-8 items-center hover:bg-rose-500/[0.02] transition-all group">
+                                                    <div className="col-span-1 text-center text-[10px] text-text-dim font-mono font-bold">#{(i + 1).toString().padStart(3, '0')}</div>
+                                                    <div className="col-span-5 flex items-center gap-5">
+                                                        <div className="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center font-black text-2xl text-rose-500 shadow-xl shadow-rose-500/5 relative overflow-hidden">
+                                                            <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/20 to-transparent" />
+                                                            {u.name.charAt(0)}
+                                                        </div>
                                                         <div>
-                                                            <p className="font-bold">{u.name}</p>
-                                                            <p className="text-xs text-text-dim">{u.email}</p>
+                                                            <p className="font-black text-xl tracking-tight leading-tight group-hover:text-rose-400 transition-colors">{u.name}</p>
+                                                            <p className="text-[10px] font-bold text-text-dim uppercase tracking-widest mt-1">{u.email}</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-span-3 text-center">
-                                                        <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full ${u.role === 'super_admin' ? 'bg-rose-500 text-white' :
-                                                                u.role === 'admin' ? 'bg-indigo-500 text-white' : 'bg-white/10 text-text'
+                                                        <span className={`text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border ${u.role === 'super_admin' ? 'bg-rose-500 text-white border-rose-500' :
+                                                                u.role === 'admin' ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' : 'bg-white/5 text-text-dim border-white/10'
                                                             }`}>
                                                             {u.role.replace('_', ' ')}
                                                         </span>
                                                     </div>
-                                                    <div className="col-span-3 flex justify-end gap-2">
+                                                    <div className="col-span-3 flex justify-end gap-3 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all">
                                                         {u.role !== 'super_admin' && (
-                                                            <select
-                                                                disabled={processingId === u.id}
-                                                                value={u.role}
-                                                                onChange={(e) => handleRoleChange(u.id, e.target.value)}
-                                                                className="bg-white/5 border border-white/10 text-xs font-bold p-2 rounded-lg outline-none focus:border-rose-500/50 transition-all"
-                                                            >
-                                                                <option value="user">USER</option>
-                                                                <option value="organizer">ORGANIZER</option>
-                                                                <option value="admin">ADMIN</option>
-                                                            </select>
+                                                            <div className="relative">
+                                                                <select
+                                                                    disabled={processingId === u.id}
+                                                                    value={u.role}
+                                                                    onChange={(e) => handleRoleChange(u.id, e.target.value)}
+                                                                    className="appearance-none bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest py-3 px-6 pr-10 rounded-xl outline-none focus:border-rose-500/50 transition-all cursor-pointer hover:bg-white/10"
+                                                                >
+                                                                    <option value="user">User Node</option>
+                                                                    <option value="organizer">Organizer Node</option>
+                                                                    <option value="admin">Admin Node</option>
+                                                                </select>
+                                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-text-dim">
+                                                                    <Settings size={12} />
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                        {u.role === 'super_admin' && (
+                                                            <div className="w-10 h-10 flex items-center justify-center text-rose-500 bg-rose-500/10 rounded-xl border border-rose-500/20">
+                                                                <Fingerprint size={18} />
+                                                            </div>
                                                         )}
                                                     </div>
                                                 </div>
@@ -174,44 +191,51 @@ const SuperAdminDashboard = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
                             >
-                                <div className="glass-morphism rounded-radius-xl overflow-hidden border border-white/10 bg-black/20 font-mono text-sm">
-                                    <div className="bg-white/5 p-4 border-b border-white/10 flex items-center justify-between text-rose-500">
-                                        <div className="flex items-center gap-2 uppercase tracking-tighter font-black">
-                                            <Database size={16} /> Platform_Audit_Log.out
+                                <div className="glass-morphism rounded-radius-xl overflow-hidden border border-rose-500/10 bg-black/40 font-mono text-sm shadow-2xl">
+                                    <div className="bg-rose-500/5 p-6 border-b border-rose-500/10 flex items-center justify-between text-rose-500">
+                                        <div className="flex items-center gap-3 uppercase tracking-[0.2em] font-black text-xs">
+                                            <Database size={18} /> Audit_Registry.sys
                                         </div>
-                                        <Activity size={16} className="animate-pulse" />
+                                        <div className="flex items-center gap-4">
+                                            <span className="text-[10px] font-black uppercase tracking-widest animate-pulse">Scanning Grid...</span>
+                                            <Activity size={18} className="animate-pulse" />
+                                        </div>
                                     </div>
-                                    <div className="overflow-x-auto max-h-[600px] overflow-y-auto custom-scrollbar">
+                                    <div className="overflow-x-auto max-h-[650px] overflow-y-auto custom-scrollbar">
                                         <table className="w-full text-left">
-                                            <thead className="bg-white/5 text-[10px] text-text-dim uppercase tracking-widest">
+                                            <thead className="bg-white/5 text-[9px] text-text-dim uppercase tracking-[0.15em]">
                                                 <tr>
-                                                    <th className="px-6 py-3">Timestamp</th>
-                                                    <th className="px-6 py-3">Actor</th>
-                                                    <th className="px-6 py-3">Action</th>
-                                                    <th className="px-6 py-3">Target</th>
-                                                    <th className="px-6 py-3 text-right">Details</th>
+                                                    <th className="px-8 py-5 border-b border-white/5">Sequence_Time</th>
+                                                    <th className="px-8 py-5 border-b border-white/5">Initiator_Node</th>
+                                                    <th className="px-8 py-5 border-b border-white/5">Operation_Protocol</th>
+                                                    <th className="px-8 py-5 border-b border-white/5">Target_Object</th>
+                                                    <th className="px-8 py-5 border-b border-white/5 text-right">Data_Frame</th>
                                                 </tr>
                                             </thead>
-                                            <tbody className="divide-y divide-white/5">
+                                            <tbody className="divide-y divide-white/[0.03]">
                                                 {logs.map((log) => (
-                                                    <tr key={log.id} className="hover:bg-white/5 transition-colors">
-                                                        <td className="px-6 py-3 text-text-dim whitespace-nowrap">{new Date(log.timestamp).toLocaleString()}</td>
-                                                        <td className="px-6 py-3">
+                                                    <tr key={log.id} className="hover:bg-rose-500/[0.03] transition-colors group">
+                                                        <td className="px-8 py-5 text-text-dim whitespace-nowrap text-xs font-bold">{new Date(log.timestamp).toLocaleString()}</td>
+                                                        <td className="px-8 py-5">
                                                             <div className="flex flex-col">
-                                                                <span className="font-bold">{log.actor.name}</span>
-                                                                <span className="text-[10px] opacity-50 uppercase">{log.actor.role}</span>
+                                                                <span className="font-black text-text group-hover:text-rose-400 transition-colors uppercase tracking-tight">{log.actor.name}</span>
+                                                                <span className="text-[9px] opacity-40 uppercase font-black">{log.actor.role}</span>
                                                             </div>
                                                         </td>
-                                                        <td className="px-6 py-3">
-                                                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${log.action.includes('BAN') || log.action.includes('DISABLE') ? 'bg-red-500/20 text-red-500' :
-                                                                    log.action.includes('APPROVE') ? 'bg-emerald-500/20 text-emerald-500' : 'bg-indigo-500/20 text-indigo-500'
+                                                        <td className="px-8 py-5">
+                                                            <span className={`px-3 py-1 rounded-md text-[9px] font-black uppercase tracking-widest border ${log.action.includes('BAN') || log.action.includes('DISABLE') || log.action.includes('KILL')
+                                                                    ? 'bg-rose-500/10 text-rose-500 border-rose-500/20' :
+                                                                    log.action.includes('APPROVE') || log.action.includes('CLEAR')
+                                                                        ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' : 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20'
                                                                 }`}>
                                                                 {log.action}
                                                             </span>
                                                         </td>
-                                                        <td className="px-6 py-3 opacity-50 font-mono text-xs">{log.target || '-'}</td>
-                                                        <td className="px-6 py-3 text-right">
-                                                            <button className="text-[10px] text-rose-500 hover:underline">View Metadata</button>
+                                                        <td className="px-8 py-5 opacity-40 font-mono text-[10px] font-bold">{log.target || 'NULL_SET'}</td>
+                                                        <td className="px-8 py-5 text-right">
+                                                            <button className="text-[9px] font-black uppercase tracking-widest text-rose-500/50 hover:text-rose-500 transition-colors hover:underline flex items-center gap-1.5 ml-auto">
+                                                                <FileSearch size={10} /> Inspect_Frame
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 ))}
@@ -231,52 +255,92 @@ const SuperAdminDashboard = () => {
                                 className="grid grid-cols-1 md:grid-cols-2 gap-8"
                             >
                                 {/* Platform Status */}
-                                <div className="glass-morphism p-8 rounded-radius-xl border border-white/5 space-y-6">
-                                    <h3 className="text-2xl font-black mb-4 flex items-center gap-3">
-                                        <Server className="text-rose-500" /> Platform Infrastructure
+                                <div className="glass-morphism p-10 rounded-radius-xl border border-white/5 space-y-8 relative overflow-hidden group">
+                                    <div className="absolute -bottom-10 -right-10 text-rose-500/5 group-hover:text-rose-500/10 transition-colors">
+                                        <AlertTriangle size={160} />
+                                    </div>
+                                    <h3 className="text-3xl font-black tracking-tighter flex items-center gap-4">
+                                        <Server className="text-rose-500" /> Infrastructure Core
                                     </h3>
 
-                                    <div className="p-6 bg-rose-500/10 rounded-radius-lg border border-rose-500/20">
-                                        <div className="flex items-center justify-between mb-4">
+                                    <div className={`p-8 rounded-3xl border transition-all duration-500 ${config.maintenanceMode
+                                            ? 'bg-rose-500 text-white shadow-2xl shadow-rose-500/40 border-rose-400'
+                                            : 'bg-rose-500/5 border-rose-500/20 text-rose-500'
+                                        }`}>
+                                        <div className="flex items-center justify-between mb-8">
                                             <div>
-                                                <p className="font-black text-rose-500 uppercase tracking-tighter">Emergency Kill-Switch</p>
-                                                <p className="text-xs text-rose-500/70">Disables all public transactions and logins immediately.</p>
+                                                <p className="font-black text-xl tracking-tighter uppercase mb-1">Emergency Kill-Switch</p>
+                                                <p className={`text-xs font-bold ${config.maintenanceMode ? 'text-white/80' : 'text-rose-500/60'}`}>Terminate all public transactions and sync immediately.</p>
                                             </div>
                                             <div
                                                 onClick={toggleMaintenance}
-                                                className={`w-14 h-8 rounded-full p-1 cursor-pointer transition-all ${config.maintenanceMode ? 'bg-rose-500' : 'bg-white/10'}`}
+                                                className={`w-16 h-10 rounded-2xl p-1.5 cursor-pointer transition-all border-2 ${config.maintenanceMode ? 'bg-white/20 border-white' : 'bg-rose-500/10 border-rose-500/40'
+                                                    }`}
                                             >
                                                 <motion.div
                                                     animate={{ x: config.maintenanceMode ? 24 : 0 }}
-                                                    className="w-6 h-6 bg-white rounded-full shadow-lg"
+                                                    className={`w-6 h-6 rounded-xl shadow-2xl transition-colors ${config.maintenanceMode ? 'bg-white' : 'bg-rose-500'}`}
                                                 />
                                             </div>
                                         </div>
-                                        {config.maintenanceMode && (
-                                            <div className="flex items-center gap-2 text-rose-500 font-bold animate-pulse text-sm">
-                                                <AlertTriangle size={16} /> SYSTEM IS CURRENTLY OFFLINE
+                                        {config.maintenanceMode ? (
+                                            <div className="flex items-center gap-3 font-black text-xs tracking-[0.2em] animate-pulse">
+                                                <ShieldAlert size={18} /> SYSTEM_STATUS: OFFLINE_LOCKED
+                                            </div>
+                                        ) : (
+                                            <div className="flex items-center gap-3 font-black text-xs tracking-[0.2em]">
+                                                <ShieldCheck size={18} /> SYSTEM_STATUS: OPERATIONAL
                                             </div>
                                         )}
+                                    </div>
+
+                                    <div className="p-6 bg-white/[0.02] rounded-2xl border border-white/5 flex items-center justify-between text-text-dim">
+                                        <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest">
+                                            <Globe size={18} className="text-primary" /> Region Cluster
+                                        </div>
+                                        <span className="font-bold text-xs uppercase tracking-tighter text-white">Global_Sector_Alpha</span>
                                     </div>
                                 </div>
 
                                 {/* Financial Config */}
-                                <div className="glass-morphism p-8 rounded-radius-xl border border-white/5 space-y-6">
-                                    <h3 className="text-2xl font-black mb-4 flex items-center gap-3">
-                                        <Settings className="text-indigo-500" /> System Parameters
+                                <div className="glass-morphism p-10 rounded-radius-xl border border-white/5 space-y-8 relative overflow-hidden group">
+                                    <div className="absolute -bottom-10 -right-10 text-indigo-500/5 group-hover:text-indigo-500/10 transition-colors">
+                                        <Lock size={160} />
+                                    </div>
+                                    <h3 className="text-3xl font-black tracking-tighter flex items-center gap-4">
+                                        <Settings className="text-indigo-500" /> Protocol Logic
                                     </h3>
 
-                                    <div className="space-y-4">
-                                        <div>
-                                            <label className="block text-sm font-bold mb-2 text-text-dim uppercase tracking-widest">Platform Commission (%)</label>
-                                            <div className="flex gap-4">
-                                                <input
-                                                    type="number"
-                                                    value={config.platformCommission}
-                                                    onChange={(e) => setConfig({ ...config, platformCommission: Number(e.target.value) })}
-                                                    className="w-full bg-white/5 border border-white/10 rounded-lg p-3 outline-none focus:border-indigo-500/50"
-                                                />
-                                                <button className="bg-indigo-500 text-white px-6 rounded-lg font-bold hover:bg-indigo-600 transition-all">Save</button>
+                                    <div className="space-y-6">
+                                        <div className="space-y-3">
+                                            <label className="text-[10px] font-black text-text-dim uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
+                                                <Activity size={12} className="text-indigo-400" /> Platform Fee Scalar
+                                            </label>
+                                            <div className="flex gap-3">
+                                                <div className="relative flex-grow group/input">
+                                                    <input
+                                                        type="number"
+                                                        value={config.platformCommission}
+                                                        onChange={(e) => setConfig({ ...config, platformCommission: Number(e.target.value) })}
+                                                        className="w-full bg-white/[0.03] border border-white/5 rounded-2xl p-5 outline-none focus:border-indigo-500/50 transition-all font-black text-2xl tracking-tighter"
+                                                    />
+                                                    <span className="absolute right-5 top-1/2 -translate-y-1/2 font-black text-2xl text-indigo-500 opacity-50">%</span>
+                                                </div>
+                                                <button className="bg-indigo-500 text-white px-8 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 transition-all shadow-xl shadow-indigo-500/20 active:scale-95">
+                                                    Commit
+                                                </button>
+                                            </div>
+                                            <p className="text-[10px] text-text-dim font-medium ml-1">Universal tax applied to all validated ticket transactions.</p>
+                                        </div>
+
+                                        <div className="pt-8 border-t border-white/[0.03] space-y-4">
+                                            <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/5">
+                                                <span className="text-[9px] font-black uppercase tracking-widest text-text-dim">Encryption_Level</span>
+                                                <span className="text-[9px] font-black uppercase tracking-widest text-emerald-500">AES-512-QUANTUM</span>
+                                            </div>
+                                            <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/5">
+                                                <span className="text-[9px] font-black uppercase tracking-widest text-text-dim">Node_Latency</span>
+                                                <span className="text-[9px] font-black uppercase tracking-widest text-amber-500">12ms_STABLE</span>
                                             </div>
                                         </div>
                                     </div>
@@ -291,9 +355,12 @@ const SuperAdminDashboard = () => {
 };
 
 const LoadingState = () => (
-    <div className="p-20 text-center text-text-dim animate-pulse flex flex-col items-center gap-4">
-        <Server className="animate-bounce" size={48} />
-        <span className="font-bold uppercase tracking-widest">Fetching Platform Data...</span>
+    <div className="p-32 text-center flex flex-col items-center gap-6">
+        <div className="relative">
+            <Server className="text-rose-500 animate-pulse" size={64} />
+            <div className="absolute inset-0 bg-rose-500 blur-2xl opacity-20 animate-pulse" />
+        </div>
+        <span className="font-black text-[10px] uppercase tracking-[0.4em] text-rose-500 animate-pulse">Establishing Root Handshake...</span>
     </div>
 );
 

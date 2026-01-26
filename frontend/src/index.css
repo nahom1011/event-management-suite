@@ -5,21 +5,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary: #6366f1;
-  --primary-glow: rgba(99, 102, 241, 0.4);
-  --secondary: #8b5cf6;
-  --accent: #f43f5e;
-  --bg: #030712;
-  --surface: #111827;
-  --surface-alt: #1f2937;
-  --text: #f9fafb;
-  --text-dim: #9ca3af;
-  --glass: rgba(17, 24, 39, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* Refined Color Palette (HSL) */
+  --primary: hwb(239 47% 0%);
+  --primary-glow: hsla(238, 82%, 67%, 0.15);
+  --secondary: hsla(262, 83%, 66%, 1);
+  --accent: hsla(349, 89%, 60%, 1);
+
+  --bg: hsla(222, 47%, 4%, 1);
+  --surface: hsla(222, 47%, 7%, 1);
+  --surface-alt: hsla(222, 47%, 11%, 1);
+
+  --text: hsla(210, 40%, 98%, 1);
+  --text-dim: hsla(215, 20%, 65%, 1);
+
+  --glass: hsla(222, 47%, 7%, 0.4);
+  --glass-border: hsla(0, 0%, 100%, 0.08);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -29,12 +36,13 @@
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--bg);
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
 }
 
 h1,
@@ -45,56 +53,77 @@ h5,
 h6 {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  font-family: inherit;
+  letter-spacing: -0.03em;
 }
 
 .glass-morphism {
   background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .gradient-text {
+  background: linear-gradient(135deg, var(--text) 0%, var(--text-dim) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.primary-gradient-text {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.animated-gradient-bg {
-  background: linear-gradient(-45deg, #030712, #1e1b4b, #312e81, #0f172a);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 4px 14px 0 var(--primary-glow);
 }
 
-@keyframes gradient {
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px 0 var(--primary-glow);
+}
+
+.card-hover {
+  transition: var(--transition);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: hsla(238, 82%, 67%, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes float {
   0% {
-    background-position: 0% 50%;
+    transform: translateY(0px);
   }
 
   50% {
-    background-position: 100% 50%;
+    transform: translateY(-10px);
   }
 
   100% {
-    background-position: 0% 50%;
+    transform: translateY(0px);
   }
 }
 
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -102,8 +131,8 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--surface-alt);
-  border-radius: 4px;
+  background: hsla(222, 47%, 20%, 1);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
