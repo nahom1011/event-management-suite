@@ -5,6 +5,8 @@ import cors from '@fastify/cors';
 import { authRoutes } from './auth/auth.routes';
 import { eventRoutes } from './events/events.routes';
 import { ordersRoutes } from './orders/orders.routes';
+import { organizerRoutes } from './organizer/organizer.routes';
+import { adminRoutes } from './admin/admin.routes';
 
 dotenv.config();
 
@@ -28,6 +30,8 @@ server.get('/health', async (request, reply) => {
 server.register(authRoutes, { prefix: '/api/v1/auth' });
 server.register(eventRoutes, { prefix: '/api/v1/events' });
 server.register(ordersRoutes, { prefix: '/api/v1/orders' });
+server.register(organizerRoutes, { prefix: '/api/v1/organizer' });
+server.register(adminRoutes, { prefix: '/api/v1/admin' });
 
 const start = async () => {
     try {

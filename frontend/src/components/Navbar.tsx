@@ -1,17 +1,26 @@
 import { useNavigate } from 'react-router-dom';
-import { Calendar, User, Menu, X, PlusCircle, Ticket } from 'lucide-react';
+import { Calendar, User, Menu, X, PlusCircle, Ticket, ShieldAlert } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../store/AuthContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { user } = useAuth();
     const navigate = useNavigate();
+
+    const isAdmin = user?.role === 'admin' || user?.role === 'super_admin';
+    const isOrganizer = user?.role === 'organizer';
 
     const navLinks = [
         { name: 'Events', path: '/', icon: <Calendar size={18} /> },
         { name: 'My Tickets', path: '/orders', icon: <Ticket size={18} /> },
         { name: 'Profile', path: '/profile', icon: <User size={18} /> },
     ];
+
+    if (isAdmin) {
+        navLinks.push({ name: 'Admin', path: '/admin', icon: <ShieldAlert size={18} /> });
+    }
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 glass-morphism h-16 px-6 flex items-center justify-between">
@@ -34,13 +43,15 @@ const Navbar = () => {
                         {link.name}
                     </button>
                 ))}
-                <button
-                    onClick={() => navigate('/events/create')}
-                    className="bg-primary hover:bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/20"
-                >
-                    <PlusCircle size={18} />
-                    Create Event
-                </button>
+                {isOrganizer && (
+                    <button
+                        onClick={() => navigate('/events/create')}
+                        className="bg-primary hover:bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/20"
+                    >
+                        <PlusCircle size={18} />
+                        Create Event
+                    </button>
+                )}
             </div>
 
             <div className="md:hidden">
@@ -71,16 +82,18 @@ const Navbar = () => {
                                 {link.name}
                             </button>
                         ))}
-                        <button
-                            onClick={() => {
-                                navigate('/events/create');
-                                setIsOpen(false);
-                            }}
-                            className="bg-primary text-white p-3 rounded-lg font-semibold flex items-center justify-center gap-2 mt-2"
-                        >
-                            <PlusCircle size={20} />
-                            Create Event
-                        </button>
+                        {isOrganizer && (
+                            <button
+                                onClick={() => {
+                                    navigate('/events/create');
+                                    setIsOpen(false);
+                                }}
+                                className="bg-primary text-white p-3 rounded-lg font-semibold flex items-center justify-center gap-2 mt-2"
+                            >
+                                <PlusCircle size={20} />
+                                Create Event
+                            </button>
+                        )}
                     </motion.div>
                 )}
             </AnimatePresence>

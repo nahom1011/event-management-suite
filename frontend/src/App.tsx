@@ -3,10 +3,12 @@ import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import EventDetailPage from './pages/EventDetailPage';
 import OrdersPage from './pages/OrdersPage';
+import ProfilePage from './pages/ProfilePage';
+import AdminDashboard from './pages/AdminDashboard';
 import { AuthProvider, useAuth } from './store/AuthContext';
 
 const AppRoutes = () => {
-  const { isAuthenticated, loading } = useAuth();
+  const { user, isAuthenticated, loading } = useAuth();
 
   if (loading) {
     return (
@@ -16,9 +18,12 @@ const AppRoutes = () => {
     );
   }
 
+  const isAdmin = user?.role === 'admin' || user?.role === 'super_admin';
+
   return (
     <Routes>
       <Route path="/login" element={!isAuthenticated ? <LoginPage /> : <Navigate to="/" />} />
+
       <Route
         path="/"
         element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
@@ -31,6 +36,17 @@ const AppRoutes = () => {
         path="/orders"
         element={isAuthenticated ? <OrdersPage /> : <Navigate to="/login" />}
       />
+      <Route
+        path="/profile"
+        element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />}
+      />
+
+      {/* Admin routes */}
+      <Route
+        path="/admin"
+        element={isAuthenticated && isAdmin ? <AdminDashboard /> : <Navigate to="/" />}
+      />
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
