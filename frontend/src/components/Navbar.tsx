@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Calendar, User, Menu, X, PlusCircle } from 'lucide-react';
+import { Calendar, User, Menu, X, PlusCircle, Ticket } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -9,6 +9,7 @@ const Navbar = () => {
 
     const navLinks = [
         { name: 'Events', path: '/', icon: <Calendar size={18} /> },
+        { name: 'My Tickets', path: '/orders', icon: <Ticket size={18} /> },
         { name: 'Profile', path: '/profile', icon: <User size={18} /> },
     ];
 
