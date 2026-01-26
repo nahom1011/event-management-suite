@@ -6,9 +6,22 @@ async function promote(email: string) {
     try {
         const user = await prisma.user.update({
             where: { email },
-            data: { role: 'admin' },
+            data: {
+                role: 'admin',
+                organizerProfile: {
+                    upsert: {
+                        create: {
+                            organizationName: `${email.split('@')[0]}'s Hub`,
+                            verificationStatus: 'approved'
+                        },
+                        update: {
+                            verificationStatus: 'approved'
+                        }
+                    }
+                }
+            },
         });
-        console.log(`User ${email} has been promoted to admin.`);
+        console.log(`User ${email} has been promoted to admin and organizer status.`);
         console.log(user);
     } catch (error) {
         console.error(`Error promoting user ${email}:`, error);

@@ -48,6 +48,20 @@ const CreateEventPage = () => {
     };
 
     const handleSubmit = async () => {
+        // Basic Validation
+        if (!eventData.title || eventData.title.length < 3) {
+            alert("Title must be at least 3 characters.");
+            return;
+        }
+        if (!eventData.startDate || !eventData.startTime || !eventData.endDate || !eventData.endTime) {
+            alert("Please fill in all date and time windows.");
+            return;
+        }
+        if (tickets.some(t => !t.type || t.quantity < 1)) {
+            alert("Please ensure all tickets have a type and a valid quantity.");
+            return;
+        }
+
         setLoading(true);
         try {
             const startDateTime = new Date(`${eventData.startDate}T${eventData.startTime}`).toISOString();
@@ -66,9 +80,10 @@ const CreateEventPage = () => {
 
             setSuccess(true);
             setTimeout(() => navigate('/organizer'), 2000);
-        } catch (error) {
+        } catch (error: any) {
             console.error('Creation failed:', error);
-            alert('Something went wrong. Please check your data.');
+            const message = error.response?.data?.message || error.message || 'Something went wrong. Please check your data.';
+            alert(message);
         } finally {
             setLoading(false);
         }

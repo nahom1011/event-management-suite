@@ -8,6 +8,17 @@ const api = axios.create({
     },
 });
 
+// Request interceptor to add access token to headers
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
+
 // Interceptor for handling token expiration/refresh logic
 api.interceptors.response.use(
     (response) => response,
@@ -18,14 +29,22 @@ api.interceptors.response.use(
             originalRequest._retry = true;
             try {
                 // Attempt to refresh token
-                await axios.post(
+                const { data } = await axios.post(
                     `${api.defaults.baseURL}/auth/refresh`,
                     {},
                     { withCredentials: true }
                 );
+
+                const newToken = data.data.accessToken;
+                localStorage.setItem('accessToken', newToken);
+
+                // Retry the original request with the new token
+                originalRequest.headers.Authorization = `Bearer ${newToken}`;
                 return api(originalRequest);
             } catch (refreshError) {
                 // If refresh fails, redirect to login or clear state
+                localStorage.removeItem('user');
+                localStorage.removeItem('accessToken');
                 window.location.href = '/login';
                 return Promise.reject(refreshError);
             }

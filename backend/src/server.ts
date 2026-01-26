@@ -8,11 +8,15 @@ import { ordersRoutes } from './orders/orders.routes';
 import { organizerRoutes } from './organizer/organizer.routes';
 import { adminRoutes } from './admin/admin.routes';
 
+import { globalErrorHandler } from './middlewares/errorHandler';
+
 dotenv.config();
 
 const server = fastify({
     logger: true,
 });
+
+server.setErrorHandler(globalErrorHandler);
 
 // Register Plugins
 server.register(cookie);
