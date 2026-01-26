@@ -1,6 +1,7 @@
 import fastify from 'fastify';
 import dotenv from 'dotenv';
 import cookie from '@fastify/cookie';
+import cors from '@fastify/cors';
 import { authRoutes } from './auth/auth.routes';
 import { eventRoutes } from './events/events.routes';
 
@@ -12,6 +13,10 @@ const server = fastify({
 
 // Register Plugins
 server.register(cookie);
+server.register(cors, {
+    origin: ['http://localhost:5173'],
+    credentials: true,
+});
 
 // Health Check
 server.get('/health', async (request, reply) => {
