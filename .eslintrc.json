@@ -1,0 +1,19 @@
+{
+    "root": true,
+    "extends": [
+        "eslint:recommended",
+        "prettier"
+    ],
+    "env": {
+        "node": true,
+        "es2020": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2020
+    },
+    "ignorePatterns": [
+        "dist",
+        "build",
+        "node_modules"
+    ]
+}
