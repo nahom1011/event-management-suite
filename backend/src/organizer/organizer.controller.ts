@@ -36,3 +36,15 @@ export const getMyProfileHandler = async (request: FastifyRequest, reply: Fastif
         data: { profile },
     });
 };
+
+export const getStatsHandler = async (request: FastifyRequest, reply: FastifyReply) => {
+    const userId = request.user?.id;
+    if (!userId) throw new AppError('Unauthorized', 401);
+
+    const stats = await organizerService.getOrganizerStats(userId);
+
+    return reply.send({
+        status: 'success',
+        data: { stats },
+    });
+};

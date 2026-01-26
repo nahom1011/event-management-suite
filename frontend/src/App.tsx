@@ -5,6 +5,7 @@ import EventDetailPage from './pages/EventDetailPage';
 import OrdersPage from './pages/OrdersPage';
 import ProfilePage from './pages/ProfilePage';
 import AdminDashboard from './pages/AdminDashboard';
+import OrganizerDashboard from './pages/OrganizerDashboard';
 import { AuthProvider, useAuth } from './store/AuthContext';
 
 const AppRoutes = () => {
@@ -19,6 +20,7 @@ const AppRoutes = () => {
   }
 
   const isAdmin = user?.role === 'admin' || user?.role === 'super_admin';
+  const isOrganizer = user?.role === 'organizer';
 
   return (
     <Routes>
@@ -39,6 +41,12 @@ const AppRoutes = () => {
       <Route
         path="/profile"
         element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />}
+      />
+
+      {/* Organizer routes */}
+      <Route
+        path="/organizer"
+        element={isAuthenticated && (isOrganizer || isAdmin) ? <OrganizerDashboard /> : <Navigate to="/" />}
       />
 
       {/* Admin routes */}

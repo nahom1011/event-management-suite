@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Calendar, User, Menu, X, PlusCircle, Ticket, ShieldAlert } from 'lucide-react';
+import { Calendar, User, Menu, X, PlusCircle, Ticket, ShieldAlert, BarChart3 } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../store/AuthContext';
@@ -17,6 +17,10 @@ const Navbar = () => {
         { name: 'My Tickets', path: '/orders', icon: <Ticket size={18} /> },
         { name: 'Profile', path: '/profile', icon: <User size={18} /> },
     ];
+
+    if (isOrganizer || isAdmin) {
+        navLinks.push({ name: 'Dashboard', path: '/organizer', icon: <BarChart3 size={18} /> });
+    }
 
     if (isAdmin) {
         navLinks.push({ name: 'Admin', path: '/admin', icon: <ShieldAlert size={18} /> });
@@ -43,7 +47,7 @@ const Navbar = () => {
                         {link.name}
                     </button>
                 ))}
-                {isOrganizer && (
+                {(isOrganizer || isAdmin) && (
                     <button
                         onClick={() => navigate('/events/create')}
                         className="bg-primary hover:bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/20"
@@ -82,7 +86,7 @@ const Navbar = () => {
                                 {link.name}
                             </button>
                         ))}
-                        {isOrganizer && (
+                        {(isOrganizer || isAdmin) && (
                             <button
                                 onClick={() => {
                                     navigate('/events/create');
