@@ -1,5 +1,6 @@
 import { OAuth2Client } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 import { env } from '../config/env';
 import { AppError } from '../utils/AppError';
 import { PrismaClient } from '@prisma/client';
@@ -50,6 +51,62 @@ export class AuthService {
         );
 
         return { accessToken, refreshToken };
+    }
+
+    async register(data: { email: string; password?: string; name: string; avatar?: string }) {
+        const existingUser = await prisma.user.findUnique({
+            where: { email: data.email },
+        });
+
+        if (existingUser) {
+            throw new AppError('User with this email already exists', 400);
+        }
+
+        let hashedPassword = undefined;
+        if (data.password) {
+            hashedPassword = await bcrypt.hash(data.password, 12);
+        }
+
+        const user = await prisma.user.create({
+            data: {
+                email: data.email,
+                password: hashedPassword,
+                name: data.name,
+                avatar: data.avatar,
+                role: 'user',
+            },
+        });
+
+        const tokens = this.generateTokens(user.id, user.role);
+        return { user, tokens };
+    }
+
+    async login(email: string, password?: string) {
+        const user = await prisma.user.findUnique({
+            where: { email },
+        });
+
+        if (!user) {
+            throw new AppError('Invalid email or password', 401);
+        }
+
+        if (user.isBanned) {
+            throw new AppError('User is banned', 403);
+        }
+
+        if (password) {
+            if (!user.password) {
+                throw new AppError('This account uses Google Login. Please sign in with Google.', 401);
+            }
+
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+            if (!isPasswordValid) {
+                throw new AppError('Invalid email or password', 401);
+            }
+        }
+
+        const tokens = this.generateTokens(user.id, user.role);
+        return { user, tokens };
     }
 
     async loginWithGoogle(idToken: string) {

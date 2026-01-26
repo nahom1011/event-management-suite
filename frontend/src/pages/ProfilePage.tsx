@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import { useAuth } from '../store/AuthContext';
 import api from '../services/api';
-import { User, Mail, Shield, Building, Phone, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { Mail, Shield, Building, CheckCircle, Clock, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ProfilePage = () => {
@@ -76,7 +76,7 @@ const ProfilePage = () => {
                         ) : profile ? (
                             <div className="glass-morphism p-8 rounded-radius-lg relative overflow-hidden">
                                 <div className={`absolute top-0 right-0 px-4 py-2 text-xs font-bold uppercase tracking-widest ${profile.verificationStatus === 'approved' ? 'bg-emerald-500 text-white' :
-                                        profile.verificationStatus === 'pending' ? 'bg-amber-500 text-white' : 'bg-red-500 text-white'
+                                    profile.verificationStatus === 'pending' ? 'bg-amber-500 text-white' : 'bg-red-500 text-white'
                                     }`}>
                                     {profile.verificationStatus}
                                 </div>

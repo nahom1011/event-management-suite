@@ -12,6 +12,11 @@ const eventBodySchema = z.object({
     location: z.string().optional(),
     startDate: z.string().datetime(),
     endDate: z.string().datetime(),
+    tickets: z.array(z.object({
+        type: z.string().min(1),
+        price: z.number().min(0),
+        quantity: z.number().int().min(1)
+    })).min(1)
 });
 
 export const createEventHandler = async (request: FastifyRequest, reply: FastifyReply) => {
@@ -98,3 +103,4 @@ export const deleteEventHandler = async (request: FastifyRequest, reply: Fastify
 
     return reply.code(204).send();
 };
+

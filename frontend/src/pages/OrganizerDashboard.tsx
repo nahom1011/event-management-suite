@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import api from '../services/api';
 import {
-    Calendar, Ticket, DollarSign, Activity,
-    PlusCircle, ExternalLink, Edit3, Trash2,
-    BarChart3, Layers, Clock, CheckCircle2
+    Ticket, DollarSign, Activity,
+    PlusCircle, ExternalLink, Edit3,
+    BarChart3, Layers, Clock, Send
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -14,19 +14,30 @@ const OrganizerDashboard = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    const fetchStats = async () => {
+        try {
+            const { data } = await api.get('/organizer/stats');
+            setStats(data.data.stats);
+        } catch (error) {
+            console.error('Failed to fetch organizer stats:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const fetchStats = async () => {
-            try {
-                const { data } = await api.get('/organizer/stats');
-                setStats(data.data.stats);
-            } catch (error) {
-                console.error('Failed to fetch organizer stats:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
         fetchStats();
     }, []);
+
+    const submitForReview = async (id: string) => {
+        try {
+            await api.patch(`/events/${id}`, { status: 'pending' });
+            fetchStats();
+        } catch (error) {
+            console.error('Failed to submit for review:', error);
+            alert('Failed to submit event for review.');
+        }
+    };
 
     const statCards = [
         { title: 'Total Events', value: stats?.totalEvents || 0, icon: <Layers />, color: 'text-indigo-500', bg: 'bg-indigo-500/10' },
@@ -118,7 +129,7 @@ const OrganizerDashboard = () => {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${event.status === 'live' ? 'bg-emerald-500 text-white' :
-                                                        event.status === 'draft' ? 'bg-white/10 text-white' : 'bg-amber-500 text-white'
+                                                    event.status === 'draft' ? 'bg-white/10 text-white' : 'bg-amber-500 text-white'
                                                     }`}>
                                                     {event.status}
                                                 </span>
@@ -130,6 +141,15 @@ const OrganizerDashboard = () => {
                                             </td>
                                             <td className="px-6 py-4 text-right">
                                                 <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    {event.status === 'draft' && (
+                                                        <button
+                                                            onClick={(e) => { e.stopPropagation(); submitForReview(event.id); }}
+                                                            className="p-2 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-lg text-emerald-500 transition-all flex items-center gap-1 text-xs font-bold"
+                                                            title="Submit for Review"
+                                                        >
+                                                            <Send size={14} /> Submit
+                                                        </button>
+                                                    )}
                                                     <button className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-text-dim hover:text-white transition-all">
                                                         <Edit3 size={18} />
                                                     </button>

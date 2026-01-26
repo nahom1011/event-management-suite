@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import api from '../services/api';
-import { Calendar, MapPin, Tag, Users, Clock, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { Calendar, MapPin, Clock, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const EventDetailPage = () => {
@@ -129,10 +129,10 @@ const EventDetailPage = () => {
                                                 disabled={purchasing || purchaseSuccess || t.quantity <= 0}
                                                 onClick={() => handlePurchase(t.id)}
                                                 className={`px-4 py-2 rounded-lg font-bold transition-all ${purchaseSuccess
-                                                        ? 'bg-emerald-500 text-white'
-                                                        : t.quantity <= 0
-                                                            ? 'bg-red-500/20 text-red-500 cursor-not-allowed'
-                                                            : 'bg-primary hover:bg-indigo-600 text-white active:scale-95'
+                                                    ? 'bg-emerald-500 text-white'
+                                                    : t.quantity <= 0
+                                                        ? 'bg-red-500/20 text-red-500 cursor-not-allowed'
+                                                        : 'bg-primary hover:bg-indigo-600 text-white active:scale-95'
                                                     }`}
                                             >
                                                 {purchaseSuccess ? (

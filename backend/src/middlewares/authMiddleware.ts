@@ -28,9 +28,21 @@ export const authenticate = async (request: FastifyRequest, reply: FastifyReply)
         const token = authHeader.split(' ')[1];
         const decoded = jwt.verify(token, env.JWT_SECRET) as JWTPayload;
 
+        // Verify user status in DB
+        const { PrismaClient } = await import('@prisma/client');
+        const prisma = new PrismaClient();
+        const user = await prisma.user.findUnique({
+            where: { id: decoded.userId },
+            select: { id: true, role: true, isActive: true, isBanned: true }
+        });
+
+        if (!user || !user.isActive || user.isBanned) {
+            throw new AppError('Account is restricted or does not exist', 403);
+        }
+
         request.user = {
-            id: decoded.userId,
-            role: decoded.role,
+            id: user.id,
+            role: user.role,
         };
     } catch (error) {
         if (error instanceof jwt.JsonWebTokenError) {

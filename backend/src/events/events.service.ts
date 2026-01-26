@@ -1,4 +1,4 @@
-import { PrismaClient, EventStatus } from '@prisma/client';
+import { PrismaClient, EventStatus, Prisma } from '@prisma/client';
 import { AppError } from '../utils/AppError';
 
 const prisma = new PrismaClient();
@@ -11,12 +11,28 @@ export class EventsService {
         startDate: Date;
         endDate: Date;
         organizerId: string;
+        tickets: { type: string; price: number; quantity: number }[];
     }) {
         return await prisma.event.create({
             data: {
-                ...data,
+                title: data.title,
+                description: data.description,
+                location: data.location,
+                startDate: data.startDate,
+                endDate: data.endDate,
+                organizerId: data.organizerId,
                 status: EventStatus.draft,
+                tickets: {
+                    create: data.tickets.map(t => ({
+                        type: t.type,
+                        price: new Prisma.Decimal(t.price),
+                        quantity: t.quantity
+                    }))
+                }
             },
+            include: {
+                tickets: true
+            }
         });
     }
 
@@ -64,6 +80,7 @@ export class EventsService {
         return await prisma.event.update({
             where: { id },
             data,
+            include: { tickets: true }
         });
     }
 
@@ -85,9 +102,10 @@ export class EventsService {
         });
 
         if (!profile) {
-            throw new AppError('Organizer profile not found. Please register as an organizer first.', 404);
+            throw new AppError('Organizer profile not found', 404);
         }
 
         return profile;
     }
 }
+

@@ -1,15 +1,16 @@
 import { useNavigate } from 'react-router-dom';
-import { Calendar, User, Menu, X, PlusCircle, Ticket, ShieldAlert, BarChart3 } from 'lucide-react';
+import { Calendar, User, Menu, X, PlusCircle, Ticket, ShieldAlert, BarChart3, ShieldCheck, LogOut } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../store/AuthContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const navigate = useNavigate();
 
-    const isAdmin = user?.role === 'admin' || user?.role === 'super_admin';
+    const isSuperAdmin = user?.role === 'super_admin';
+    const isAdmin = user?.role === 'admin' || isSuperAdmin;
     const isOrganizer = user?.role === 'organizer';
 
     const navLinks = [
@@ -25,6 +26,15 @@ const Navbar = () => {
     if (isAdmin) {
         navLinks.push({ name: 'Admin', path: '/admin', icon: <ShieldAlert size={18} /> });
     }
+
+    if (isSuperAdmin) {
+        navLinks.push({ name: 'Super Admin', path: '/super-admin', icon: <ShieldCheck size={18} className="text-rose-500" /> });
+    }
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 glass-morphism h-16 px-6 flex items-center justify-between">
@@ -56,9 +66,19 @@ const Navbar = () => {
                         Create Event
                     </button>
                 )}
+
+                {user && (
+                    <button
+                        onClick={handleLogout}
+                        className="text-rose-500 hover:text-rose-400 transition-colors flex items-center gap-2 font-medium ml-2"
+                    >
+                        <LogOut size={18} />
+                        Logout
+                    </button>
+                )}
             </div>
 
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center gap-4">
                 <button onClick={() => setIsOpen(!isOpen)} className="text-text">
                     {isOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -96,6 +116,16 @@ const Navbar = () => {
                             >
                                 <PlusCircle size={20} />
                                 Create Event
+                            </button>
+                        )}
+
+                        {user && (
+                            <button
+                                onClick={handleLogout}
+                                className="text-rose-500 hover:text-rose-400 transition-colors flex items-center justify-center gap-3 py-3 text-lg font-bold border-t border-white/10 mt-2"
+                            >
+                                <LogOut size={20} />
+                                Logout
                             </button>
                         )}
                     </motion.div>
