@@ -4,6 +4,7 @@ import cookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import { authRoutes } from './auth/auth.routes';
 import { eventRoutes } from './events/events.routes';
+import { ordersRoutes } from './orders/orders.routes';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ server.get('/health', async (request, reply) => {
 // Register Routes
 server.register(authRoutes, { prefix: '/api/v1/auth' });
 server.register(eventRoutes, { prefix: '/api/v1/events' });
+server.register(ordersRoutes, { prefix: '/api/v1/orders' });
 
 const start = async () => {
     try {
