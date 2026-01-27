@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+.dashboard-hero {
+    @apply relative py-12 md:py-20 flex flex-col items-center text-center;
+}
+
+.dashboard-badge {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-6;
+}
+
+.dashboard-heading {
+    @apply text-6xl md:text-8xl font-black mb-6 tracking-tight leading-[0.9];
+}
+
+.dashboard-tagline {
+    @apply max-w-xl text-text-dim text-lg md:text-xl font-medium mb-12;
+}
+
+.search-container {
+    @apply w-full max-w-2xl flex flex-col md:flex-row gap-4 p-2 rounded-3xl;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.search-input-wrapper {
+    @apply relative flex-grow;
+}
+
+.search-input {
+    @apply w-full bg-transparent border-none pl-12 pr-4 py-4 outline-none text-text placeholder:text-text-dim/50 font-medium;
+}
+
+.filter-btn {
+    @apply flex items-center justify-center gap-2 min-w-[140px];
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 14px 0 var(--primary-glow);
+}
+
+.section-header {
+    @apply flex items-center justify-between;
+}
+
+.section-icon-box {
+    @apply w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent;
+}
+
+.events-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+}
+
+.card-skeleton {
+    @apply h-96 rounded-radius-lg animate-pulse;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.event-card {
+    @apply rounded-radius-lg overflow-hidden card-hover group cursor-pointer relative;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.event-image-container {
+    @apply h-56 bg-surface-alt relative overflow-hidden;
+}
+
+.event-status-badge {
+    @apply bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest text-white shadow-xl;
+}
+
+.event-overlay {
+    @apply absolute bottom-0 left-0 right-0 p-6;
+    background: linear-gradient(to top, var(--bg), transparent);
+}
+
+.event-title {
+    @apply text-2xl font-black text-white group-hover:text-primary transition-colors line-clamp-1 leading-tight;
+}
+
+.event-card-content {
+    @apply p-6;
+}
+
+.event-location {
+    @apply flex items-center gap-2 text-text-dim text-sm mb-6;
+}
+
+.event-price-actions {
+    @apply flex items-center justify-between;
+}
+
+.action-icon-box {
+    @apply w-10 h-10 rounded-full border border-white/5 flex items-center justify-center group-hover:bg-primary group-hover:border-primary group-hover:text-white transition-all;
+}
+
+.empty-state {
+    @apply text-center py-32 rounded-3xl border-dashed;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.empty-icon-box {
+    @apply w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6;
+}
+
+.reset-btn {
+    @apply mt-8 text-primary font-bold uppercase tracking-widest text-xs hover:underline;
+}

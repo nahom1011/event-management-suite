@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+.profile-container {
+    @apply max-w-6xl mx-auto space-y-12;
+}
+
+.profile-header-badge {
+    @apply flex items-center gap-3 text-primary font-black uppercase tracking-[0.2em] text-[10px] mb-4;
+}
+
+.profile-title {
+    @apply text-6xl font-black tracking-tighter;
+}
+
+.profile-grid {
+    @apply grid grid-cols-1 md:grid-cols-12 gap-12;
+}
+
+.user-info-column {
+    @apply md:col-span-4 space-y-8;
+}
+
+.user-card {
+    @apply p-10 rounded-3xl flex flex-col items-center relative overflow-hidden text-center;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.card-top-accent {
+    @apply absolute top-0 left-0 w-full h-1.5;
+    background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+}
+
+.avatar-container {
+    @apply w-32 h-32 rounded-[2.5rem] mb-8 flex items-center justify-center text-5xl font-black text-white shadow-2xl shadow-primary/40 relative group;
+    background: linear-gradient(to top right, var(--primary), var(--secondary));
+}
+
+.fingerprint-icon {
+    @apply absolute w-10 h-10 bg-bg border-4 border-surface rounded-full flex items-center justify-center text-primary;
+    bottom: -0.5rem;
+    right: -0.5rem;
+}
+
+.user-name {
+    @apply text-3xl font-black tracking-tighter mb-2;
+}
+
+.role-badge {
+    @apply px-4 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] font-black uppercase tracking-widest text-text-dim;
+}
+
+.info-list {
+    @apply w-full mt-12 space-y-4 pt-8 border-t border-white/[0.03];
+}
+
+.info-item {
+    @apply flex items-center gap-4 text-text-dim bg-white/[0.02] p-4 rounded-2xl border border-white/5;
+}
+
+.info-icon-box {
+    @apply w-10 h-10 rounded-xl flex items-center justify-center;
+}
+
+.info-label {
+    @apply text-[10px] font-black uppercase tracking-widest opacity-50;
+}
+
+.info-value {
+    @apply text-sm font-bold text-text truncate max-w-[180px];
+}
+
+.organizer-column {
+    @apply md:col-span-8;
+}
+
+.loading-skeleton {
+    @apply h-96 rounded-3xl animate-pulse;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.organizer-card {
+    @apply p-10 rounded-3xl relative overflow-hidden;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.status-badge {
+    @apply absolute top-0 right-0 px-6 py-2 text-[10px] font-black uppercase tracking-[0.2em] shadow-xl;
+}
+
+.hub-header {
+    @apply flex items-center gap-4 mb-12;
+}
+
+.hub-icon-box {
+    @apply w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary;
+}
+
+.hub-title {
+    @apply text-3xl font-black tracking-tighter;
+}
+
+.hub-subtitle {
+    @apply text-text-dim font-medium;
+}
+
+.stats-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8 mb-12;
+}
+
+.stat-card {
+    @apply p-6 bg-white/[0.02] rounded-2xl border border-white/5;
+}
+
+.stat-label {
+    @apply text-[10px] text-text-dim uppercase font-black tracking-widest mb-2 flex items-center gap-2;
+}
+
+.stat-value {
+    @apply font-black text-xl tracking-tight;
+}
+
+.alert-box {
+    @apply p-8 rounded-3xl flex gap-5 items-start;
+}
+
+.alert-title {
+    @apply font-black text-lg tracking-tight mb-1 uppercase;
+}
+
+.alert-description {
+    @apply text-sm font-medium opacity-80 leading-relaxed;
+}
+
+.apply-card {
+    @apply p-10 rounded-3xl border-dashed border-2 border-primary/20;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.apply-title {
+    @apply text-4xl font-black tracking-tighter mb-4;
+}
+
+.apply-subtitle {
+    @apply text-text-dim font-medium mb-10 leading-relaxed;
+}
+
+.form-group {
+    @apply space-y-2;
+}
+
+.form-label {
+    @apply text-[10px] font-black text-text-dim uppercase tracking-widest ml-1;
+}
+
+.form-input {
+    @apply w-full bg-white/[0.03] border border-white/5 rounded-2xl p-4 outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all font-bold;
+}
+
+.verification-notice {
+    @apply p-6 bg-indigo-500/10 rounded-2xl flex gap-4 text-indigo-400 text-sm border border-indigo-500/20;
+}
+
+.submit-application-btn {
+    @apply w-full py-5 text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl shadow-primary/20;
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 14px 0 var(--primary-glow);
+}

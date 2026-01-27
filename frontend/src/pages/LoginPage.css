@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+.login-container {
+    @apply min-h-screen flex flex-col items-center justify-center p-6;
+    background: linear-gradient(to top right, var(--bg), var(--bg), rgba(49, 46, 129, 0.1));
+}
+
+.login-card {
+    @apply w-full max-w-md p-10 rounded-3xl shadow-2xl relative overflow-hidden;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.login-card-accent {
+    @apply absolute top-0 left-0 w-full h-1.5;
+    background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+}
+
+.login-icon-box {
+    @apply w-20 h-20 bg-primary rounded-3xl flex items-center justify-center mb-6 shadow-2xl shadow-primary/40;
+}
+
+.login-title {
+    @apply text-5xl font-black tracking-tighter mb-2;
+}
+
+.login-subtitle {
+    @apply text-text-dim text-center font-medium;
+}
+
+.login-toggle-container {
+    @apply flex bg-white/5 p-1.5 rounded-2xl mb-10 border border-white/5;
+}
+
+.login-toggle-btn {
+    @apply flex-1 py-3 text-sm font-bold rounded-xl transition-all duration-500;
+}
+
+.login-toggle-btn-active {
+    @apply bg-primary text-white shadow-xl;
+}
+
+.login-toggle-btn-inactive {
+    @apply text-text-dim hover:text-text;
+}
+
+.feature-item {
+    @apply flex items-center gap-4 text-text/90 bg-white/[0.03] p-4 rounded-2xl border border-white/5;
+}
+
+.feature-icon-box {
+    @apply w-10 h-10 rounded-xl flex items-center justify-center;
+}
+
+.input-label {
+    @apply text-[10px] font-black text-text-dim uppercase tracking-widest ml-1;
+}
+
+.input-icon {
+    @apply absolute left-4 top-1/2 text-text-dim group-focus-within:text-primary transition-colors;
+    transform: translateY(-50%);
+}
+
+.form-input {
+    @apply w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl py-4 pl-12 pr-4 outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all font-medium;
+}
+
+.submit-btn {
+    @apply w-full flex items-center justify-center gap-3 py-4 text-xs uppercase tracking-[0.2em];
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 14px 0 var(--primary-glow);
+}
+
+.error-message {
+    @apply p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-rose-500 text-xs font-bold text-center uppercase tracking-widest;
+}
+
+.footer-link {
+    @apply text-primary hover:text-white font-black transition-colors ml-1 uppercase tracking-widest;
+}
+
+.aesthetic-footer {
+    @apply mt-12 flex items-center gap-8 opacity-20;
+}

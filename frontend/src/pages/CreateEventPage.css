@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+.create-event-container {
+    @apply max-w-3xl mx-auto py-12;
+}
+
+.create-event-header {
+    @apply mb-12;
+}
+
+.progress-bar {
+    @apply flex items-center gap-4 mb-4;
+}
+
+.step-indicator {
+    @apply flex items-center gap-2;
+}
+
+.step-circle {
+    @apply w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all;
+}
+
+.step-circle-active {
+    @apply bg-primary text-white scale-110 shadow-lg shadow-primary/30;
+}
+
+.step-circle-completed {
+    @apply bg-emerald-500 text-white;
+}
+
+.step-circle-inactive {
+    @apply bg-white/5 text-text-dim border border-white/10;
+}
+
+.step-line {
+    @apply h-1 w-12 rounded;
+}
+
+.step-line-active {
+    @apply bg-emerald-500;
+}
+
+.step-line-inactive {
+    @apply bg-white/5;
+}
+
+.page-title {
+    @apply text-5xl font-black tracking-tight;
+}
+
+.page-description {
+    @apply text-text-dim mt-2;
+}
+
+.form-card {
+    @apply p-8 rounded-3xl relative overflow-hidden;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.form-section {
+    @apply space-y-6;
+}
+
+.form-label-create {
+    @apply block text-sm font-bold mb-2 text-text-dim flex items-center gap-2;
+}
+
+.form-input-create {
+    @apply w-full bg-white/5 border border-white/10 rounded-lg p-4 outline-none focus:border-primary/50 transition-all font-semibold text-lg;
+}
+
+.form-textarea {
+    @apply w-full bg-white/5 border border-white/10 rounded-lg p-4 outline-none focus:border-primary/50 transition-all font-medium;
+}
+
+.ticket-card {
+    @apply p-6 bg-white/5 rounded-radius-lg border border-white/10 relative group;
+}
+
+.remove-ticket-btn {
+    @apply absolute top-4 right-4 text-rose-500 p-2 hover:bg-rose-500/10 rounded-lg transition-all;
+}
+
+.ticket-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
+}
+
+.ticket-label {
+    @apply block text-xs font-bold mb-2 text-text-dim uppercase tracking-wider;
+}
+
+.ticket-input {
+    @apply w-full bg-white/5 border border-white/10 rounded-lg p-3 outline-none focus:border-primary/50 transition-all;
+}
+
+.add-ticket-btn {
+    @apply w-full border-2 border-dashed border-white/10 p-4 rounded-radius-lg text-text-dim flex items-center justify-center gap-2 hover:bg-white/5 transition-all font-bold;
+}
+
+.nav-bar {
+    @apply mt-12 pt-8 border-t border-white/5 flex items-center justify-between;
+}
+
+.back-btn {
+    @apply flex items-center gap-2 text-text-dim hover:text-white transition-colors font-bold;
+}
+
+.next-btn {
+    @apply bg-white text-bg px-8 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-primary hover:text-white transition-all active:scale-95;
+}
+
+.submit-btn-create {
+    @apply px-10 py-3 rounded-lg font-bold flex items-center gap-2 transition-all active:scale-95 shadow-xl;
+}
+
+.submit-btn-success {
+    @apply bg-emerald-500 text-white;
+}
+
+.submit-btn-default {
+    @apply bg-primary text-white shadow-primary/25 hover:bg-indigo-600;
+}

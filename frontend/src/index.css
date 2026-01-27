@@ -1,8 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
 
 :root {
   /* Refined Color Palette (HSL) */
@@ -10,6 +7,14 @@
   --primary-glow: hsla(238, 82%, 67%, 0.15);
   --secondary: hsla(262, 83%, 66%, 1);
   --accent: hsla(349, 89%, 60%, 1);
+
+  /* Helper Colors for Gradients */
+  --color-indigo-500: #6366f1;
+  --color-purple-600: #9333ea;
+  --color-rose-500: #f43f5e;
+  --color-rose-400: #fb7185;
+  --color-emerald-500: #10b981;
+  --color-amber-500: #f59e0b;
 
   --bg: hsla(222, 47%, 4%, 1);
   --surface: hsla(222, 47%, 7%, 1);

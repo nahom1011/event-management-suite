@@ -1,0 +1,327 @@
+@import "tailwindcss";
+
+.super-admin-container {
+    @apply max-w-7xl mx-auto space-y-12 pb-20;
+}
+
+.super-header {
+    @apply flex flex-col lg:flex-row lg:items-end justify-between gap-8;
+}
+
+.super-header-content {
+    @apply space-y-4;
+}
+
+.super-header-badge {
+    @apply flex items-center gap-2 text-rose-500 font-black uppercase tracking-[0.2em] text-[10px];
+}
+
+.super-page-title {
+    @apply text-6xl font-black tracking-tighter;
+}
+
+.super-page-subtitle {
+    @apply text-text-dim font-medium text-lg;
+}
+
+.super-tabs-container {
+    @apply flex bg-rose-500/5 p-1.5 rounded-2xl border border-rose-500/10 backdrop-blur-3xl shadow-2xl;
+}
+
+.super-tab-btn {
+    @apply px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all flex items-center gap-3;
+}
+
+.super-tab-active {
+    @apply bg-rose-500 text-white shadow-xl shadow-rose-500/20;
+}
+
+.super-tab-inactive {
+    @apply text-text-dim hover:text-rose-400 hover:bg-rose-500/5;
+}
+
+.super-content-container {
+    @apply grid grid-cols-1 gap-8;
+}
+
+.users-section {
+    @apply space-y-8;
+}
+
+.search-container-super {
+    @apply relative group;
+}
+
+.search-icon-super {
+    @apply absolute left-5 top-1/2 text-text-dim group-focus-within:text-rose-500 transition-colors;
+    transform: translateY(-50%);
+}
+
+.search-input-super {
+    @apply w-full bg-white/[0.03] border border-white/5 rounded-2xl pl-14 pr-6 py-5 outline-none focus:border-rose-500/50 focus:bg-white/[0.05] transition-all font-black text-lg;
+}
+
+.users-table-card {
+    @apply rounded-3xl overflow-hidden border border-white/5 shadow-2xl bg-white/[0.01];
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.users-table-header {
+    @apply bg-white/[0.02] p-8 border-b border-white/[0.03] grid grid-cols-12 gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-text-dim;
+}
+
+.users-list {
+    @apply divide-y divide-white/[0.03];
+}
+
+.user-row {
+    @apply p-8 grid grid-cols-12 gap-8 items-center hover:bg-rose-500/[0.02] transition-all group;
+}
+
+.user-index {
+    @apply col-span-1 text-center text-[10px] text-text-dim font-mono font-bold;
+}
+
+.user-identity {
+    @apply col-span-5 flex items-center gap-5;
+}
+
+.user-avatar-box {
+    @apply w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center font-black text-2xl text-rose-500 shadow-xl shadow-rose-500/5 relative overflow-hidden;
+}
+
+.user-avatar-gradient {
+    @apply absolute inset-0;
+    background: linear-gradient(to top right, rgba(244, 63, 94, 0.2), transparent);
+}
+
+.user-name {
+    @apply font-black text-xl tracking-tight leading-tight group-hover:text-rose-400 transition-colors;
+}
+
+.user-email {
+    @apply text-[10px] font-bold text-text-dim uppercase tracking-widest mt-1;
+}
+
+.role-badge {
+    @apply text-[10px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border;
+}
+
+.role-super-admin {
+    @apply bg-rose-500 text-white border-rose-500;
+}
+
+.role-admin {
+    @apply bg-indigo-500/10 text-indigo-400 border-indigo-500/20;
+}
+
+.role-user {
+    @apply bg-white/5 text-text-dim border-white/10;
+}
+
+.user-actions {
+    @apply col-span-3 flex justify-end gap-3 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all;
+}
+
+.role-select-container {
+    @apply relative;
+}
+
+.role-select {
+    @apply appearance-none bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest py-3 px-6 pr-10 rounded-xl outline-none focus:border-rose-500/50 transition-all cursor-pointer hover:bg-white/10;
+}
+
+.role-select-icon {
+    @apply absolute right-4 top-1/2 pointer-events-none text-text-dim;
+    transform: translateY(-50%);
+}
+
+.fingerprint-icon-box {
+    @apply w-10 h-10 flex items-center justify-center text-rose-500 bg-rose-500/10 rounded-xl border border-rose-500/20;
+}
+
+.logs-card {
+    @apply rounded-3xl overflow-hidden border border-rose-500/10 bg-black/40 font-mono text-sm shadow-2xl;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.logs-header {
+    @apply bg-rose-500/5 p-6 border-b border-rose-500/10 flex items-center justify-between text-rose-500;
+}
+
+.logs-title {
+    @apply flex items-center gap-3 uppercase tracking-[0.2em] font-black text-xs;
+}
+
+.logs-status {
+    @apply text-[10px] font-black uppercase tracking-widest animate-pulse;
+}
+
+.logs-table-wrapper {
+    @apply overflow-x-auto max-h-[650px] overflow-y-auto custom-scrollbar;
+}
+
+.logs-table {
+    @apply w-full text-left;
+}
+
+.logs-thead {
+    @apply bg-white/5 text-[9px] text-text-dim uppercase tracking-[0.15em];
+}
+
+.logs-th {
+    @apply px-8 py-5 border-b border-white/5;
+}
+
+.logs-tbody {
+    @apply divide-y divide-white/[0.03];
+}
+
+.log-row {
+    @apply hover:bg-rose-500/[0.03] transition-colors group;
+}
+
+.log-time {
+    @apply px-8 py-5 text-text-dim whitespace-nowrap text-xs font-bold;
+}
+
+.log-actor-name {
+    @apply font-black text-text group-hover:text-rose-400 transition-colors uppercase tracking-tight;
+}
+
+.log-actor-role {
+    @apply text-[9px] opacity-40 uppercase font-black;
+}
+
+.log-badge {
+    @apply px-3 py-1 rounded-md text-[9px] font-black uppercase tracking-widest border;
+}
+
+.log-badge-danger {
+    @apply bg-rose-500/10 text-rose-500 border-rose-500/20;
+}
+
+.log-badge-success {
+    @apply bg-emerald-500/10 text-emerald-500 border-emerald-500/20;
+}
+
+.log-badge-info {
+    @apply bg-indigo-500/10 text-indigo-400 border-indigo-500/20;
+}
+
+.log-target {
+    @apply px-8 py-5 opacity-40 font-mono text-[10px] font-bold;
+}
+
+.log-inspect-btn {
+    @apply text-[9px] font-black uppercase tracking-widest text-rose-500/50 hover:text-rose-500 transition-colors hover:underline flex items-center gap-1.5 ml-auto;
+}
+
+.config-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+}
+
+.config-card {
+    @apply p-10 rounded-3xl border border-white/5 space-y-8 relative overflow-hidden group;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.config-icon-bg {
+    @apply absolute text-rose-500/5 group-hover:text-rose-500/10 transition-colors;
+    bottom: -2.5rem;
+    right: -2.5rem;
+}
+
+.config-icon-bg-indigo {
+    @apply absolute text-indigo-500/5 group-hover:text-indigo-500/10 transition-colors;
+    bottom: -2.5rem;
+    right: -2.5rem;
+}
+
+.config-title {
+    @apply text-3xl font-black tracking-tighter flex items-center gap-4;
+}
+
+.maintenance-box {
+    @apply p-8 rounded-3xl border transition-all duration-500;
+}
+
+.maintenance-active {
+    @apply bg-rose-500 text-white shadow-2xl shadow-rose-500/40 border-rose-400;
+}
+
+.maintenance-inactive {
+    @apply bg-rose-500/5 border-rose-500/20 text-rose-500;
+}
+
+.kill-switch-header {
+    @apply flex items-center justify-between mb-8;
+}
+
+.toggle-container {
+    @apply w-16 h-10 rounded-2xl p-1.5 cursor-pointer transition-all border-2;
+}
+
+.toggle-active {
+    @apply bg-white/20 border-white;
+}
+
+.toggle-inactive {
+    @apply bg-rose-500/10 border-rose-500/40;
+}
+
+.toggle-thumb {
+    @apply w-6 h-6 rounded-xl shadow-2xl transition-colors;
+}
+
+.system-status {
+    @apply flex items-center gap-3 font-black text-xs tracking-[0.2em];
+}
+
+.region-info {
+    @apply p-6 bg-white/[0.02] rounded-2xl border border-white/5 flex items-center justify-between text-text-dim;
+}
+
+.region-label {
+    @apply flex items-center gap-3 text-[10px] font-black uppercase tracking-widest;
+}
+
+.commission-label {
+    @apply text-[10px] font-black text-text-dim uppercase tracking-[0.2em] ml-1 flex items-center gap-2;
+}
+
+.commission-input-group {
+    @apply flex gap-3;
+}
+
+.commission-input {
+    @apply w-full bg-white/[0.03] border border-white/5 rounded-2xl p-5 outline-none focus:border-indigo-500/50 transition-all font-black text-2xl tracking-tighter;
+}
+
+.commit-btn {
+    @apply bg-indigo-500 text-white px-8 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 transition-all shadow-xl shadow-indigo-500/20 active:scale-95;
+}
+
+.protocol-info-row {
+    @apply flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/5;
+}
+
+.loading-state-container {
+    @apply p-32 text-center flex flex-col items-center gap-6;
+}
+
+.loading-pulse {
+    @apply font-black text-[10px] uppercase tracking-[0.4em] text-rose-500 animate-pulse;
+}

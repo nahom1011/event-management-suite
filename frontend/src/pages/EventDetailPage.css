@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+.event-detail-container {
+    @apply max-w-7xl mx-auto;
+}
+
+.loading-container {
+    @apply flex items-center justify-center min-h-[60vh];
+}
+
+.loading-spinner-event {
+    @apply w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin;
+}
+
+.error-container {
+    @apply text-center py-20;
+}
+
+.error-title {
+    @apply text-4xl font-black mb-4;
+}
+
+.error-text {
+    @apply text-text-dim mb-8;
+}
+
+.event-header {
+    @apply flex items-center justify-between mb-8;
+}
+
+.back-to-deck-btn {
+    @apply group flex items-center gap-3 text-text-dim hover:text-text transition-all font-bold uppercase tracking-widest text-[10px];
+}
+
+.back-btn-icon-box {
+    @apply w-8 h-8 rounded-full border border-white/5 flex items-center justify-center group-hover:bg-white/5 transition-colors;
+}
+
+.event-action-group {
+    @apply flex gap-2;
+}
+
+.event-action-btn {
+    @apply w-10 h-10 rounded-full border border-white/5 flex items-center justify-center text-text-dim hover:text-accent hover:bg-accent/10 transition-all;
+}
+
+.event-detail-grid {
+    @apply grid grid-cols-1 lg:grid-cols-12 gap-12;
+}
+
+.event-main-column {
+    @apply lg:col-span-8 space-y-12;
+}
+
+.hero-image-container {
+    @apply relative aspect-video md:aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl group;
+}
+
+.hero-bg-overlay {
+    @apply absolute inset-0;
+    background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.2), rgba(147, 51, 234, 0.1), transparent);
+}
+
+.hero-bg-image {
+    @apply absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80')] bg-cover bg-center transition-transform duration-1000 group-hover:scale-110;
+}
+
+.hero-gradient-overlay {
+    @apply absolute inset-0 opacity-80;
+    background: linear-gradient(to top, var(--bg), transparent, transparent);
+}
+
+.hero-content {
+    @apply absolute bottom-8 left-8 right-8;
+}
+
+.premium-badge {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-white text-[10px] font-black uppercase tracking-[0.2em] mb-4 backdrop-blur-md;
+}
+
+.hero-title {
+    @apply text-4xl md:text-6xl font-black tracking-tighter text-white mb-2 leading-tight;
+}
+
+.details-section {
+    @apply space-y-8;
+}
+
+.section-h2 {
+    @apply text-2xl font-black mb-6 flex items-center gap-3;
+}
+
+.description-card {
+    @apply p-8 rounded-3xl;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.description-text {
+    @apply text-text-dim leading-relaxed text-lg font-medium whitespace-pre-wrap;
+}
+
+.info-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+}
+
+.info-card {
+    @apply p-6 rounded-radius-lg border-l-4 border-indigo-500;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.info-card-title {
+    @apply text-[10px] font-black uppercase tracking-[0.2em] text-text-dim mb-4;
+}
+
+.info-card-content {
+    @apply flex gap-4 items-center;
+}
+
+.info-icon-box {
+    @apply w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400;
+}
+
+.info-value {
+    @apply font-bold text-text-dim;
+}
+
+.event-sidebar-column {
+    @apply lg:col-span-4 space-y-8;
+}
+
+.sidebar-card {
+    @apply p-8 rounded-3xl sticky top-28 space-y-10 border-t-2 border-primary/30;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.meta-item {
+    @apply flex gap-5;
+}
+
+.meta-icon-box {
+    @apply w-14 h-14 bg-white/[0.03] border border-white/5 rounded-2xl flex items-center justify-center text-primary group hover:scale-110 transition-transform;
+}
+
+.meta-content {
+    @apply flex flex-col justify-center;
+}
+
+.meta-label {
+    @apply text-[10px] text-text-dim uppercase font-black tracking-[0.2em] mb-1;
+}
+
+.meta-value {
+    @apply font-black text-lg;
+}
+
+.meta-subtext {
+    @apply text-xs text-text-dim font-bold;
+}
+
+.tickets-container {
+    @apply space-y-4 pt-10 border-t border-white/[0.05];
+}
+
+.tickets-h4 {
+    @apply text-[10px] font-black uppercase tracking-[0.2em] mb-6;
+}
+
+.ticket-item {
+    @apply group p-5 bg-white/[0.02] hover:bg-white/[0.04] rounded-2xl border border-white/5 hover:border-primary/30 transition-all;
+}
+
+.ticket-header {
+    @apply flex items-center justify-between mb-6;
+}
+
+.ticket-name {
+    @apply font-black text-lg leading-tight uppercase tracking-tight;
+}
+
+.ticket-quantity {
+    @apply text-xs text-text-dim font-bold;
+}
+
+.ticket-price {
+    @apply text-2xl font-black text-primary tracking-tighter;
+}
+
+.buy-btn {
+    @apply w-full py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] transition-all;
+}
+
+.buy-btn-success {
+    @apply bg-emerald-500 text-white;
+}
+
+.buy-btn-disabled {
+    @apply bg-red-500/10 text-red-500/50 cursor-not-allowed border border-red-500/20;
+}
+
+.buy-btn-default {
+    @apply bg-primary hover:bg-indigo-600 text-white shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-[0.98];
+}
+
+.tickets-closed {
+    @apply text-center p-8 bg-amber-500/5 border border-amber-500/20 text-amber-500 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em];
+}

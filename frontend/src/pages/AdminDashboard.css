@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+.admin-container {
+    @apply py-8;
+}
+
+.admin-header {
+    @apply mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6;
+}
+
+.admin-title {
+    @apply text-5xl font-black mb-2 tracking-tight;
+}
+
+.admin-subtitle {
+    @apply text-text-dim text-lg;
+}
+
+.admin-tabs-container {
+    @apply flex bg-white/5 p-1 rounded-radius-lg border border-white/5;
+}
+
+.admin-tab-btn {
+    @apply px-6 py-2 rounded-lg font-bold text-sm transition-all capitalize;
+}
+
+.admin-tab-btn-active {
+    @apply bg-primary text-white shadow-lg shadow-primary/20;
+}
+
+.admin-tab-btn-inactive {
+    @apply text-text-dim hover:text-white;
+}
+
+.admin-search-container {
+    @apply mb-6 relative;
+}
+
+.admin-search-icon {
+    @apply absolute left-4 top-1/2 text-text-dim;
+    transform: translateY(-50%);
+}
+
+.admin-search-input {
+    @apply w-full bg-white/5 border border-white/10 rounded-radius-lg pl-12 pr-4 py-4 outline-none focus:border-primary/50 transition-all;
+}
+
+.admin-content-card {
+    @apply rounded-3xl overflow-hidden border border-white/5;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Tables */
+.table-header {
+    @apply bg-white/5 p-4 border-b border-white/5 grid grid-cols-12 gap-4 text-xs font-bold uppercase tracking-widest text-text-dim;
+}
+
+.table-body {
+    @apply divide-y divide-white/5;
+}
+
+.table-row {
+    @apply p-6 grid grid-cols-12 gap-4 items-center hover:bg-white/[0.02] transition-colors;
+}
+
+/* Avatars */
+.org-avatar {
+    @apply w-10 h-10 bg-indigo-500/20 text-primary rounded-lg flex items-center justify-center font-bold;
+}
+
+.user-avatar {
+    @apply w-10 h-10 rounded-full bg-white/5 flex items-center justify-center font-bold text-primary;
+}
+
+/* Action Buttons */
+.action-btn-icon {
+    @apply w-10 h-10 rounded-lg flex items-center justify-center transition-all;
+}
+
+.action-btn-reject {
+    @apply border border-red-500/30 text-red-500 hover:bg-red-500/10;
+}
+
+.action-btn-approve {
+    @apply bg-emerald-500 text-white hover:bg-emerald-600;
+}
+
+.action-btn-view {
+    @apply bg-white/5 text-text-dim hover:text-white;
+}
+
+.user-action-btn {
+    @apply flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all;
+}
+
+/* Status & Badges */
+.role-badge {
+    @apply text-[10px] font-black uppercase tracking-widest bg-white/10 px-2 py-1 rounded text-text-dim;
+}
+
+.status-active {
+    @apply text-emerald-500;
+}
+
+.status-inactive {
+    @apply text-text-dim;
+}
+
+.status-banned {
+    @apply text-red-500;
+}
+
+/* Empty & Loading */
+.loading-state {
+    @apply p-20 text-center text-text-dim animate-pulse;
+}
+
+.empty-queue {
+    @apply p-20 text-center flex flex-col items-center;
+}

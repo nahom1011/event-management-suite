@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+.signup-container {
+    @apply min-h-screen flex flex-col items-center justify-center;
+    margin-top: -3rem;
+}
+
+.signup-card {
+    @apply w-full max-w-md p-8 rounded-3xl shadow-2xl relative overflow-hidden;
+    background: var(--glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.signup-card-accent {
+    @apply absolute top-0 left-0 w-full h-1;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+}
+
+.signup-header {
+    @apply flex flex-col items-center mb-8;
+}
+
+.signup-icon-box {
+    @apply w-16 h-16 rounded-2xl flex items-center justify-center mb-4 shadow-xl shadow-primary/30;
+    background: linear-gradient(to top right, var(--color-indigo-500), var(--color-purple-600));
+}
+
+.signup-title {
+    @apply text-4xl font-black font-['Space_Grotesk'] mb-2 tracking-tight text-center;
+}
+
+.signup-subtitle {
+    @apply text-text-dim text-center text-sm;
+}
+
+.signup-form {
+    @apply space-y-4;
+}
+
+.signup-error {
+    @apply p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm text-center;
+}
+
+.form-group-signup {
+    @apply space-y-1;
+}
+
+.signup-label {
+    @apply text-xs font-semibold text-text-dim uppercase tracking-wider ml-1;
+}
+
+.signup-input-wrapper {
+    @apply relative;
+}
+
+.signup-input-icon {
+    @apply absolute left-3 top-1/2 text-text-dim;
+    transform: translateY(-50%);
+}
+
+.signup-input {
+    @apply w-full bg-white/5 border border-white/10 rounded-lg py-2.5 pl-10 pr-4 outline-none focus:border-primary/50 transition-colors;
+}
+
+.signup-submit-btn {
+    @apply w-full bg-primary hover:bg-primary-hover text-white font-bold py-3 rounded-lg mt-4 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed group;
+}
+
+.loading-spinner-signup {
+    @apply w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin;
+}
+
+.signup-footer {
+    @apply text-sm text-text-dim text-center mt-6;
+}
+
+.signup-login-link {
+    @apply text-primary hover:underline font-semibold;
+}

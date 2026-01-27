@@ -7,6 +7,7 @@ import {
     UserX, UserCheck, ShieldOff, Search
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
     const [activeTab, setActiveTab] = useState<'organizers' | 'events' | 'users'>('organizers');
@@ -86,20 +87,19 @@ const AdminDashboard = () => {
 
     return (
         <Layout>
-            <div className="py-8">
-                <div className="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="admin-container">
+                <div className="admin-header">
                     <div>
-                        <h1 className="text-5xl font-black mb-2 tracking-tight">Admin Moderation</h1>
-                        <p className="text-text-dim text-lg">Maintain platform integrity and review submissions.</p>
+                        <h1 className="admin-title">Admin Moderation</h1>
+                        <p className="admin-subtitle">Maintain platform integrity and review submissions.</p>
                     </div>
 
-                    <div className="flex bg-white/5 p-1 rounded-radius-lg border border-white/5">
+                    <div className="admin-tabs-container">
                         {['organizers', 'events', 'users'].map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab as any)}
-                                className={`px-6 py-2 rounded-lg font-bold text-sm transition-all capitalize ${activeTab === tab ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-text-dim hover:text-white'
-                                    }`}
+                                className={`admin-tab-btn ${activeTab === tab ? 'admin-tab-btn-active' : 'admin-tab-btn-inactive'}`}
                             >
                                 {tab}
                                 {tab === 'organizers' && organizers.length > 0 && <span className="ml-1 opacity-50">({organizers.length})</span>}
@@ -110,19 +110,19 @@ const AdminDashboard = () => {
                 </div>
 
                 {activeTab === 'users' && (
-                    <div className="mb-6 relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-text-dim" size={18} />
+                    <div className="admin-search-container">
+                        <Search className="admin-search-icon" size={18} />
                         <input
                             type="text"
                             placeholder="Search users by name or email..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 rounded-radius-lg pl-12 pr-4 py-4 outline-none focus:border-primary/50 transition-all"
+                            className="admin-search-input"
                         />
                     </div>
                 )}
 
-                <div className="glass-morphism rounded-radius-xl overflow-hidden border border-white/5">
+                <div className="admin-content-card">
                     {activeTab === 'organizers' ? (
                         <OrganizerTable organizers={organizers} loading={loading} processingId={processingId} onReview={handleOrganizerReview} />
                     ) : activeTab === 'events' ? (
@@ -138,18 +138,18 @@ const AdminDashboard = () => {
 
 const OrganizerTable = ({ organizers, loading, processingId, onReview }: any) => (
     <>
-        <div className="bg-white/5 p-4 border-b border-white/5 grid grid-cols-12 gap-4 text-xs font-bold uppercase tracking-widest text-text-dim">
+        <div className="table-header">
             <div className="col-span-4">Organizer / Company</div>
             <div className="col-span-4">Contact Details</div>
             <div className="col-span-2 text-center">Applied Date</div>
             <div className="col-span-2 text-right">Actions</div>
         </div>
         {loading ? <LoadingIndicator /> : organizers.length > 0 ? (
-            <div className="divide-y divide-white/5">
+            <div className="table-body">
                 {organizers.map((app: any) => (
-                    <motion.div key={app.id} className="p-6 grid grid-cols-12 gap-4 items-center hover:bg-white/[0.02] transition-colors">
+                    <motion.div key={app.id} className="table-row">
                         <div className="col-span-4 flex items-center gap-4">
-                            <div className="w-10 h-10 bg-indigo-500/20 text-primary rounded-lg flex items-center justify-center font-bold">{app.organizationName.charAt(0)}</div>
+                            <div className="org-avatar">{app.organizationName.charAt(0)}</div>
                             <div>
                                 <p className="font-bold text-lg">{app.organizationName}</p>
                                 <p className="text-text-dim text-sm flex items-center gap-1"><User size={12} /> {app.user.name}</p>
@@ -161,8 +161,8 @@ const OrganizerTable = ({ organizers, loading, processingId, onReview }: any) =>
                         </div>
                         <div className="col-span-2 text-center text-text-dim">{new Date(app.createdAt).toLocaleDateString()}</div>
                         <div className="col-span-2 flex justify-end gap-3">
-                            <button onClick={() => onReview(app.id, 'rejected')} disabled={!!processingId} className="w-10 h-10 rounded-lg border border-red-500/30 text-red-500 flex items-center justify-center hover:bg-red-500/10 transition-all"><X size={20} /></button>
-                            <button onClick={() => onReview(app.id, 'approved')} disabled={!!processingId} className="w-10 h-10 rounded-lg bg-emerald-500 text-white flex items-center justify-center hover:bg-emerald-600 transition-all"><Check size={20} /></button>
+                            <button onClick={() => onReview(app.id, 'rejected')} disabled={!!processingId} className="action-btn-icon action-btn-reject"><X size={20} /></button>
+                            <button onClick={() => onReview(app.id, 'approved')} disabled={!!processingId} className="action-btn-icon action-btn-approve"><Check size={20} /></button>
                         </div>
                     </motion.div>
                 ))}
@@ -173,16 +173,16 @@ const OrganizerTable = ({ organizers, loading, processingId, onReview }: any) =>
 
 const EventTable = ({ events, loading, processingId, onReview }: any) => (
     <>
-        <div className="bg-white/5 p-4 border-b border-white/5 grid grid-cols-12 gap-4 text-xs font-bold uppercase tracking-widest text-text-dim">
+        <div className="table-header">
             <div className="col-span-4">Event Details</div>
             <div className="col-span-3">Organizer</div>
             <div className="col-span-2 text-center">Date</div>
             <div className="col-span-3 text-right">Actions</div>
         </div>
         {loading ? <LoadingIndicator /> : events.length > 0 ? (
-            <div className="divide-y divide-white/5">
+            <div className="table-body">
                 {events.map((event: any) => (
-                    <motion.div key={event.id} className="p-6 grid grid-cols-12 gap-4 items-center hover:bg-white/[0.02] transition-colors">
+                    <motion.div key={event.id} className="table-row">
                         <div className="col-span-4">
                             <p className="font-bold text-lg">{event.title}</p>
                             <div className="flex items-center gap-3 mt-1">
@@ -192,9 +192,9 @@ const EventTable = ({ events, loading, processingId, onReview }: any) => (
                         <div className="col-span-3 font-medium text-text-dim uppercase text-[10px] tracking-widest">{event.organizer.organizationName}</div>
                         <div className="col-span-2 text-center text-text-dim text-sm">{new Date(event.startDate).toLocaleDateString()}</div>
                         <div className="col-span-3 flex justify-end gap-3">
-                            <button className="w-10 h-10 rounded-lg bg-white/5 text-text-dim flex items-center justify-center hover:text-white transition-all"><Eye size={18} /></button>
-                            <button onClick={() => onReview(event.id, 'cancelled')} disabled={!!processingId} className="w-10 h-10 rounded-lg border border-red-500/30 text-red-500 flex items-center justify-center hover:bg-red-500/10 transition-all"><X size={20} /></button>
-                            <button onClick={() => onReview(event.id, 'live')} disabled={!!processingId} className="w-10 h-10 rounded-lg bg-emerald-500 text-white flex items-center justify-center hover:bg-emerald-600 transition-all"><Check size={20} /></button>
+                            <button className="action-btn-icon action-btn-view"><Eye size={18} /></button>
+                            <button onClick={() => onReview(event.id, 'cancelled')} disabled={!!processingId} className="action-btn-icon action-btn-reject"><X size={20} /></button>
+                            <button onClick={() => onReview(event.id, 'live')} disabled={!!processingId} className="action-btn-icon action-btn-approve"><Check size={20} /></button>
                         </div>
                     </motion.div>
                 ))}
@@ -205,35 +205,35 @@ const EventTable = ({ events, loading, processingId, onReview }: any) => (
 
 const UserTable = ({ users, loading, processingId, onToggle }: any) => (
     <>
-        <div className="bg-white/5 p-4 border-b border-white/5 grid grid-cols-12 gap-4 text-xs font-bold uppercase tracking-widest text-text-dim">
+        <div className="table-header">
             <div className="col-span-4">User Info</div>
             <div className="col-span-2">Role</div>
             <div className="col-span-2 text-center">Status</div>
             <div className="col-span-4 text-right">Actions</div>
         </div>
         {loading ? <LoadingIndicator /> : users.length > 0 ? (
-            <div className="divide-y divide-white/5">
+            <div className="table-body">
                 {users.map((u: any) => (
-                    <motion.div key={u.id} className="p-6 grid grid-cols-12 gap-4 items-center hover:bg-white/[0.02] transition-colors">
+                    <motion.div key={u.id} className="table-row">
                         <div className="col-span-4 flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center font-bold text-primary">{u.name.charAt(0)}</div>
+                            <div className="user-avatar">{u.name.charAt(0)}</div>
                             <div>
                                 <p className="font-bold">{u.name}</p>
                                 <p className="text-xs text-text-dim">{u.email}</p>
                             </div>
                         </div>
                         <div className="col-span-2">
-                            <span className="text-[10px] font-black uppercase tracking-widest bg-white/10 px-2 py-1 rounded text-text-dim">{u.role}</span>
+                            <span className="role-badge">{u.role}</span>
                         </div>
                         <div className="col-span-2 text-center space-y-1">
-                            <div className={`text-[10px] font-bold uppercase ${u.isActive ? 'text-emerald-500' : 'text-text-dim'}`}>{u.isActive ? 'Active' : 'Inactive'}</div>
-                            {u.isBanned && <div className="text-[10px] font-bold uppercase text-red-500">Banned</div>}
+                            <div className={`text-[10px] font-bold uppercase ${u.isActive ? 'status-active' : 'status-inactive'}`}>{u.isActive ? 'Active' : 'Inactive'}</div>
+                            {u.isBanned && <div className="text-[10px] font-bold uppercase status-banned">Banned</div>}
                         </div>
                         <div className="col-span-4 flex justify-end gap-2">
                             <button
                                 onClick={() => onToggle(u.id, 'active', !u.isActive)}
                                 disabled={!!processingId}
-                                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all ${u.isActive ? 'bg-amber-500/10 text-amber-500 hover:bg-amber-500/20' : 'bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20'
+                                className={`user-action-btn ${u.isActive ? 'bg-amber-500/10 text-amber-500 hover:bg-amber-500/20' : 'bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20'
                                     }`}
                             >
                                 {u.isActive ? <><UserX size={14} /> Suspend</> : <><UserCheck size={14} /> Activate</>}
@@ -241,7 +241,7 @@ const UserTable = ({ users, loading, processingId, onToggle }: any) => (
                             <button
                                 onClick={() => onToggle(u.id, 'ban', !u.isBanned)}
                                 disabled={!!processingId}
-                                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all ${u.isBanned ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white hover:bg-red-600'
+                                className={`user-action-btn ${u.isBanned ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white hover:bg-red-600'
                                     }`}
                             >
                                 {u.isBanned ? <><ShieldCheck size={14} /> Unban</> : <><ShieldOff size={14} /> Ban</>}
@@ -254,10 +254,10 @@ const UserTable = ({ users, loading, processingId, onToggle }: any) => (
     </>
 );
 
-const LoadingIndicator = () => <div className="p-20 text-center text-text-dim animate-pulse">Loading queue...</div>;
+const LoadingIndicator = () => <div className="loading-state">Loading queue...</div>;
 
 const EmptyQueue = ({ message }: { message: string }) => (
-    <div className="p-20 text-center flex flex-col items-center">
+    <div className="empty-queue">
         <ShieldCheck size={64} className="text-white/10 mb-4" />
         <h3 className="text-2xl font-bold mb-2">Queue is clear!</h3>
         <p className="text-text-dim">{message}</p>
