@@ -13,7 +13,7 @@
 }
 
 .organizer-hub-badge {
-    @apply flex items-center gap-2 text-primary font-black uppercase tracking-[0.2em] text-[10px];
+    @apply flex items-center gap-2 text-[#6366f1] font-black uppercase tracking-[0.2em] text-[10px];
 }
 
 .organizer-page-title {
@@ -21,11 +21,11 @@
 }
 
 .organizer-page-subtitle {
-    @apply text-text-dim font-medium text-lg;
+    @apply text-[#9ca3af] font-medium text-lg;
 }
 
 .create-event-action-btn {
-    @apply group flex items-center justify-center gap-3 py-5 px-8 shadow-2xl shadow-primary;
+    @apply flex items-center justify-center gap-3 py-5 px-8 shadow-2xl;
     background: var(--primary);
     color: white;
     padding: 0.75rem 1.5rem;
@@ -48,11 +48,11 @@
 }
 
 .stats-skeleton-organizer {
-    @apply h-40 glass-morphism rounded-3xl animate-pulse;
+    @apply h-40 rounded-3xl animate-pulse;
 }
 
 .stat-card-organizer {
-    @apply glass-morphism p-8 rounded-3xl group hover:border-primary/30 transition-all relative overflow-hidden;
+    @apply p-8 rounded-3xl hover:border-[#6366f1]/30 transition-all relative overflow-hidden;
 }
 
 .stat-header {
@@ -72,7 +72,7 @@
 }
 
 .stat-title {
-    @apply text-[10px] font-black text-text-dim uppercase tracking-widest;
+    @apply text-[10px] font-black text-[#9ca3af] uppercase tracking-widest;
 }
 
 .stat-value {
@@ -86,7 +86,7 @@
 }
 
 .events-table-card {
-    @apply glass-morphism rounded-3xl overflow-hidden border border-white/5 shadow-2xl;
+    @apply rounded-3xl overflow-hidden border border-white/5 shadow-2xl;
 }
 
 .table-card-header {
@@ -98,7 +98,7 @@
 }
 
 .table-header-icon-box {
-    @apply w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-text-dim;
+    @apply w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#9ca3af];
 }
 
 .table-wrapper {
@@ -110,7 +110,7 @@
 }
 
 .table-thead {
-    @apply bg-white/[0.02] text-[10px] font-black uppercase tracking-[0.2em] text-text-dim;
+    @apply bg-white/[0.02] text-[10px] font-black uppercase tracking-[0.2em] text-[#9ca3af];
 }
 
 .table-th {
@@ -122,11 +122,11 @@
 }
 
 .table-loading-row {
-    @apply p-20 text-center text-text-dim font-bold uppercase tracking-widest animate-pulse;
+    @apply p-20 text-center text-[#9ca3af] font-bold uppercase tracking-widest animate-pulse;
 }
 
 .table-tr {
-    @apply hover:bg-white/[0.02] transition-all group;
+    @apply hover:bg-white/[0.02] transition-all;
 }
 
 .table-td {
@@ -138,15 +138,15 @@
 }
 
 .event-title-text {
-    @apply font-black text-lg group-hover:text-primary transition-colors;
+    @apply font-black text-lg group-hover:text-[#6366f1] transition-colors;
 }
 
 .event-id-text {
-    @apply text-[10px] font-mono text-text-dim opacity-50 font-bold;
+    @apply text-[10px] font-mono text-[#9ca3af] opacity-50 font-bold;
 }
 
 .date-cell {
-    @apply flex items-center gap-3 text-text-dim font-bold text-sm;
+    @apply flex items-center gap-3 text-[#9ca3af] font-bold text-sm;
 }
 
 .date-icon-box {
@@ -162,7 +162,7 @@
 }
 
 .status-draft {
-    @apply bg-white/5 text-text-dim border-white/10;
+    @apply bg-white/5 text-[#9ca3af] border-white/10;
 }
 
 .status-pending {
@@ -178,15 +178,15 @@
 }
 
 .sync-btn {
-    @apply px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-xl text-emerald-500 transition-all flex items-center gap-2 text-[10px] font-black uppercase tracking-widest border border-emerald-500/10 shadow-lg shadow-emerald-500;
+    @apply px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-xl text-emerald-500 transition-all flex items-center gap-2 text-[10px] font-black uppercase tracking-widest border border-emerald-500/10 shadow-lg;
 }
 
 .action-icon-btn {
-    @apply w-10 h-10 bg-white/5 hover:bg-white/10 rounded-xl text-text-dim hover:text-white transition-all flex items-center justify-center border border-white/5;
+    @apply w-10 h-10 bg-white/5 hover:bg-white/10 rounded-xl text-[#9ca3af] hover:text-white transition-all flex items-center justify-center border border-white/5;
 }
 
 .action-external-btn {
-    @apply w-10 h-10 bg-white/5 hover:bg-primary/20 rounded-xl text-text-dim hover:text-primary transition-all flex items-center justify-center border border-white/5;
+    @apply w-10 h-10 bg-white/5 hover:bg-[#6366f1]/20 rounded-xl text-[#9ca3af] hover:text-[#6366f1] transition-all flex items-center justify-center border border-white/5;
 }
 
 .empty-state-container {
@@ -206,9 +206,9 @@
 }
 
 .empty-state-text {
-    @apply text-text-dim font-medium mb-12;
+    @apply text-[#9ca3af] font-medium mb-12;
 }
 
 .deploy-primary-cluster-btn {
-    @apply btn-primary w-full py-5 text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-primary;
+    @apply w-full py-5 text-[10px] font-black uppercase tracking-widest shadow-2xl;
 }

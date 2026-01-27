@@ -13,11 +13,11 @@
 }
 
 .admin-subtitle {
-    @apply text-text-dim text-lg;
+    @apply text-[#9ca3af] text-lg;
 }
 
 .admin-tabs-container {
-    @apply flex bg-white/5 p-1 rounded-radius-lg border border-white/5;
+    @apply flex bg-white/5 p-1 rounded-2xl border border-white/5;
 }
 
 .admin-tab-btn {
@@ -25,11 +25,11 @@
 }
 
 .admin-tab-btn-active {
-    @apply bg-primary text-white shadow-lg shadow-primary;
+    @apply bg-[#6366f1] text-white shadow-lg;
 }
 
 .admin-tab-btn-inactive {
-    @apply text-text-dim hover:text-white;
+    @apply text-[#9ca3af] hover:text-white;
 }
 
 .admin-search-container {
@@ -37,12 +37,12 @@
 }
 
 .admin-search-icon {
-    @apply absolute left-4 top-1/2 text-text-dim;
+    @apply absolute left-4 top-1/2 text-[#9ca3af];
     transform: translateY(-50%);
 }
 
 .admin-search-input {
-    @apply w-full bg-white/5 border border-white/10 rounded-radius-lg pl-12 pr-4 py-4 outline-none focus:border-primary/50 transition-all;
+    @apply w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-[#6366f1]/50 transition-all;
 }
 
 .admin-content-card {
@@ -56,7 +56,7 @@
 
 /* Tables */
 .table-header {
-    @apply bg-white/5 p-4 border-b border-white/5 grid grid-cols-12 gap-4 text-xs font-bold uppercase tracking-widest text-text-dim;
+    @apply bg-white/5 p-4 border-b border-white/5 grid grid-cols-12 gap-4 text-xs font-bold uppercase tracking-widest text-[#9ca3af];
 }
 
 .table-body {
@@ -69,11 +69,11 @@
 
 /* Avatars */
 .org-avatar {
-    @apply w-10 h-10 bg-indigo-500/20 text-primary rounded-lg flex items-center justify-center font-bold;
+    @apply w-10 h-10 bg-indigo-500/20 text-[#6366f1] rounded-lg flex items-center justify-center font-bold;
 }
 
 .user-avatar {
-    @apply w-10 h-10 rounded-full bg-white/5 flex items-center justify-center font-bold text-primary;
+    @apply w-10 h-10 rounded-full bg-white/5 flex items-center justify-center font-bold text-[#6366f1];
 }
 
 /* Action Buttons */
@@ -90,7 +90,7 @@
 }
 
 .action-btn-view {
-    @apply bg-white/5 text-text-dim hover:text-white;
+    @apply bg-white/5 text-[#9ca3af] hover:text-white;
 }
 
 .user-action-btn {
@@ -99,7 +99,7 @@
 
 /* Status & Badges */
 .role-badge {
-    @apply text-[10px] font-black uppercase tracking-widest bg-white/10 px-2 py-1 rounded text-text-dim;
+    @apply text-[10px] font-black uppercase tracking-widest bg-white/10 px-2 py-1 rounded text-[#9ca3af];
 }
 
 .status-active {
@@ -107,7 +107,7 @@
 }
 
 .status-inactive {
-    @apply text-text-dim;
+    @apply text-[#9ca3af];
 }
 
 .status-banned {
@@ -116,7 +116,7 @@
 
 /* Empty & Loading */
 .loading-state {
-    @apply p-20 text-center text-text-dim animate-pulse;
+    @apply p-20 text-center text-[#9ca3af] animate-pulse;
 }
 
 .empty-queue {

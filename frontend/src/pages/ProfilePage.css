@@ -5,7 +5,7 @@
 }
 
 .profile-header-badge {
-    @apply flex items-center gap-3 text-primary font-black uppercase tracking-[0.2em] text-[10px] mb-4;
+    @apply flex items-center gap-3 text-[#6366f1] font-black uppercase tracking-[0.2em] text-[10px] mb-4;
 }
 
 .profile-title {
@@ -35,12 +35,12 @@
 }
 
 .avatar-container {
-    @apply w-32 h-32 rounded-[2.5rem] mb-8 flex items-center justify-center text-5xl font-black text-white shadow-2xl shadow-primary relative group;
+    @apply w-32 h-32 rounded-[2.5rem] mb-8 flex items-center justify-center text-5xl font-black text-white shadow-2xl relative;
     background: linear-gradient(to top right, var(--primary), var(--secondary));
 }
 
 .fingerprint-icon {
-    @apply absolute w-10 h-10 bg-bg border-4 border-surface rounded-full flex items-center justify-center text-primary;
+    @apply absolute w-10 h-10 bg-[#030712] border-4 border-[#111827] rounded-full flex items-center justify-center text-[#6366f1];
     bottom: -0.5rem;
     right: -0.5rem;
 }
@@ -50,7 +50,7 @@
 }
 
 .role-badge {
-    @apply px-4 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] font-black uppercase tracking-widest text-text-dim;
+    @apply px-4 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] font-black uppercase tracking-widest text-[#9ca3af];
 }
 
 .info-list {
@@ -58,7 +58,7 @@
 }
 
 .info-item {
-    @apply flex items-center gap-4 text-text-dim bg-white/[0.02] p-4 rounded-2xl border border-white/5;
+    @apply flex items-center gap-4 text-[#9ca3af] bg-white/[0.02] p-4 rounded-2xl border border-white/5;
 }
 
 .info-icon-box {
@@ -70,7 +70,7 @@
 }
 
 .info-value {
-    @apply text-sm font-bold text-text truncate max-w-[180px];
+    @apply text-sm font-bold text-[#f9fafb] truncate max-w-[180px];
 }
 
 .organizer-column {
@@ -104,7 +104,7 @@
 }
 
 .hub-icon-box {
-    @apply w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary;
+    @apply w-14 h-14 rounded-2xl bg-[#6366f1]/10 flex items-center justify-center text-[#6366f1];
 }
 
 .hub-title {
@@ -112,7 +112,7 @@
 }
 
 .hub-subtitle {
-    @apply text-text-dim font-medium;
+    @apply text-[#9ca3af] font-medium;
 }
 
 .stats-grid {
@@ -124,7 +124,7 @@
 }
 
 .stat-label {
-    @apply text-[10px] text-text-dim uppercase font-black tracking-widest mb-2 flex items-center gap-2;
+    @apply text-[10px] text-[#9ca3af] uppercase font-black tracking-widest mb-2 flex items-center gap-2;
 }
 
 .stat-value {
@@ -144,7 +144,7 @@
 }
 
 .apply-card {
-    @apply p-10 rounded-3xl border-dashed border-2 border-primary/20;
+    @apply p-10 rounded-3xl border-dashed border-2 border-[#6366f1]/20;
     background: var(--glass);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -157,7 +157,7 @@
 }
 
 .apply-subtitle {
-    @apply text-text-dim font-medium mb-10 leading-relaxed;
+    @apply text-[#9ca3af] font-medium mb-10 leading-relaxed;
 }
 
 .form-group {
@@ -165,11 +165,11 @@
 }
 
 .form-label {
-    @apply text-[10px] font-black text-text-dim uppercase tracking-widest ml-1;
+    @apply text-[10px] font-black text-[#9ca3af] uppercase tracking-widest ml-1;
 }
 
 .form-input {
-    @apply w-full bg-white/[0.03] border border-white/5 rounded-2xl p-4 outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all font-bold;
+    @apply w-full bg-white/[0.03] border border-white/5 rounded-2xl p-4 outline-none focus:border-[#6366f1]/50 focus:bg-white/[0.05] transition-all font-bold;
 }
 
 .verification-notice {
@@ -177,7 +177,7 @@
 }
 
 .submit-application-btn {
-    @apply w-full py-5 text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl shadow-primary;
+    @apply w-full py-5 text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl;
     background: var(--primary);
     color: white;
     padding: 0.75rem 1.5rem;

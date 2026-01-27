@@ -21,7 +21,7 @@
 }
 
 .super-page-subtitle {
-    @apply text-text-dim font-medium text-lg;
+    @apply text-[#9ca3af] font-medium text-lg;
 }
 
 .super-tabs-container {
@@ -33,11 +33,11 @@
 }
 
 .super-tab-active {
-    @apply bg-rose-500 text-white shadow-xl shadow-rose-500;
+    @apply bg-rose-500 text-white shadow-xl;
 }
 
 .super-tab-inactive {
-    @apply text-text-dim hover:text-rose-400 hover:bg-rose-500/5;
+    @apply text-[#9ca3af] hover:text-rose-400 hover:bg-rose-500/5;
 }
 
 .super-content-container {
@@ -49,11 +49,11 @@
 }
 
 .search-container-super {
-    @apply relative group;
+    @apply relative;
 }
 
 .search-icon-super {
-    @apply absolute left-5 top-1/2 text-text-dim group-focus-within:text-rose-500 transition-colors;
+    @apply absolute left-5 top-1/2 text-[#9ca3af] group-focus-within:text-rose-500 transition-colors;
     transform: translateY(-50%);
 }
 
@@ -71,7 +71,7 @@
 }
 
 .users-table-header {
-    @apply bg-white/[0.02] p-8 border-b border-white/[0.03] grid grid-cols-12 gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-text-dim;
+    @apply bg-white/[0.02] p-8 border-b border-white/[0.03] grid grid-cols-12 gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-[#9ca3af];
 }
 
 .users-list {
@@ -79,11 +79,11 @@
 }
 
 .user-row {
-    @apply p-8 grid grid-cols-12 gap-8 items-center hover:bg-rose-500/[0.02] transition-all group;
+    @apply p-8 grid grid-cols-12 gap-8 items-center hover:bg-rose-500/[0.02] transition-all;
 }
 
 .user-index {
-    @apply col-span-1 text-center text-[10px] text-text-dim font-mono font-bold;
+    @apply col-span-1 text-center text-[10px] text-[#9ca3af] font-mono font-bold;
 }
 
 .user-identity {
@@ -91,7 +91,7 @@
 }
 
 .user-avatar-box {
-    @apply w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center font-black text-2xl text-rose-500 shadow-xl shadow-rose-500 relative overflow-hidden;
+    @apply w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center font-black text-2xl text-rose-500 shadow-xl relative overflow-hidden;
 }
 
 .user-avatar-gradient {
@@ -104,7 +104,7 @@
 }
 
 .user-email {
-    @apply text-[10px] font-bold text-text-dim uppercase tracking-widest mt-1;
+    @apply text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mt-1;
 }
 
 .role-badge {
@@ -120,7 +120,7 @@
 }
 
 .role-user {
-    @apply bg-white/5 text-text-dim border-white/10;
+    @apply bg-white/5 text-[#9ca3af] border-white/10;
 }
 
 .user-actions {
@@ -136,7 +136,7 @@
 }
 
 .role-select-icon {
-    @apply absolute right-4 top-1/2 pointer-events-none text-text-dim;
+    @apply absolute right-4 top-1/2 pointer-events-none text-[#9ca3af];
     transform: translateY(-50%);
 }
 
@@ -166,7 +166,7 @@
 }
 
 .logs-table-wrapper {
-    @apply overflow-x-auto max-h-[650px] overflow-y-auto custom-scrollbar;
+    @apply overflow-x-auto max-h-[650px] overflow-y-auto;
 }
 
 .logs-table {
@@ -174,7 +174,7 @@
 }
 
 .logs-thead {
-    @apply bg-white/5 text-[9px] text-text-dim uppercase tracking-[0.15em];
+    @apply bg-white/5 text-[9px] text-[#9ca3af] uppercase tracking-[0.15em];
 }
 
 .logs-th {
@@ -186,15 +186,15 @@
 }
 
 .log-row {
-    @apply hover:bg-rose-500/[0.03] transition-colors group;
+    @apply hover:bg-rose-500/[0.03] transition-colors;
 }
 
 .log-time {
-    @apply px-8 py-5 text-text-dim whitespace-nowrap text-xs font-bold;
+    @apply px-8 py-5 text-[#9ca3af] whitespace-nowrap text-xs font-bold;
 }
 
 .log-actor-name {
-    @apply font-black text-text group-hover:text-rose-400 transition-colors uppercase tracking-tight;
+    @apply font-black text-[#f9fafb] group-hover:text-rose-400 transition-colors uppercase tracking-tight;
 }
 
 .log-actor-role {
@@ -230,7 +230,7 @@
 }
 
 .config-card {
-    @apply p-10 rounded-3xl border border-white/5 space-y-8 relative overflow-hidden group;
+    @apply p-10 rounded-3xl border border-white/5 space-y-8 relative overflow-hidden;
     background: var(--glass);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -259,7 +259,7 @@
 }
 
 .maintenance-active {
-    @apply bg-rose-500 text-white shadow-2xl shadow-rose-500 border-rose-400;
+    @apply bg-rose-500 text-white shadow-2xl border-rose-400;
 }
 
 .maintenance-inactive {
@@ -291,7 +291,7 @@
 }
 
 .region-info {
-    @apply p-6 bg-white/[0.02] rounded-2xl border border-white/5 flex items-center justify-between text-text-dim;
+    @apply p-6 bg-white/[0.02] rounded-2xl border border-white/5 flex items-center justify-between text-[#9ca3af];
 }
 
 .region-label {
@@ -299,7 +299,7 @@
 }
 
 .commission-label {
-    @apply text-[10px] font-black text-text-dim uppercase tracking-[0.2em] ml-1 flex items-center gap-2;
+    @apply text-[10px] font-black text-[#9ca3af] uppercase tracking-[0.2em] ml-1 flex items-center gap-2;
 }
 
 .commission-input-group {
@@ -311,7 +311,7 @@
 }
 
 .commit-btn {
-    @apply bg-indigo-500 text-white px-8 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 transition-all shadow-xl shadow-indigo-500 active:scale-95;
+    @apply bg-indigo-500 text-white px-8 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 transition-all shadow-xl active:scale-95;
 }
 
 .protocol-info-row {

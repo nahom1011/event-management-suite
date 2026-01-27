@@ -9,7 +9,7 @@
 }
 
 .loading-spinner-event {
-    @apply w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin;
+    @apply w-12 h-12 border-4 border-[#6366f1]/20 border-t-[#6366f1] rounded-full animate-spin;
 }
 
 .error-container {
@@ -21,7 +21,7 @@
 }
 
 .error-text {
-    @apply text-text-dim mb-8;
+    @apply text-[#9ca3af] mb-8;
 }
 
 .event-header {
@@ -29,7 +29,7 @@
 }
 
 .back-to-deck-btn {
-    @apply group flex items-center gap-3 text-text-dim hover:text-text transition-all font-bold uppercase tracking-widest text-[10px];
+    @apply flex items-center gap-3 text-[#9ca3af] hover:text-[#f9fafb] transition-all font-bold uppercase tracking-widest text-[10px];
 }
 
 .back-btn-icon-box {
@@ -41,7 +41,7 @@
 }
 
 .event-action-btn {
-    @apply w-10 h-10 rounded-full border border-white/5 flex items-center justify-center text-text-dim hover:text-accent hover:bg-accent/10 transition-all;
+    @apply w-10 h-10 rounded-full border border-white/5 flex items-center justify-center text-[#9ca3af] hover:text-[#f43f5e] hover:bg-[#f43f5e]/10 transition-all;
 }
 
 .event-detail-grid {
@@ -53,7 +53,7 @@
 }
 
 .hero-image-container {
-    @apply relative aspect-video md:aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl group;
+    @apply relative aspect-video md:aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl;
 }
 
 .hero-bg-overlay {
@@ -75,7 +75,7 @@
 }
 
 .premium-badge {
-    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-white text-[10px] font-black uppercase tracking-[0.2em] mb-4 backdrop-blur-md;
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#6366f1]/20 border border-[#6366f1]/30 text-white text-[10px] font-black uppercase tracking-[0.2em] mb-4 backdrop-blur-md;
 }
 
 .hero-title {
@@ -100,7 +100,7 @@
 }
 
 .description-text {
-    @apply text-text-dim leading-relaxed text-lg font-medium whitespace-pre-wrap;
+    @apply text-[#9ca3af] leading-relaxed text-lg font-medium whitespace-pre-wrap;
 }
 
 .info-grid {
@@ -108,7 +108,7 @@
 }
 
 .info-card {
-    @apply p-6 rounded-radius-lg border-l-4 border-indigo-500;
+    @apply p-6 rounded-2xl border-l-4 border-indigo-500;
     background: var(--glass);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -117,7 +117,7 @@
 }
 
 .info-card-title {
-    @apply text-[10px] font-black uppercase tracking-[0.2em] text-text-dim mb-4;
+    @apply text-[10px] font-black uppercase tracking-[0.2em] text-[#9ca3af] mb-4;
 }
 
 .info-card-content {
@@ -129,7 +129,7 @@
 }
 
 .info-value {
-    @apply font-bold text-text-dim;
+    @apply font-bold text-[#9ca3af];
 }
 
 .event-sidebar-column {
@@ -137,7 +137,7 @@
 }
 
 .sidebar-card {
-    @apply p-8 rounded-3xl sticky top-28 space-y-10 border-t-2 border-primary/30;
+    @apply p-8 rounded-3xl sticky top-28 space-y-10 border-t-2 border-[#6366f1]/30;
     background: var(--glass);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -150,7 +150,7 @@
 }
 
 .meta-icon-box {
-    @apply w-14 h-14 bg-white/[0.03] border border-white/5 rounded-2xl flex items-center justify-center text-primary group hover:scale-110 transition-transform;
+    @apply w-14 h-14 bg-white/[0.03] border border-white/5 rounded-2xl flex items-center justify-center text-[#6366f1] hover:scale-110 transition-transform;
 }
 
 .meta-content {
@@ -158,7 +158,7 @@
 }
 
 .meta-label {
-    @apply text-[10px] text-text-dim uppercase font-black tracking-[0.2em] mb-1;
+    @apply text-[10px] text-[#9ca3af] uppercase font-black tracking-[0.2em] mb-1;
 }
 
 .meta-value {
@@ -166,7 +166,7 @@
 }
 
 .meta-subtext {
-    @apply text-xs text-text-dim font-bold;
+    @apply text-xs text-[#9ca3af] font-bold;
 }
 
 .tickets-container {
@@ -178,7 +178,7 @@
 }
 
 .ticket-item {
-    @apply group p-5 bg-white/[0.02] hover:bg-white/[0.04] rounded-2xl border border-white/5 hover:border-primary/30 transition-all;
+    @apply p-5 bg-white/[0.02] hover:bg-white/[0.04] rounded-2xl border border-white/5 hover:border-[#6366f1]/30 transition-all;
 }
 
 .ticket-header {
@@ -190,11 +190,11 @@
 }
 
 .ticket-quantity {
-    @apply text-xs text-text-dim font-bold;
+    @apply text-xs text-[#9ca3af] font-bold;
 }
 
 .ticket-price {
-    @apply text-2xl font-black text-primary tracking-tighter;
+    @apply text-2xl font-black text-[#6366f1] tracking-tighter;
 }
 
 .buy-btn {
@@ -210,7 +210,7 @@
 }
 
 .buy-btn-default {
-    @apply bg-primary hover:bg-indigo-600 text-white shadow-lg shadow-primary hover:shadow-primary active:scale-[0.98];
+    @apply bg-[#6366f1] hover:bg-indigo-600 text-white shadow-lg active:scale-[0.98];
 }
 
 .tickets-closed {

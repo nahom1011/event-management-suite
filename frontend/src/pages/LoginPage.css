@@ -11,7 +11,7 @@
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 8px 32px 0   rgba(0, 0, 0, 0.37);
 }
 
 .login-card-accent {
@@ -20,7 +20,7 @@
 }
 
 .login-icon-box {
-    @apply w-20 h-20 bg-primary rounded-3xl flex items-center justify-center mb-6 shadow-2xl shadow-primary;
+    @apply w-20 h-20 bg-[#6366f1] rounded-3xl flex items-center justify-center mb-6 shadow-2xl;
 }
 
 .login-title {
@@ -28,7 +28,7 @@
 }
 
 .login-subtitle {
-    @apply text-text-dim text-center font-medium;
+    @apply text-[#9ca3af] text-center font-medium;
 }
 
 .login-toggle-container {
@@ -40,15 +40,15 @@
 }
 
 .login-toggle-btn-active {
-    @apply bg-primary text-white shadow-xl;
+    @apply bg-[#6366f1] text-white shadow-xl;
 }
 
 .login-toggle-btn-inactive {
-    @apply text-text-dim hover:text-text;
+    @apply text-[#9ca3af] hover:text-[#f9fafb];
 }
 
 .feature-item {
-    @apply flex items-center gap-4 text-text/90 bg-white/[0.03] p-4 rounded-2xl border border-white/5;
+    @apply flex items-center gap-4 text-[#f9fafb]/90 bg-white/[0.03] p-4 rounded-2xl border border-white/5;
 }
 
 .feature-icon-box {
@@ -56,16 +56,16 @@
 }
 
 .input-label {
-    @apply text-[10px] font-black text-text-dim uppercase tracking-widest ml-1;
+    @apply text-[10px] font-black text-[#9ca3af] uppercase tracking-widest ml-1;
 }
 
 .input-icon {
-    @apply absolute left-4 top-1/2 text-text-dim group-focus-within:text-primary transition-colors;
+    @apply absolute left-4 top-1/2 text-[#9ca3af] group-focus-within:text-[#6366f1] transition-colors;
     transform: translateY(-50%);
 }
 
 .form-input {
-    @apply w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl py-4 pl-12 pr-4 outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all font-medium;
+    @apply w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl py-4 pl-12 pr-4 outline-none focus:border-[#6366f1]/50 focus:bg-white/[0.05] transition-all font-medium;
 }
 
 .submit-btn {
@@ -84,7 +84,7 @@
 }
 
 .footer-link {
-    @apply text-primary hover:text-white font-black transition-colors ml-1 uppercase tracking-widest;
+    @apply text-[#6366f1] hover:text-white font-black transition-colors ml-1 uppercase tracking-widest;
 }
 
 .aesthetic-footer {

@@ -7,21 +7,45 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: "#6366f1",
+                primary: {
+                    DEFAULT: "#6366f1",
+                    hover: "#5558e3",
+                },
                 secondary: "#8b5cf6",
+                accent: "#f43f5e",
                 bg: "#030712",
                 surface: "#111827",
                 "surface-alt": "#1f2937",
                 text: {
                     DEFAULT: "#f9fafb",
                     dim: "#9ca3af",
-                }
+                },
+                indigo: {
+                    500: "#6366f1",
+                    600: "#5558e3",
+                },
+                rose: {
+                    400: "#fb7185",
+                    500: "#f43f5e",
+                },
+                emerald: {
+                    500: "#10b981",
+                },
+                amber: {
+                    500: "#f59e0b",
+                },
             },
             borderRadius: {
                 'radius-sm': '8px',
                 'radius-md': '12px',
                 'radius-lg': '16px',
                 'radius-xl': '24px',
+            },
+            boxShadow: {
+                'primary': '0 10px 40px -10px rgba(99, 102, 241, 0.4)',
+                'rose-500': '0 10px 40px -10px rgba(244, 63, 94, 0.4)',
+                'emerald-500': '0 10px 40px -10px rgba(16, 185, 129, 0.2)',
+                'indigo-500': '0 10px 40px -10px rgba(99, 102, 241, 0.3)',
             }
         },
     },

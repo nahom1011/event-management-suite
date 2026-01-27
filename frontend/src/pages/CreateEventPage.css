@@ -21,7 +21,7 @@
 }
 
 .step-circle-active {
-    @apply bg-primary text-white scale-110 shadow-lg shadow-primary;
+    @apply bg-[#6366f1] text-white scale-110 shadow-lg;
 }
 
 .step-circle-completed {
@@ -29,7 +29,7 @@
 }
 
 .step-circle-inactive {
-    @apply bg-white/5 text-text-dim border border-white/10;
+    @apply bg-white/5 text-[#9ca3af] border border-white/10;
 }
 
 .step-line {
@@ -49,7 +49,7 @@
 }
 
 .page-description {
-    @apply text-text-dim mt-2;
+    @apply text-[#9ca3af] mt-2;
 }
 
 .form-card {
@@ -66,19 +66,19 @@
 }
 
 .form-label-create {
-    @apply block text-sm font-bold mb-2 text-text-dim flex items-center gap-2;
+    @apply block text-sm font-bold mb-2 text-[#9ca3af] flex items-center gap-2;
 }
 
 .form-input-create {
-    @apply w-full bg-white/5 border border-white/10 rounded-lg p-4 outline-none focus:border-primary/50 transition-all font-semibold text-lg;
+    @apply w-full bg-white/5 border border-white/10 rounded-lg p-4 outline-none focus:border-[#6366f1]/50 transition-all font-semibold text-lg;
 }
 
 .form-textarea {
-    @apply w-full bg-white/5 border border-white/10 rounded-lg p-4 outline-none focus:border-primary/50 transition-all font-medium;
+    @apply w-full bg-white/5 border border-white/10 rounded-lg p-4 outline-none focus:border-[#6366f1]/50 transition-all font-medium;
 }
 
 .ticket-card {
-    @apply p-6 bg-white/5 rounded-radius-lg border border-white/10 relative group;
+    @apply p-6 bg-white/5 rounded-2xl border border-white/10 relative;
 }
 
 .remove-ticket-btn {
@@ -90,15 +90,15 @@
 }
 
 .ticket-label {
-    @apply block text-xs font-bold mb-2 text-text-dim uppercase tracking-wider;
+    @apply block text-xs font-bold mb-2 text-[#9ca3af] uppercase tracking-wider;
 }
 
 .ticket-input {
-    @apply w-full bg-white/5 border border-white/10 rounded-lg p-3 outline-none focus:border-primary/50 transition-all;
+    @apply w-full bg-white/5 border border-white/10 rounded-lg p-3 outline-none focus:border-[#6366f1]/50 transition-all;
 }
 
 .add-ticket-btn {
-    @apply w-full border-2 border-dashed border-white/10 p-4 rounded-radius-lg text-text-dim flex items-center justify-center gap-2 hover:bg-white/5 transition-all font-bold;
+    @apply w-full border-2 border-dashed border-white/10 p-4 rounded-2xl text-[#9ca3af] flex items-center justify-center gap-2 hover:bg-white/5 transition-all font-bold;
 }
 
 .nav-bar {
@@ -106,11 +106,11 @@
 }
 
 .back-btn {
-    @apply flex items-center gap-2 text-text-dim hover:text-white transition-colors font-bold;
+    @apply flex items-center gap-2 text-[#9ca3af] hover:text-white transition-colors font-bold;
 }
 
 .next-btn {
-    @apply bg-white text-bg px-8 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-primary hover:text-white transition-all active:scale-95;
+    @apply bg-white text-[#030712] px-8 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-[#6366f1] hover:text-white transition-all active:scale-95;
 }
 
 .submit-btn-create {
@@ -122,5 +122,5 @@
 }
 
 .submit-btn-default {
-    @apply bg-primary text-white shadow-primary hover:bg-indigo-600;
+    @apply bg-[#6366f1] text-white hover:bg-indigo-600;
 }

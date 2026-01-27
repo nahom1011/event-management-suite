@@ -5,7 +5,7 @@
 }
 
 .dashboard-badge {
-    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-6;
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/20 text-[#6366f1] text-xs font-bold uppercase tracking-widest mb-6;
 }
 
 .dashboard-heading {
@@ -13,7 +13,7 @@
 }
 
 .dashboard-tagline {
-    @apply max-w-xl text-text-dim text-lg md:text-xl font-medium mb-12;
+    @apply max-w-xl text-[#9ca3af] text-lg md:text-xl font-medium mb-12;
 }
 
 .search-container {
@@ -30,7 +30,7 @@
 }
 
 .search-input {
-    @apply w-full bg-transparent border-none pl-12 pr-4 py-4 outline-none text-text placeholder:text-text-dim/50 font-medium;
+    @apply w-full bg-transparent border-none pl-12 pr-4 py-4 outline-none text-[#f9fafb] placeholder:text-[#9ca3af]/50 font-medium;
 }
 
 .filter-btn {
@@ -49,7 +49,7 @@
 }
 
 .section-icon-box {
-    @apply w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent;
+    @apply w-10 h-10 rounded-xl bg-[#f43f5e]/10 flex items-center justify-center text-[#f43f5e];
 }
 
 .events-grid {
@@ -57,7 +57,7 @@
 }
 
 .card-skeleton {
-    @apply h-96 rounded-radius-lg animate-pulse;
+    @apply h-96 rounded-2xl animate-pulse;
     background: var(--glass);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -66,7 +66,7 @@
 }
 
 .event-card {
-    @apply rounded-radius-lg overflow-hidden card-hover group cursor-pointer relative;
+    @apply rounded-2xl overflow-hidden cursor-pointer relative;
     background: var(--glass);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -75,7 +75,7 @@
 }
 
 .event-image-container {
-    @apply h-56 bg-surface-alt relative overflow-hidden;
+    @apply h-56 bg-[#1f2937] relative overflow-hidden;
 }
 
 .event-status-badge {
@@ -88,7 +88,7 @@
 }
 
 .event-title {
-    @apply text-2xl font-black text-white group-hover:text-primary transition-colors line-clamp-1 leading-tight;
+    @apply text-2xl font-black text-white group-hover:text-[#6366f1] transition-colors line-clamp-1 leading-tight;
 }
 
 .event-card-content {
@@ -96,7 +96,7 @@
 }
 
 .event-location {
-    @apply flex items-center gap-2 text-text-dim text-sm mb-6;
+    @apply flex items-center gap-2 text-[#9ca3af] text-sm mb-6;
 }
 
 .event-price-actions {
@@ -104,7 +104,7 @@
 }
 
 .action-icon-box {
-    @apply w-10 h-10 rounded-full border border-white/5 flex items-center justify-center group-hover:bg-primary group-hover:border-primary group-hover:text-white transition-all;
+    @apply w-10 h-10 rounded-full border border-white/5 flex items-center justify-center group-hover:bg-[#6366f1] group-hover:border-[#6366f1] group-hover:text-white transition-all;
 }
 
 .empty-state {
@@ -121,5 +121,5 @@
 }
 
 .reset-btn {
-    @apply mt-8 text-primary font-bold uppercase tracking-widest text-xs hover:underline;
+    @apply mt-8 text-[#6366f1] font-bold uppercase tracking-widest text-xs hover:underline;
 }
