@@ -1,92 +1,304 @@
-@import "tailwindcss";
-
 .login-container {
-    @apply min-h-screen flex flex-col items-center justify-center p-6;
-    background: linear-gradient(to top right, var(--bg), var(--bg), rgba(49, 46, 129, 0.1));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-black);
+}
+
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite;
 }
 
 .login-card {
-    @apply w-full max-w-md p-10 rounded-3xl shadow-2xl relative overflow-hidden;
+    width: 100%;
+    max-width: 28rem;
+    padding: 3rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-dark-lg);
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
     background: var(--glass);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
     border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0   rgba(0, 0, 0, 0.37);
+    transition: var(--transition);
+}
+
+.login-card:hover {
+    border-color: rgba(220, 38, 38, 0.3);
+    box-shadow: var(--shadow-red-glow);
 }
 
 .login-card-accent {
-    @apply absolute top-0 left-0 w-full h-1.5;
-    background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-red);
+    box-shadow: 0 0 20px var(--primary-glow);
 }
 
 .login-icon-box {
-    @apply w-20 h-20 bg-[#6366f1] rounded-3xl flex items-center justify-center mb-6 shadow-2xl;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    background: var(--gradient-red);
+    box-shadow: var(--shadow-red-glow);
+    animation: pulse-red 3s ease-in-out infinite;
 }
 
 .login-title {
-    @apply text-5xl font-black tracking-tighter mb-2;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.75rem;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .login-subtitle {
-    @apply text-[#9ca3af] text-center font-medium;
+    color: var(--text-secondary);
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+    font-size: 0.875rem;
 }
 
 .login-toggle-container {
-    @apply flex bg-white/5 p-1.5 rounded-2xl mb-10 border border-white/5;
+    display: flex;
+    background: var(--bg-elevated);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin-bottom: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .login-toggle-btn {
-    @apply flex-1 py-3 text-sm font-bold rounded-xl transition-all duration-500;
+    flex: 1;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .login-toggle-btn-active {
-    @apply bg-[#6366f1] text-white shadow-xl;
+    background: var(--gradient-red);
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    transform: scale(1.02);
 }
 
 .login-toggle-btn-inactive {
-    @apply text-[#9ca3af] hover:text-[#f9fafb];
+    color: var(--text-dim);
+}
+
+.login-toggle-btn-inactive:hover {
+    color: var(--text-secondary);
 }
 
 .feature-item {
-    @apply flex items-center gap-4 text-[#f9fafb]/90 bg-white/[0.03] p-4 rounded-2xl border border-white/5;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-secondary);
+    background: rgba(10, 10, 10, 0.5);
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s;
+}
+
+.feature-item:hover {
+    border-color: rgba(220, 38, 38, 0.2);
+    background: var(--bg-card);
 }
 
 .feature-icon-box {
-    @apply w-10 h-10 rounded-xl flex items-center justify-center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--primary);
 }
 
 .input-label {
-    @apply text-[10px] font-black text-[#9ca3af] uppercase tracking-widest ml-1;
+    font-size: 10px;
+    font-weight: 900;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-left: 0.25rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
 }
 
 .input-icon {
-    @apply absolute left-4 top-1/2 text-[#9ca3af] group-focus-within:text-[#6366f1] transition-colors;
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    color: var(--text-dim);
+    transition: color 0.3s;
     transform: translateY(-50%);
 }
 
 .form-input {
-    @apply w-full bg-white/[0.03] border border-white/[0.05] rounded-2xl py-4 pl-12 pr-4 outline-none focus:border-[#6366f1]/50 focus:bg-white/[0.05] transition-all font-medium;
+    width: 100%;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1rem 1rem 1rem 3rem;
+    outline: none;
+    transition: all 0.4s;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-input:focus {
+    border-color: var(--primary);
+    background: var(--bg-elevated);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.input-group:focus-within .input-icon {
+    color: var(--primary);
 }
 
 .submit-btn {
-    @apply w-full flex items-center justify-center gap-3 py-4 text-xs uppercase tracking-[0.2em];
-    background: var(--primary);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--gradient-red);
     color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-md);
-    font-weight: 600;
+    box-shadow: var(--shadow-red-glow);
     transition: var(--transition);
-    box-shadow: 0 4px 14px 0 var(--primary-glow);
+    border: none;
+    cursor: pointer;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 50px rgba(220, 38, 38, 0.5);
+}
+
+.submit-btn:active {
+    transform: translateY(0) scale(0.98);
 }
 
 .error-message {
-    @apply p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-rose-500 text-xs font-bold text-center uppercase tracking-widest;
+    padding: 1rem;
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    border-radius: 1rem;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    animation: pulse-red 2s ease-in-out infinite;
 }
 
 .footer-link {
-    @apply text-[#6366f1] hover:text-white font-black transition-colors ml-1 uppercase tracking-widest;
+    color: var(--primary);
+    font-weight: 900;
+    transition: color 0.3s;
+    margin-left: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: var(--primary-light);
+}
+
+.footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-red);
+    transition: width 0.3s;
+}
+
+.footer-link:hover::after {
+    width: 100%;
 }
 
 .aesthetic-footer {
-    @apply mt-12 flex items-center gap-8 opacity-20;
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0.1;
 }

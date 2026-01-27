@@ -8,92 +8,57 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: "#6366f1",
-                    hover: "#5558e3",
+                    DEFAULT: "#dc2626",
+                    dark: "#991b1b",
+                    light: "#ef4444",
                 },
-                secondary: "#8b5cf6",
-                accent: "#f43f5e",
-                bg: "#030712",
-                surface: "#111827",
-                "surface-alt": "#1f2937",
+                black: {
+                    DEFAULT: "#000000",
+                    dark: "#0a0a0a",
+                    card: "#111111",
+                    elevated: "#1a1a1a",
+                },
+                accent: {
+                    gold: "#fbbf24",
+                    green: "#10b981",
+                    blue: "#3b82f6",
+                },
                 text: {
-                    DEFAULT: "#f9fafb",
-                    dim: "#9ca3af",
-                },
-                indigo: {
-                    500: "#6366f1",
-                    600: "#5558e3",
-                },
-                rose: {
-                    400: "#fb7185",
-                    500: "#f43f5e",
-                },
-                emerald: {
-                    500: "#10b981",
-                },
-                amber: {
-                    500: "#f59e0b",
+                    DEFAULT: "#ffffff",
+                    secondary: "#a3a3a3",
+                    dim: "#737373",
                 },
             },
-            borderRadius: {
-                'radius-sm': '8px',
-                'radius-md': '12px',
-                'radius-lg': '16px',
-                'radius-xl': '24px',
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+                serif: ['Playfair Display', 'serif'],
             },
             boxShadow: {
-                'primary': '0 10px 40px -10px rgba(99, 102, 241, 0.4)',
-                'rose-500': '0 10px 40px -10px rgba(244, 63, 94, 0.4)',
-                'emerald-500': '0 10px 40px -10px rgba(16, 185, 129, 0.2)',
-                'indigo-500': '0 10px 40px -10px rgba(99, 102, 241, 0.3)',
-            }
+                'red': '0 8px 32px rgba(220, 38, 38, 0.3)',
+                'red-glow': '0 0 40px rgba(220, 38, 38, 0.4)',
+                'dark': '0 4px 16px rgba(0, 0, 0, 0.5)',
+                'dark-lg': '0 8px 32px rgba(0, 0, 0, 0.6)',
+            },
+            animation: {
+                'float': 'float 6s ease-in-out infinite',
+                'pulse-red': 'pulse-red 2s ease-in-out infinite',
+                'glow': 'glow 2s ease-in-out infinite',
+            },
+            keyframes: {
+                float: {
+                    '0%, 100%': { transform: 'translateY(0px)' },
+                    '50%': { transform: 'translateY(-12px)' },
+                },
+                'pulse-red': {
+                    '0%, 100%': { boxShadow: '0 0 0 0 rgba(220, 38, 38, 0.4)' },
+                    '50%': { boxShadow: '0 0 0 20px rgba(220, 38, 38, 0)' },
+                },
+                glow: {
+                    '0%, 100%': { filter: 'drop-shadow(0 0 8px rgba(220, 38, 38, 0.4))' },
+                    '50%': { filter: 'drop-shadow(0 0 16px rgba(220, 38, 38, 0.4))' },
+                },
+            },
         },
     },
-    plugins: [
-        function ({ addComponents }) {
-            addComponents({
-                '.glass-morphism': {
-                    'background': 'var(--glass)',
-                    'backdrop-filter': 'blur(20px) saturate(180%)',
-                    '-webkit-backdrop-filter': 'blur(20px) saturate(180%)',
-                    'border': '1px solid var(--glass-border)',
-                    'box-shadow': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-                },
-                '.gradient-text': {
-                    'background': 'linear-gradient(135deg, var(--text) 0%, var(--text-dim) 100%)',
-                    '-webkit-background-clip': 'text',
-                    '-webkit-text-fill-color': 'transparent',
-                    'background-clip': 'text',
-                },
-                '.primary-gradient-text': {
-                    'background': 'linear-gradient(135deg, var(--primary), var(--secondary))',
-                    '-webkit-background-clip': 'text',
-                    '-webkit-text-fill-color': 'transparent',
-                    'background-clip': 'text',
-                },
-                '.btn-primary': {
-                    'background': 'var(--primary)',
-                    'color': 'white',
-                    'padding': '0.75rem 1.5rem',
-                    'border-radius': 'var(--radius-md)',
-                    'font-weight': '600',
-                    'transition': 'var(--transition)',
-                    'box-shadow': '0 4px 14px 0 var(--primary-glow)',
-                    '&:hover': {
-                        'filter': 'brightness(1.1)',
-                        'transform': 'translateY(-1px)',
-                        'box-shadow': '0 6px 20px 0 var(--primary-glow)',
-                    },
-                },
-                '.card-hover': {
-                    'transition': 'var(--transition)',
-                    '&:hover': {
-                        'transform': 'translateY(-4px)',
-                        'border-color': 'hsla(238, 82%, 67%, 0.3)',
-                        'box-shadow': '0 12px 40px rgba(0, 0, 0, 0.4)',
-                    },
-                }
-            })
-        }
-    ],
+    plugins: [],
 }

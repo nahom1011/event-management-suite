@@ -61,7 +61,7 @@ const LoginPage = () => {
                 >
                     <div className="login-card-accent" />
 
-                    <div className="flex flex-col items-center mb-10">
+                    <div className="login-header">
                         <motion.div
                             initial={{ y: -10 }}
                             animate={{ y: 0 }}
@@ -95,31 +95,31 @@ const LoginPage = () => {
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: 20 }}
-                                className="space-y-8"
+                                className="login-step"
                             >
-                                <div className="space-y-4">
+                                <div className="features-list">
                                     <div className="feature-item">
-                                        <div className="feature-icon-box bg-indigo-500/10 text-indigo-400">
+                                        <div className="feature-icon-box feature-icon-secure">
                                             <ShieldCheck size={20} />
                                         </div>
-                                        <div className="flex flex-col">
-                                            <span className="font-bold text-sm">Secure Auth</span>
-                                            <span className="text-xs text-text-dim">End-to-end encrypted sessions</span>
+                                        <div className="feature-text">
+                                            <span className="feature-label">Secure Auth</span>
+                                            <span className="feature-desc">End-to-end encrypted sessions</span>
                                         </div>
                                     </div>
                                     <div className="feature-item">
-                                        <div className="feature-icon-box bg-amber-500/10 text-amber-400">
+                                        <div className="feature-icon-box feature-icon-sync">
                                             <Zap size={20} />
                                         </div>
-                                        <div className="flex flex-col">
-                                            <span className="font-bold text-sm">Instant Sync</span>
-                                            <span className="text-xs text-text-dim">Access your global event cloud</span>
+                                        <div className="feature-text">
+                                            <span className="feature-label">Instant Sync</span>
+                                            <span className="feature-desc">Access your global event cloud</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="flex justify-center flex-col gap-4">
-                                    <div className="w-full flex justify-center bg-white rounded-xl p-0.5 overflow-hidden">
+                                <div className="google-login-wrapper">
+                                    <div className="google-btn-container">
                                         <GoogleLogin
                                             onSuccess={handleGoogleSuccess}
                                             onError={() => setError('Google Login Failed')}
@@ -138,7 +138,7 @@ const LoginPage = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
                                 onSubmit={handleEmailLogin}
-                                className="space-y-6"
+                                className="login-form"
                             >
                                 {error && (
                                     <motion.div
@@ -150,9 +150,9 @@ const LoginPage = () => {
                                     </motion.div>
                                 )}
 
-                                <div className="space-y-2">
+                                <div className="input-field-group">
                                     <label className="input-label">Identity</label>
-                                    <div className="relative group">
+                                    <div className="input-wrapper">
                                         <Mail className="input-icon" size={18} />
                                         <input
                                             type="email"
@@ -165,9 +165,9 @@ const LoginPage = () => {
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
+                                <div className="input-field-group">
                                     <label className="input-label">Passkey</label>
-                                    <div className="relative group">
+                                    <div className="input-wrapper">
                                         <Lock className="input-icon" size={18} />
                                         <input
                                             type="password"
@@ -186,29 +186,29 @@ const LoginPage = () => {
                                     className="submit-btn"
                                 >
                                     {isLoading ? (
-                                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        <div className="spinner" />
                                     ) : (
-                                        <>
+                                        <div className="btn-content">
                                             <LogIn size={16} />
                                             <span>Enter Portal</span>
-                                        </>
+                                        </div>
                                     )}
                                 </button>
                             </motion.form>
                         )}
                     </AnimatePresence>
 
-                    <div className="mt-12 pt-8 border-t border-white/[0.03] text-center">
-                        <p className="text-xs text-text-dim font-medium">
+                    <div className="login-footer">
+                        <p className="footer-text">
                             {loginType === 'email' ? (
                                 <>
                                     New to the ecosystem?{' '}
-                                    <Link to="/signup" className="footer-link">
+                                    <Link to="/signup" className="register-link">
                                         Register
                                     </Link>
                                 </>
                             ) : (
-                                <span className="uppercase tracking-[0.1em] opacity-40">Verified Infrastructure</span>
+                                <span className="infrastructure-text">Verified Infrastructure</span>
                             )}
                         </p>
                     </div>

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import Navbar from './Navbar';
 import { motion } from 'framer-motion';
+import './Layout.css';
 
 interface LayoutProps {
     children: ReactNode;
@@ -9,31 +10,34 @@ interface LayoutProps {
 
 const Layout = ({ children, showNav = true }: LayoutProps) => {
     return (
-        <div className="min-h-screen relative overflow-hidden flex flex-col selection:bg-primary/30 selection:text-white">
-            {/* Soft Ambient Glows */}
-            <div className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/5 blur-[120px] rounded-full -z-10 animate-pulse" />
-            <div className="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/5 blur-[120px] rounded-full -z-10" />
-            <div className="fixed top-[20%] right-[10%] w-[30%] h-[30%] bg-blue-600/5 blur-[100px] rounded-full -z-10" />
+        <div className="layout-root">
+            {/* Elegant Ambient Glows */}
+            <div className="ambient-glow-1" />
+            <div className="ambient-glow-2" />
+            <div className="ambient-glow-3" />
 
             {showNav && <Navbar />}
 
-            <main className={`flex-grow container mx-auto px-4 md:px-8 ${showNav ? 'pt-28 pb-16' : ''}`}>
+            <main className={`main-content ${showNav ? 'main-with-nav' : ''}`}>
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.99 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 >
                     {children}
                 </motion.div>
             </main>
 
-            <footer className="py-12 border-t border-white/[0.03] backdrop-blur-sm">
-                <div className="container mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-text-dim text-xs uppercase tracking-widest font-medium">
-                    <div>&copy; {new Date().getFullYear()} Eventify. Digital Experience.</div>
-                    <div className="flex gap-8">
-                        <span className="hover:text-text cursor-pointer transition-colors">Privacy</span>
-                        <span className="hover:text-text cursor-pointer transition-colors">Terms</span>
-                        <span className="hover:text-text cursor-pointer transition-colors">Contact</span>
+            <footer className="layout-footer">
+                <div className="footer-container">
+                    <div className="footer-copyright">
+                        <span className="status-indicator" />
+                        &copy; {new Date().getFullYear()} Eventify. The Gold Standard.
+                    </div>
+                    <div className="footer-links">
+                        <span className="footer-link">Privacy</span>
+                        <span className="footer-link">Terms</span>
+                        <span className="footer-link">Contact</span>
                     </div>
                 </div>
             </footer>
@@ -42,3 +46,4 @@ const Layout = ({ children, showNav = true }: LayoutProps) => {
 };
 
 export default Layout;
+

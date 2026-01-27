@@ -1,0 +1,130 @@
+.layout-root {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-black);
+}
+
+.ambient-glow-1 {
+    position: fixed;
+    top: -15%;
+    left: -10%;
+    width: 60%;
+    height: 60%;
+    background: rgba(220, 38, 38, 0.05);
+    filter: blur(150px);
+    border-radius: 9999px;
+    z-index: -10;
+    animation: float 10s ease-in-out infinite;
+}
+
+.ambient-glow-2 {
+    position: fixed;
+    bottom: -10%;
+    right: -10%;
+    width: 50%;
+    height: 50%;
+    background: rgba(220, 38, 38, 0.03);
+    filter: blur(120px);
+    border-radius: 9999px;
+    z-index: -10;
+}
+
+.ambient-glow-3 {
+    position: fixed;
+    top: 30%;
+    right: 5%;
+    width: 35%;
+    height: 35%;
+    background: rgba(220, 38, 38, 0.02);
+    filter: blur(100px);
+    border-radius: 9999px;
+    z-index: -10;
+    animation: pulse-red 8s ease-in-out infinite;
+}
+
+.main-content {
+    flex-grow: 1;
+    width: 100%;
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    transition: padding 0.5s var(--transition);
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+
+.main-with-nav {
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+}
+
+.layout-footer {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.footer-container {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    color: var(--text-dim);
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+}
+
+@media (min-width: 768px) {
+    .footer-container {
+        flex-direction: row;
+    }
+}
+
+.footer-copyright {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.status-indicator {
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--primary);
+    border-radius: 9999px;
+    animation: glow-red 3s ease-in-out infinite;
+}
+
+.footer-links {
+    display: flex;
+    gap: 3rem;
+}
+
+.footer-link {
+    cursor: pointer;
+    transition: all 0.3s var(--transition);
+}
+
+.footer-link:hover {
+    color: var(--primary);
+    letter-spacing: 0.5em;
+}

@@ -1,172 +1,440 @@
-@import "tailwindcss";
-
 .orders-container {
-    @apply max-w-5xl mx-auto space-y-12;
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 .orders-header-content {
-    @apply flex flex-col md:flex-row md:items-end justify-between gap-6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+    .orders-header-content {
+        flex-direction: row;
+        align-items: flex-end;
+    }
 }
 
 .orders-page-badge {
-    @apply flex items-center gap-2 text-[#6366f1] font-black uppercase tracking-[0.2em] text-[10px] mb-4;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primary);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 10px;
+    margin-bottom: 1.5rem;
+    animation: float 6s ease-in-out infinite;
 }
 
 .orders-page-title {
-    @apply text-6xl font-black tracking-tighter;
+    font-size: 4.5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: white;
+    font-family: 'Playfair Display', serif;
 }
 
 .orders-page-subtitle {
-    @apply text-[#9ca3af] font-medium mt-2;
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    max-width: 28rem;
 }
 
 .stats-card {
-    @apply px-6 py-3 rounded-2xl flex flex-col items-center justify-center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: var(--glass);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+.stats-card:hover {
+    transform: translateY(-0.5rem);
+    border-color: rgba(220, 38, 38, 0.2);
 }
 
 .stats-label {
-    @apply text-[10px] font-black text-[#9ca3af] uppercase tracking-widest;
+    font-size: 9px;
+    font-weight: 900;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.5rem;
 }
 
 .stats-value {
-    @apply text-2xl font-black tracking-tighter;
+    font-size: 1.875rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: white;
+    font-family: serif;
 }
 
 .loading-skeleton-orders {
-    @apply h-48 rounded-3xl animate-pulse;
-    background: var(--glass);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    height: 16rem;
+    border-radius: 2.5rem;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .orders-list {
-    @apply space-y-8 pb-20;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-bottom: 6rem;
 }
 
 .order-card {
-    @apply rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl transition-all border-l-4 border-[#6366f1];
+    border-radius: 2.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-dark-lg);
+    transition: var(--transition);
+    border-left: 6px solid var(--primary);
     background: var(--glass);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(24px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (min-width: 768px) {
+    .order-card {
+        flex-direction: row;
+    }
+}
+
+.order-card:hover {
+    transform: translateY(-0.5rem);
+    border-color: rgba(220, 38, 38, 0.2);
 }
 
 .order-card-main {
-    @apply p-10 flex-grow relative;
+    padding: 3rem;
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
 }
 
 .bg-decoration-ticket {
-    @apply absolute top-0 right-0 p-8 opacity-5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2.5rem;
+    opacity: 0.1;
+    color: var(--primary);
+    animation: glow-pulse 3s infinite;
+}
+
+@keyframes glow-pulse {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 5px var(--primary-glow));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 15px var(--primary-glow));
+    }
 }
 
 .transaction-info {
-    @apply flex items-center gap-3 mb-8;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
 }
 
 .transaction-icon-box {
-    @apply w-10 h-10 rounded-xl bg-[#6366f1]/10 flex items-center justify-center text-[#6366f1];
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background: rgba(220, 38, 38, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.transaction-details {
+    display: flex;
+    flex-direction: column;
 }
 
 .transaction-label {
-    @apply text-[10px] font-black text-[#9ca3af] uppercase tracking-widest;
+    font-size: 9px;
+    font-weight: 900;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
 }
 
 .transaction-id {
-    @apply text-xs font-mono font-bold uppercase;
+    font-size: 0.75rem;
+    font-family: monospace;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 0.05em;
 }
 
 .order-event-title {
-    @apply text-3xl font-black tracking-tighter mb-10 group-hover:text-[#6366f1] transition-colors;
+    font-size: 2.25rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    margin-bottom: 3rem;
+    color: white;
+    transition: color 0.3s;
+    font-family: 'Playfair Display', serif;
+}
+
+.order-card:hover .order-event-title {
+    color: var(--primary);
 }
 
 .order-info-grid {
-    @apply grid grid-cols-2 lg:grid-cols-4 gap-8;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+    .order-info-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
 
 .order-info-item {
-    @apply space-y-2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 .order-info-label {
-    @apply text-[10px] font-black text-[#9ca3af] uppercase tracking-[0.15em] flex items-center gap-1.5;
+    font-size: 9px;
+    font-weight: 900;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .order-info-value {
-    @apply font-black text-sm uppercase tracking-tight;
+    font-weight: 900;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    color: white;
+}
+
+.payment-success-marker {
+    color: var(--accent-green);
+    animation: glow-pulse 3s infinite;
 }
 
 .ticket-column {
-    @apply bg-white/[0.03] md:w-80 flex flex-col items-center justify-center p-10 border-t md:border-t-0 md:border-l border-white/[0.05] relative overflow-hidden;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .ticket-column {
+        width: 350px;
+        border-top: none;
+        border-left: 1px solid rgba(255, 255, 255, 0.05);
+    }
 }
 
 .ticket-gradient {
-    @apply absolute top-0 left-0 w-full h-1 md:w-1 md:h-full;
-    background: linear-gradient(to bottom, var(--primary), transparent);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.25rem;
+    background: var(--gradient-red);
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+@media (min-width: 768px) {
+    .ticket-gradient {
+        width: 0.25rem;
+        height: 100%;
+    }
 }
 
 .qr-container {
-    @apply p-4 bg-white rounded-3xl shadow-2xl mb-6 group-hover:scale-105 transition-transform duration-500;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 2rem;
+    box-shadow: 0 0 30px -5px var(--primary-glow);
+    margin-bottom: 2rem;
+    transition: all 0.5s;
+    transform: scale(1);
+}
+
+.order-card:hover .qr-container {
+    transform: scale(1.05);
 }
 
 .qr-code-text {
-    @apply text-[10px] font-mono font-black text-[#9ca3af] uppercase tracking-widest text-center mb-10 bg-white/5 py-1.5 px-3 rounded-full;
+    font-size: 9px;
+    font-family: monospace;
+    font-weight: 900;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .ticket-actions {
-    @apply flex flex-col gap-3 w-full;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
 }
 
 .download-pass-btn {
-    @apply w-full flex items-center justify-center gap-3 text-[10px] uppercase tracking-widest;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 1rem;
     background: var(--primary);
     color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-md);
-    font-weight: 600;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 10px;
+    border: none;
+    cursor: pointer;
     transition: var(--transition);
-    box-shadow: 0 4px 14px 0 var(--primary-glow);
+}
+
+.download-pass-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px -5px var(--primary-glow);
 }
 
 .explore-event-btn {
-    @apply w-full py-4 rounded-xl border border-white/5 hover:bg-white/5 transition-all flex items-center justify-center gap-3 text-[10px] font-black text-[#9ca3af] uppercase tracking-widest;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: var(--text-secondary);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: all 0.4s;
+    cursor: pointer;
+}
+
+.explore-event-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(220, 38, 38, 0.3);
 }
 
 .empty-vault-container {
-    @apply text-center py-32 rounded-3xl border-dashed;
-    background: var(--glass);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    text-align: center;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    border-radius: 3.5rem;
+    border: 2px dashed rgba(255, 255, 255, 0.05);
+    background: rgba(10, 10, 10, 0.5);
 }
 
 .empty-vault-icon-box {
-    @apply w-24 h-24 bg-white/5 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl;
+    width: 7rem;
+    height: 7rem;
+    background: rgba(220, 38, 38, 0.1);
+    border-radius: 1.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 0 30px -5px var(--primary-glow);
+    color: var(--primary);
 }
 
 .empty-vault-title {
-    @apply text-4xl font-black tracking-tighter mb-4;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    margin-bottom: 1.5rem;
+    color: white;
+    font-family: 'Playfair Display', serif;
 }
 
 .empty-vault-description {
-    @apply text-[#9ca3af] font-medium max-w-sm mx-auto mb-12;
+    color: var(--text-secondary);
+    font-weight: 500;
+    max-width: 24rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4rem;
+    font-size: 1.125rem;
 }
 
 .deploy-discovery-btn {
-    @apply flex items-center gap-3 mx-auto px-10 py-5 text-[10px] uppercase tracking-[0.2em];
+    padding: 1.25rem 4rem;
+    border-radius: 1rem;
     background: var(--primary);
     color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-md);
-    font-weight: 600;
+    border: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 10px;
+    cursor: pointer;
     transition: var(--transition);
-    box-shadow: 0 4px 14px 0 var(--primary-glow);
+}
+
+.deploy-discovery-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px -5px var(--primary-glow);
 }

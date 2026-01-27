@@ -33,7 +33,7 @@ const Dashboard = () => {
 
     return (
         <Layout>
-            <div className="space-y-12">
+            <div className="dashboard-content">
                 {/* Immersive Hero */}
                 <header className="dashboard-hero">
                     <motion.div
@@ -47,7 +47,7 @@ const Dashboard = () => {
 
                     <h1 className="dashboard-heading">
                         Discover. <span className="primary-gradient-text">Experience.</span> <br />
-                        Connec<span className="relative">t<div className="absolute -right-4 top-0 w-3 h-3 bg-accent rounded-full animate-ping" /></span>.
+                        Connect<span className="dot-container">.</span>
                     </h1>
 
                     <p className="dashboard-tagline">
@@ -57,7 +57,7 @@ const Dashboard = () => {
 
                     <div className="search-container">
                         <div className="search-input-wrapper">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-text-dim" size={20} />
+                            <Search className="search-icon" size={20} />
                             <input
                                 type="text"
                                 placeholder="What are you looking for?"
@@ -74,14 +74,14 @@ const Dashboard = () => {
                 </header>
 
                 {/* Trending Section Header */}
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
+                <div className="section-header">
+                    <div className="section-title-group">
                         <div className="section-icon-box">
                             <TrendingUp size={20} />
                         </div>
-                        <h2 className="text-2xl font-black">Featured Events</h2>
+                        <h2 className="section-title">Featured Events</h2>
                     </div>
-                    <div className="text-primary font-bold text-sm cursor-pointer hover:underline">View All</div>
+                    <div className="view-all-link">View All</div>
                 </div>
 
                 {loading ? (
@@ -91,7 +91,7 @@ const Dashboard = () => {
                         ))}
                     </div>
                 ) : filteredEvents.length > 0 ? (
-                    <div className="events-grid pb-12">
+                    <div className="events-grid">
                         {filteredEvents.map((event, i) => (
                             <motion.div
                                 key={event.id}
@@ -102,20 +102,22 @@ const Dashboard = () => {
                                 className="event-card"
                             >
                                 <div className="event-image-container">
-                                    {/* Mock Image Gradient */}
-                                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-600/10 to-transparent" />
-                                    <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity bg-[url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80')] bg-cover bg-center" />
+                                    <div className="event-card-bg" />
+                                    <div
+                                        className="event-card-image"
+                                        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80')" }}
+                                    />
 
-                                    <div className="absolute top-4 left-4 flex gap-2">
+                                    <div className="event-status-container">
                                         <span className="event-status-badge">
                                             {event.status}
                                         </span>
                                     </div>
 
                                     <div className="event-overlay">
-                                        <div className="flex items-center gap-2 text-white/90 font-bold mb-1">
+                                        <div className="event-date-row">
                                             <Calendar size={16} className="text-primary" />
-                                            <span className="text-xs uppercase tracking-tighter">
+                                            <span className="event-date-text">
                                                 {new Date(event.startDate).toLocaleDateString(undefined, { month: 'long', day: 'numeric' })}
                                             </span>
                                         </div>
@@ -126,18 +128,18 @@ const Dashboard = () => {
                                 </div>
                                 <div className="event-card-content">
                                     <div className="event-location">
-                                        <MapPin size={16} className="text-indigo-400" />
-                                        <span className="font-medium group-hover:text-text transition-colors capitalize">
+                                        <MapPin size={16} className="location-icon" />
+                                        <span className="location-text">
                                             {event.location || 'Seamless Experience'}
                                         </span>
                                     </div>
 
                                     <div className="event-price-actions">
-                                        <div className="text-2xl font-black tracking-tighter">
-                                            {event.tickets?.[0]?.price ? `$${event.tickets[0].price}` : <span className="text-accent uppercase text-sm font-black">Free</span>}
+                                        <div className="event-price">
+                                            {event.tickets?.[0]?.price ? `$${event.tickets[0].price}` : <span className="free-badge">Free</span>}
                                         </div>
                                         <div className="action-icon-box">
-                                            <TrendingUp size={18} className="translate-y-[1px]" />
+                                            <TrendingUp size={18} />
                                         </div>
                                     </div>
                                 </div>
@@ -149,8 +151,8 @@ const Dashboard = () => {
                         <div className="empty-icon-box">
                             <Search className="text-text-dim" size={32} />
                         </div>
-                        <h3 className="text-3xl font-black mb-2">Null Sector</h3>
-                        <p className="text-text-dim font-medium">We couldn't find any events matching your request.</p>
+                        <h3 className="empty-title">Null Sector</h3>
+                        <p className="empty-description">We couldn't find any events matching your request.</p>
                         <button onClick={() => setSearch('')} className="reset-btn">Reset Exploration</button>
                     </div>
                 )}
