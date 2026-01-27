@@ -51,7 +51,7 @@
 }
 
 .order-card {
-    @apply group rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl hover:shadow-primary/10 transition-all border-l-4 border-primary;
+    @apply group rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl hover:shadow-primary transition-all border-l-4 border-primary;
     background: var(--glass);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);

@@ -35,7 +35,7 @@
 }
 
 .avatar-container {
-    @apply w-32 h-32 rounded-[2.5rem] mb-8 flex items-center justify-center text-5xl font-black text-white shadow-2xl shadow-primary/40 relative group;
+    @apply w-32 h-32 rounded-[2.5rem] mb-8 flex items-center justify-center text-5xl font-black text-white shadow-2xl shadow-primary relative group;
     background: linear-gradient(to top right, var(--primary), var(--secondary));
 }
 
@@ -177,7 +177,7 @@
 }
 
 .submit-application-btn {
-    @apply w-full py-5 text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl shadow-primary/20;
+    @apply w-full py-5 text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl shadow-primary;
     background: var(--primary);
     color: white;
     padding: 0.75rem 1.5rem;

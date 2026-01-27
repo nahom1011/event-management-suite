@@ -24,7 +24,7 @@
 }
 
 .signup-icon-box {
-    @apply w-16 h-16 rounded-2xl flex items-center justify-center mb-4 shadow-xl shadow-primary/30;
+    @apply w-16 h-16 rounded-2xl flex items-center justify-center mb-4 shadow-xl shadow-primary;
     background: linear-gradient(to top right, var(--color-indigo-500), var(--color-purple-600));
 }
 

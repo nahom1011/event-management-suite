@@ -20,7 +20,7 @@
 }
 
 .login-icon-box {
-    @apply w-20 h-20 bg-primary rounded-3xl flex items-center justify-center mb-6 shadow-2xl shadow-primary/40;
+    @apply w-20 h-20 bg-primary rounded-3xl flex items-center justify-center mb-6 shadow-2xl shadow-primary;
 }
 
 .login-title {

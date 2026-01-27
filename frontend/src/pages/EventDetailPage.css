@@ -210,7 +210,7 @@
 }
 
 .buy-btn-default {
-    @apply bg-primary hover:bg-indigo-600 text-white shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-[0.98];
+    @apply bg-primary hover:bg-indigo-600 text-white shadow-lg shadow-primary hover:shadow-primary active:scale-[0.98];
 }
 
 .tickets-closed {

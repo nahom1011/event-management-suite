@@ -25,7 +25,7 @@
 }
 
 .admin-tab-btn-active {
-    @apply bg-primary text-white shadow-lg shadow-primary/20;
+    @apply bg-primary text-white shadow-lg shadow-primary;
 }
 
 .admin-tab-btn-inactive {

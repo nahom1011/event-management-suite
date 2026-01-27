@@ -33,7 +33,7 @@
 }
 
 .super-tab-active {
-    @apply bg-rose-500 text-white shadow-xl shadow-rose-500/20;
+    @apply bg-rose-500 text-white shadow-xl shadow-rose-500;
 }
 
 .super-tab-inactive {
@@ -91,7 +91,7 @@
 }
 
 .user-avatar-box {
-    @apply w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center font-black text-2xl text-rose-500 shadow-xl shadow-rose-500/5 relative overflow-hidden;
+    @apply w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center font-black text-2xl text-rose-500 shadow-xl shadow-rose-500 relative overflow-hidden;
 }
 
 .user-avatar-gradient {
@@ -259,7 +259,7 @@
 }
 
 .maintenance-active {
-    @apply bg-rose-500 text-white shadow-2xl shadow-rose-500/40 border-rose-400;
+    @apply bg-rose-500 text-white shadow-2xl shadow-rose-500 border-rose-400;
 }
 
 .maintenance-inactive {
@@ -311,7 +311,7 @@
 }
 
 .commit-btn {
-    @apply bg-indigo-500 text-white px-8 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 transition-all shadow-xl shadow-indigo-500/20 active:scale-95;
+    @apply bg-indigo-500 text-white px-8 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 transition-all shadow-xl shadow-indigo-500 active:scale-95;
 }
 
 .protocol-info-row {

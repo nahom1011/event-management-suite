@@ -25,7 +25,7 @@
 }
 
 .create-event-action-btn {
-    @apply group flex items-center justify-center gap-3 py-5 px-8 shadow-2xl shadow-primary/20;
+    @apply group flex items-center justify-center gap-3 py-5 px-8 shadow-2xl shadow-primary;
     background: var(--primary);
     color: white;
     padding: 0.75rem 1.5rem;
@@ -178,7 +178,7 @@
 }
 
 .sync-btn {
-    @apply px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-xl text-emerald-500 transition-all flex items-center gap-2 text-[10px] font-black uppercase tracking-widest border border-emerald-500/10 shadow-lg shadow-emerald-500/5;
+    @apply px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-xl text-emerald-500 transition-all flex items-center gap-2 text-[10px] font-black uppercase tracking-widest border border-emerald-500/10 shadow-lg shadow-emerald-500;
 }
 
 .action-icon-btn {
@@ -210,5 +210,5 @@
 }
 
 .deploy-primary-cluster-btn {
-    @apply btn-primary w-full py-5 text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-primary/20;
+    @apply btn-primary w-full py-5 text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-primary;
 }
