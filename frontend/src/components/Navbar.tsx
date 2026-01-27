@@ -19,7 +19,7 @@ const Navbar = () => {
     }, []);
 
     const isSuperAdmin = user?.role === 'super_admin';
-    const isAdmin = user?.role === 'admin' || isSuperAdmin;
+    const isAdmin = user?.role === 'admin';
     const isOrganizer = user?.role === 'organizer';
 
     const navLinks = [
@@ -28,7 +28,7 @@ const Navbar = () => {
         { name: 'Profile', path: '/profile', icon: <User size={18} /> },
     ];
 
-    if (isOrganizer || isAdmin) {
+    if (isOrganizer) {
         navLinks.push({ name: 'Hub', path: '/organizer', icon: <BarChart3 size={18} /> });
     }
 

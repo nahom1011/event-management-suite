@@ -4,7 +4,8 @@ import api from '../services/api';
 import {
     Activity, Settings, AlertTriangle, Search,
     UserCog, Database, Server, ShieldAlert, FileSearch,
-    Fingerprint, Cpu, Globe, Lock, ShieldCheck
+    Fingerprint, Cpu, Globe, Lock, ShieldCheck,
+    UserX, UserCheck, ShieldOff
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './SuperAdminDashboard.css';
@@ -46,6 +47,20 @@ const SuperAdminDashboard = () => {
             setUsers(prev => prev.map(u => u.id === userId ? { ...u, role: newRole } : u));
         } catch (error) {
             console.error('Role change failed:', error);
+        } finally {
+            setProcessingId(null);
+        }
+    };
+
+    const handleUserToggle = async (id: string, field: 'active' | 'ban', value: boolean) => {
+        setProcessingId(id);
+        try {
+            const endpoint = field === 'active' ? `/admin/users/${id}/active` : `/admin/users/${id}/ban`;
+            const payload = field === 'active' ? { isActive: value } : { isBanned: value };
+            await api.patch(endpoint, payload);
+            setUsers(prev => prev.map(u => u.id === id ? { ...u, [field === 'active' ? 'isActive' : 'isBanned']: value } : u));
+        } catch (error) {
+            console.error('User update failed:', error);
         } finally {
             setProcessingId(null);
         }
@@ -146,30 +161,54 @@ const SuperAdminDashboard = () => {
                                                             <p className="user-email">{u.email}</p>
                                                         </div>
                                                     </div>
-                                                    <div className="col-span-3 text-center">
+                                                    <div className="col-span-3 flex flex-col items-center gap-1">
                                                         <span className={`role-badge ${u.role === 'super_admin' ? 'role-super-admin' :
                                                             u.role === 'admin' ? 'role-admin' : 'role-user'
                                                             }`}>
                                                             {u.role.replace('_', ' ')}
                                                         </span>
+                                                        <div className="flex gap-2 mt-1">
+                                                            <div className={`status-dot ${u.isActive ? 'bg-emerald-500' : 'bg-amber-500'}`} title={u.isActive ? 'Active' : 'Inactive'} />
+                                                            {u.isBanned && <div className="status-dot bg-rose-500 animate-pulse" title="Banned" />}
+                                                        </div>
                                                     </div>
                                                     <div className="user-actions">
                                                         {u.role !== 'super_admin' && (
-                                                            <div className="role-select-container">
-                                                                <select
-                                                                    disabled={processingId === u.id}
-                                                                    value={u.role}
-                                                                    onChange={(e) => handleRoleChange(u.id, e.target.value)}
-                                                                    className="role-select"
-                                                                >
-                                                                    <option value="user">User Node</option>
-                                                                    <option value="organizer">Organizer Node</option>
-                                                                    <option value="admin">Admin Node</option>
-                                                                </select>
-                                                                <div className="role-select-icon">
-                                                                    <Settings size={12} />
+                                                            <>
+                                                                <div className="role-select-container">
+                                                                    <select
+                                                                        disabled={processingId === u.id}
+                                                                        value={u.role}
+                                                                        onChange={(e) => handleRoleChange(u.id, e.target.value)}
+                                                                        className="role-select"
+                                                                    >
+                                                                        <option value="user">User Node</option>
+                                                                        <option value="organizer">Organizer Node</option>
+                                                                        <option value="admin">Admin Node</option>
+                                                                    </select>
+                                                                    <div className="role-select-icon">
+                                                                        <Settings size={12} />
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                                <div className="system-overrides">
+                                                                    <button
+                                                                        onClick={() => handleUserToggle(u.id, 'active', !u.isActive)}
+                                                                        disabled={processingId === u.id}
+                                                                        className={`override-btn ${u.isActive ? 'btn-suspend' : 'btn-activate'}`}
+                                                                        title={u.isActive ? 'Suspend access' : 'Restore access'}
+                                                                    >
+                                                                        {u.isActive ? <UserX size={14} /> : <UserCheck size={14} />}
+                                                                    </button>
+                                                                    <button
+                                                                        onClick={() => handleUserToggle(u.id, 'ban', !u.isBanned)}
+                                                                        disabled={processingId === u.id}
+                                                                        className={`override-btn ${u.isBanned ? 'btn-unban' : 'btn-ban'}`}
+                                                                        title={u.isBanned ? 'Lift terminal ban' : 'Issue terminal ban'}
+                                                                    >
+                                                                        {u.isBanned ? <ShieldCheck size={14} /> : <ShieldOff size={14} />}
+                                                                    </button>
+                                                                </div>
+                                                            </>
                                                         )}
                                                         {u.role === 'super_admin' && (
                                                             <div className="fingerprint-icon-box">

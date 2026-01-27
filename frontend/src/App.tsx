@@ -23,8 +23,8 @@ const AppRoutes = () => {
   }
 
   const isSuperAdmin = user?.role === 'super_admin';
-  const isAdmin = user?.role === 'admin' || isSuperAdmin;
-  const isOrganizer = user?.role === 'organizer' || isAdmin;
+  const isAdmin = user?.role === 'admin';
+  const isOrganizer = user?.role === 'organizer';
 
   return (
     <Routes>

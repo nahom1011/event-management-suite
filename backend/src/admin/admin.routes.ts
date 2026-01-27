@@ -14,52 +14,51 @@ import {
 import { authenticate, authorize } from '../middlewares/authMiddleware';
 
 export async function adminRoutes(server: FastifyInstance) {
-    // Shared preHandler for all admin routes
-    const adminPreHandlers = [authenticate, authorize('admin', 'super_admin')];
+    // Admin ONLY: Moderation
+    const adminOnlyHandlers = [authenticate, authorize('admin')];
 
     // Organizer Moderation
     server.get('/pending-organizers', {
-        preHandler: adminPreHandlers
+        preHandler: adminOnlyHandlers
     }, getPendingApplicationsHandler);
 
     server.patch('/review-organizer/:id', {
-        preHandler: adminPreHandlers
+        preHandler: adminOnlyHandlers
     }, reviewOrganizerHandler);
 
     // Event Moderation
     server.get('/pending-events', {
-        preHandler: adminPreHandlers
+        preHandler: adminOnlyHandlers
     }, getPendingEventsHandler);
 
     server.patch('/review-event/:id', {
-        preHandler: adminPreHandlers
+        preHandler: adminOnlyHandlers
     }, reviewEventHandler);
 
-    // User Management
+    // Super Admin ONLY: User Management & System
+    const superAdminOnlyHandlers = [authenticate, authorize('super_admin')];
+
     server.get('/users', {
-        preHandler: adminPreHandlers
+        preHandler: superAdminOnlyHandlers
     }, getAllUsersHandler);
 
     server.patch('/users/:id/active', {
-        preHandler: adminPreHandlers
+        preHandler: superAdminOnlyHandlers
     }, toggleUserActiveHandler);
 
     server.patch('/users/:id/ban', {
-        preHandler: adminPreHandlers
+        preHandler: superAdminOnlyHandlers
     }, toggleUserBanHandler);
 
-    // Super Admin Only
-    const superAdminPreHandlers = [authenticate, authorize('super_admin')];
-
     server.get('/audit-logs', {
-        preHandler: superAdminPreHandlers
+        preHandler: superAdminOnlyHandlers
     }, getAuditLogsHandler);
 
     server.patch('/users/:id/role', {
-        preHandler: superAdminPreHandlers
+        preHandler: superAdminOnlyHandlers
     }, changeRoleHandler);
 
     server.post('/emergency-kill-switch', {
-        preHandler: superAdminPreHandlers
+        preHandler: superAdminOnlyHandlers
     }, killSwitchHandler);
 }

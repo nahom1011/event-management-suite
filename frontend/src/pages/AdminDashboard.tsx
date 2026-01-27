@@ -3,20 +3,17 @@ import Layout from '../components/Layout';
 import api from '../services/api';
 import {
     ShieldCheck, User, Check, X,
-    Mail, Phone, MapPin, Eye,
-    UserX, UserCheck, ShieldOff, Search
+    Mail, Phone, MapPin, Eye
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
-    const [activeTab, setActiveTab] = useState<'organizers' | 'events' | 'users'>('organizers');
+    const [activeTab, setActiveTab] = useState<'organizers' | 'events'>('organizers');
     const [organizers, setOrganizers] = useState<any[]>([]);
     const [events, setEvents] = useState<any[]>([]);
-    const [users, setUsers] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [processingId, setProcessingId] = useState<string | null>(null);
-    const [searchQuery, setSearchQuery] = useState('');
 
     const fetchData = async () => {
         setLoading(true);
@@ -27,9 +24,6 @@ const AdminDashboard = () => {
             } else if (activeTab === 'events') {
                 const { data } = await api.get('/admin/pending-events');
                 setEvents(data.data.events);
-            } else {
-                const { data } = await api.get('/admin/users');
-                setUsers(data.data.users);
             }
         } catch (error) {
             console.error('Failed to fetch data:', error);
@@ -66,25 +60,6 @@ const AdminDashboard = () => {
         }
     };
 
-    const handleUserToggle = async (id: string, field: 'active' | 'ban', value: boolean) => {
-        setProcessingId(id);
-        try {
-            const endpoint = field === 'active' ? `/admin/users/${id}/active` : `/admin/users/${id}/ban`;
-            const payload = field === 'active' ? { isActive: value } : { isBanned: value };
-            await api.patch(endpoint, payload);
-            setUsers(prev => prev.map(u => u.id === id ? { ...u, [field === 'active' ? 'isActive' : 'isBanned']: value } : u));
-        } catch (error) {
-            console.error('User update failed:', error);
-        } finally {
-            setProcessingId(null);
-        }
-    };
-
-    const filteredUsers = users.filter(u =>
-        u.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        u.email.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
     return (
         <Layout>
             <div className="admin-container">
@@ -95,7 +70,7 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className="admin-tabs-container">
-                        {['organizers', 'events', 'users'].map((tab) => (
+                        {['organizers', 'events'].map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab as any)}
@@ -109,26 +84,11 @@ const AdminDashboard = () => {
                     </div>
                 </div>
 
-                {activeTab === 'users' && (
-                    <div className="admin-search-container">
-                        <Search className="admin-search-icon" size={18} />
-                        <input
-                            type="text"
-                            placeholder="Search users by name or email..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="admin-search-input"
-                        />
-                    </div>
-                )}
-
                 <div className="admin-content-card">
                     {activeTab === 'organizers' ? (
                         <OrganizerTable organizers={organizers} loading={loading} processingId={processingId} onReview={handleOrganizerReview} />
-                    ) : activeTab === 'events' ? (
-                        <EventTable events={events} loading={loading} processingId={processingId} onReview={handleEventReview} />
                     ) : (
-                        <UserTable users={filteredUsers} loading={loading} processingId={processingId} onToggle={handleUserToggle} />
+                        <EventTable events={events} loading={loading} processingId={processingId} onReview={handleEventReview} />
                     )}
                 </div>
             </div>
@@ -203,56 +163,6 @@ const EventTable = ({ events, loading, processingId, onReview }: any) => (
     </>
 );
 
-const UserTable = ({ users, loading, processingId, onToggle }: any) => (
-    <>
-        <div className="table-header">
-            <div className="col-span-4">User Info</div>
-            <div className="col-span-2">Role</div>
-            <div className="col-span-2 text-center">Status</div>
-            <div className="col-span-4 text-right">Actions</div>
-        </div>
-        {loading ? <LoadingIndicator /> : users.length > 0 ? (
-            <div className="table-body">
-                {users.map((u: any) => (
-                    <motion.div key={u.id} className="table-row">
-                        <div className="col-span-4 flex items-center gap-3">
-                            <div className="user-avatar">{u.name.charAt(0)}</div>
-                            <div>
-                                <p className="font-bold">{u.name}</p>
-                                <p className="text-xs text-text-dim">{u.email}</p>
-                            </div>
-                        </div>
-                        <div className="col-span-2">
-                            <span className="role-badge">{u.role}</span>
-                        </div>
-                        <div className="col-span-2 text-center space-y-1">
-                            <div className={`text-[10px] font-bold uppercase ${u.isActive ? 'status-active' : 'status-inactive'}`}>{u.isActive ? 'Active' : 'Inactive'}</div>
-                            {u.isBanned && <div className="text-[10px] font-bold uppercase status-banned">Banned</div>}
-                        </div>
-                        <div className="col-span-4 flex justify-end gap-2">
-                            <button
-                                onClick={() => onToggle(u.id, 'active', !u.isActive)}
-                                disabled={!!processingId}
-                                className={`user-action-btn ${u.isActive ? 'bg-amber-500/10 text-amber-500 hover:bg-amber-500/20' : 'bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20'
-                                    }`}
-                            >
-                                {u.isActive ? <><UserX size={14} /> Suspend</> : <><UserCheck size={14} /> Activate</>}
-                            </button>
-                            <button
-                                onClick={() => onToggle(u.id, 'ban', !u.isBanned)}
-                                disabled={!!processingId}
-                                className={`user-action-btn ${u.isBanned ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white hover:bg-red-600'
-                                    }`}
-                            >
-                                {u.isBanned ? <><ShieldCheck size={14} /> Unban</> : <><ShieldOff size={14} /> Ban</>}
-                            </button>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        ) : <EmptyQueue message="No users found." />}
-    </>
-);
 
 const LoadingIndicator = () => <div className="loading-state">Loading queue...</div>;
 
