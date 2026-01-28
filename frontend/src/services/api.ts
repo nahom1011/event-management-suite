@@ -54,4 +54,12 @@ api.interceptors.response.use(
     }
 );
 
+export const auth = {
+    register: (data: any) => api.post('/auth/register', data),
+    login: (data: any) => api.post('/auth/login', data),
+    logout: () => api.post('/auth/logout'),
+    verifyEmail: (token: string) => api.get(`/auth/verify-email?token=${token}`),
+    resendVerification: (email: string) => api.post('/auth/resend-verification', { email }),
+};
+
 export default api;

@@ -13,7 +13,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState<string | React.ReactNode>('');
     const [isLoading, setIsLoading] = useState(false);
     const [loginType, setLoginType] = useState<'google' | 'email'>('google');
 
@@ -43,7 +43,29 @@ const LoginPage = () => {
             login(data.data.user, data.data.accessToken);
             navigate('/');
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+            if (err.response?.status === 403 && err.response?.data?.message?.includes('verify')) {
+                setError(
+                    <span>
+                        {err.response.data.message}{' '}
+                        <button
+                            type="button"
+                            onClick={async () => {
+                                try {
+                                    await api.post('/auth/resend-verification', { email });
+                                    setError('Verification email resent! Please check your inbox.');
+                                } catch (resendErr: any) {
+                                    setError(resendErr.response?.data?.message || 'Failed to resend email.');
+                                }
+                            }}
+                            className="underline font-bold hover:text-white"
+                        >
+                            Resend?
+                        </button>
+                    </span>
+                );
+            } else {
+                setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+            }
             console.error('Email login error:', err);
         } finally {
             setIsLoading(false);

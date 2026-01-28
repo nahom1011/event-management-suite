@@ -14,6 +14,8 @@ model User {
   password         String?
   avatar           String?
   role             UserRole          @default(user)
+  emailVerified    Boolean           @default(false)
+  status           UserStatus        @default(PENDING)
   isActive         Boolean           @default(true)
   isBanned         Boolean           @default(false)
   createdAt        DateTime          @default(now())
@@ -21,8 +23,20 @@ model User {
   auditLogs        AuditLog[]        @relation("Actor")
   orders           Order[]
   organizerProfile OrganizerProfile?
+  verificationToken EmailVerificationToken?
 
   @@map("users")
+}
+
+model EmailVerificationToken {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  tokenHash String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("email_verification_tokens")
 }
 
 model OrganizerProfile {
@@ -99,6 +113,12 @@ model AuditLog {
   actor     User     @relation("Actor", fields: [actorId], references: [id])
 
   @@map("audit_logs")
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
 }
 
 enum UserRole {

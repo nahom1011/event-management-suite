@@ -15,28 +15,48 @@ export const registerHandler = async (request: FastifyRequest, reply: FastifyRep
 
     const { email, password, name } = registerSchema.parse(request.body);
 
-    const { user, tokens } = await authService.register({ email, password, name });
+    const { user } = await authService.register({ email, password, name });
 
-    reply.setCookie('refreshToken', tokens.refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        path: '/api/v1/auth/refresh',
-        maxAge: 7 * 24 * 60 * 60, // 7 days
-    });
-
-    return reply.send({
+    return reply.status(201).send({
         status: 'success',
+        message: 'Registration successful. Please check your email to verify your account.',
         data: {
             user: {
                 id: user.id,
                 email: user.email,
                 name: user.name,
-                role: user.role,
-                avatar: user.avatar,
             },
-            accessToken: tokens.accessToken,
         },
+    });
+};
+
+export const verifyEmailHandler = async (request: FastifyRequest, reply: FastifyReply) => {
+    const verifySchema = z.object({
+        token: z.string().min(1, 'Token is required'),
+    });
+
+    const { token } = verifySchema.parse(request.query);
+
+    const result = await authService.verifyEmail(token);
+
+    return reply.send({
+        status: 'success',
+        ...result,
+    });
+};
+
+export const resendVerificationHandler = async (request: FastifyRequest, reply: FastifyReply) => {
+    const resendSchema = z.object({
+        email: z.string().email('Invalid email address'),
+    });
+
+    const { email } = resendSchema.parse(request.body);
+
+    const result = await authService.resendVerification(email);
+
+    return reply.send({
+        status: 'success',
+        ...result,
     });
 };
 

@@ -22,14 +22,13 @@ const SignupPage = () => {
         setIsLoading(true);
 
         try {
-            const { data } = await api.post('/auth/register', {
+            await api.post('/auth/register', {
                 email,
                 password,
                 name,
             });
 
-            login(data.data.user, data.data.accessToken);
-            navigate('/');
+            navigate('/signup-confirmation', { state: { email } });
         } catch (err: any) {
             setError(err.response?.data?.message || 'Registration failed. Please try again.');
             console.error('Registration error:', err);

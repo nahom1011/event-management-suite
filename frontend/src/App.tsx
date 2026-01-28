@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import SignupConfirmationPage from './pages/SignupConfirmationPage';
+import VerifyEmailPage from './pages/VerifyEmailPage';
 import Dashboard from './pages/Dashboard';
 import EventDetailPage from './pages/EventDetailPage';
 import OrdersPage from './pages/OrdersPage';
@@ -30,6 +32,8 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/login" element={!isAuthenticated ? <LoginPage /> : <Navigate to="/" />} />
       <Route path="/signup" element={!isAuthenticated ? <SignupPage /> : <Navigate to="/" />} />
+      <Route path="/signup-confirmation" element={<SignupConfirmationPage />} />
+      <Route path="/verify-email" element={<VerifyEmailPage />} />
 
       <Route
         path="/"
