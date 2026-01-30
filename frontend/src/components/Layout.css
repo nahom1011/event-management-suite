@@ -4,45 +4,66 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    background: var(--bg-black);
+    background: var(--theme-bg);
+    transition: background 1s ease;
+}
+
+/* Ambient Glow System */
+.ambient-glow-1,
+.ambient-glow-2 {
+    position: fixed;
+    border-radius: 9999px;
+    z-index: -10;
+    filter: blur(150px);
+    transition: background 1s ease;
 }
 
 .ambient-glow-1 {
-    position: fixed;
     top: -15%;
     left: -10%;
     width: 60%;
     height: 60%;
-    background: rgba(220, 38, 38, 0.05);
-    filter: blur(150px);
-    border-radius: 9999px;
-    z-index: -10;
-    animation: float 10s ease-in-out infinite;
+    animation: float 20s ease-in-out infinite;
 }
 
 .ambient-glow-2 {
-    position: fixed;
     bottom: -10%;
     right: -10%;
     width: 50%;
     height: 50%;
-    background: rgba(220, 38, 38, 0.03);
-    filter: blur(120px);
-    border-radius: 9999px;
-    z-index: -10;
 }
 
-.ambient-glow-3 {
-    position: fixed;
-    top: 30%;
-    right: 5%;
-    width: 35%;
-    height: 35%;
-    background: rgba(220, 38, 38, 0.02);
-    filter: blur(100px);
-    border-radius: 9999px;
-    z-index: -10;
-    animation: pulse-red 8s ease-in-out infinite;
+/* Role Specific Glow Colors */
+.ambient-glow-1.user {
+    background: hsla(239, 84%, 67%, 0.08);
+}
+
+.ambient-glow-2.user {
+    background: hsla(239, 84%, 67%, 0.04);
+}
+
+.ambient-glow-1.organizer {
+    background: hsla(262, 83%, 58%, 0.08);
+}
+
+.ambient-glow-2.organizer {
+    background: hsla(262, 83%, 58%, 0.04);
+}
+
+.ambient-glow-1.admin {
+    background: hsla(215, 25%, 27%, 0.12);
+}
+
+.ambient-glow-2.admin {
+    background: hsla(215, 25%, 27%, 0.06);
+}
+
+.ambient-glow-1.super_admin {
+    background: hsla(0, 72%, 51%, 0.1);
+}
+
+.ambient-glow-2.super_admin {
+    background: hsla(0, 72%, 51%, 0.05);
 }
 
 .main-content {
@@ -71,9 +92,10 @@
 .layout-footer {
     padding-top: 4rem;
     padding-bottom: 4rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid var(--theme-border);
     backdrop-filter: blur(12px);
-    background: rgba(0, 0, 0, 0.4);
+    background: var(--theme-surface);
+    opacity: 0.8;
 }
 
 .footer-container {
@@ -87,7 +109,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    color: var(--text-dim);
+    color: var(--theme-text-dim);
     font-size: 10px;
     font-weight: 900;
     text-transform: uppercase;
@@ -109,9 +131,9 @@
 .status-indicator {
     width: 0.5rem;
     height: 0.5rem;
-    background: var(--primary);
+    background: var(--theme-primary);
     border-radius: 9999px;
-    animation: glow-red 3s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--theme-primary);
 }
 
 .footer-links {

@@ -1,75 +1,73 @@
 .attendee-list-container {
-    padding: 2rem 1rem;
-    max-width: 1200px;
+    max-width: 80rem;
     margin: 0 auto;
+    padding: 2rem 1.5rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .attendee-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--theme-border);
 }
 
 .attendee-header-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(var(--primary-rgb), 0.1);
-    color: var(--primary);
-    padding: 0.5rem 1rem;
-    border-radius: 100px;
-    font-size: 0.75rem;
+    background: hsla(var(--theme-primary-rgb), 0.1);
+    color: var(--theme-primary);
+    padding: 0.375rem 0.75rem;
+    border-radius: 4px;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
 }
 
 .attendee-title {
-    font-size: 3rem;
-    font-weight: 900;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    margin: 0;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--theme-text);
+    letter-spacing: -0.02em;
 }
 
 .attendee-subtitle {
-    color: var(--text-dim);
-    font-size: 1.125rem;
-    margin-top: 0.5rem;
+    color: var(--theme-text-dim);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 }
 
 .back-link-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text);
-    padding: 0.75rem 1.25rem;
-    border-radius: 12px;
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    color: var(--theme-text);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
     font-size: 0.875rem;
     font-weight: 600;
-    transition: all 0.3s ease;
     cursor: pointer;
+    transition: all 0.2s;
 }
 
 .back-link-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateX(-4px);
+    background: var(--theme-bg);
 }
 
 .attendee-content-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: 8px;
+    box-shadow: var(--theme-shadow);
     overflow: hidden;
-    backdrop-filter: blur(20px);
-}
-
-.attendee-table-wrapper {
-    overflow-x: auto;
 }
 
 .attendee-table {
@@ -79,26 +77,27 @@
 
 .attendee-th {
     text-align: left;
-    padding: 1.25rem 2rem;
-    font-size: 0.75rem;
-    font-weight: 800;
+    padding: 0.75rem 1.5rem;
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-dim);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    letter-spacing: 0.05em;
+    color: var(--theme-text-dim);
+    background: var(--theme-bg);
+    border-bottom: 1px solid var(--theme-border);
 }
 
 .attendee-tr {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    transition: background 0.2s ease;
+    border-bottom: 1px solid var(--theme-border);
+    transition: background 0.1s;
 }
 
 .attendee-tr:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: hsla(var(--theme-primary-rgb), 0.01);
 }
 
 .attendee-td {
-    padding: 1.5rem 2rem;
+    padding: 1rem 1.5rem;
 }
 
 .attendee-identity {
@@ -108,74 +107,49 @@
 }
 
 .attendee-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: var(--primary-gradient);
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background: var(--theme-bg);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
-    color: white;
+    font-weight: 700;
+    color: var(--theme-primary);
 }
 
 .attendee-name {
-    font-weight: 700;
-    color: var(--text);
-    display: block;
+    font-weight: 600;
+    color: var(--theme-text);
 }
 
 .attendee-email {
     font-size: 0.8125rem;
-    color: var(--text-dim);
+    color: var(--theme-text-dim);
 }
 
 .ticket-type-badge {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 100px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--text);
+    padding: 0.25rem 0.5rem;
+    background: var(--theme-bg);
+    border: 1px solid var(--theme-border);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--theme-text-dim);
 }
 
 .order-id-text {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    background: rgba(255, 255, 255, 0.03);
+    font-family: monospace;
+    font-size: 11px;
+    color: var(--theme-text-dim);
+    background: var(--theme-bg);
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
 }
 
 .empty-attendees {
-    padding: 6rem 2rem;
+    padding: 4rem;
     text-align: center;
-    color: var(--text-dim);
-}
-
-.empty-attendees-icon {
-    margin-bottom: 1.5rem;
-    opacity: 0.2;
-}
-
-.empty-attendees h3 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-}
-
-@media (max-width: 768px) {
-    .attendee-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.5rem;
-    }
-
-    .attendee-title {
-        font-size: 2.5rem;
-    }
+    color: var(--theme-text-dim);
 }

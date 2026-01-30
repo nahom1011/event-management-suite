@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import Navbar from './Navbar';
 import { motion } from 'framer-motion';
+import { useAuth } from '../store/AuthContext';
 import './Layout.css';
 
 interface LayoutProps {
@@ -9,20 +10,23 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, showNav = true }: LayoutProps) => {
+    const { user } = useAuth();
+    const theme = user?.role || 'user';
+
     return (
-        <div className="layout-root">
+        <div className="layout-root" data-theme={theme}>
             {/* Elegant Ambient Glows */}
-            <div className="ambient-glow-1" />
-            <div className="ambient-glow-2" />
-            <div className="ambient-glow-3" />
+            <div className={`ambient-glow-1 ${theme}`} />
+            <div className={`ambient-glow-2 ${theme}`} />
 
             {showNav && <Navbar />}
 
             <main className={`main-content ${showNav ? 'main-with-nav' : ''}`}>
                 <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    key={theme} // Trigger re-animation on theme change
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 >
                     {children}
                 </motion.div>
