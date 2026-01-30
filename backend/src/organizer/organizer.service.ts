@@ -79,4 +79,40 @@ export class OrganizerService {
             }))
         };
     }
+
+    async getEventAttendees(userId: string, eventId: string) {
+        const profile = await this.getMyProfile(userId);
+
+        const event = await prisma.event.findFirst({
+            where: {
+                id: eventId,
+                organizerId: profile.id
+            }
+        });
+
+        if (!event) {
+            throw new AppError('Event not found or unauthorized', 404);
+        }
+
+        const orders = await prisma.order.findMany({
+            where: { eventId },
+            include: {
+                user: {
+                    select: {
+                        name: true,
+                        email: true
+                    }
+                },
+                ticket: {
+                    select: {
+                        type: true,
+                        price: true
+                    }
+                }
+            },
+            orderBy: { createdAt: 'desc' }
+        });
+
+        return orders;
+    }
 }

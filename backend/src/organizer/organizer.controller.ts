@@ -48,3 +48,16 @@ export const getStatsHandler = async (request: FastifyRequest, reply: FastifyRep
         data: { stats },
     });
 };
+
+export const getEventAttendeesHandler = async (request: FastifyRequest, reply: FastifyReply) => {
+    const { id: eventId } = z.object({ id: z.string().uuid() }).parse(request.params);
+    const userId = request.user?.id;
+    if (!userId) throw new AppError('Unauthorized', 401);
+
+    const attendees = await organizerService.getEventAttendees(userId, eventId);
+
+    return reply.send({
+        status: 'success',
+        data: { attendees },
+    });
+};

@@ -174,6 +174,13 @@ const OrganizerDashboard = () => {
                                                             <Send size={12} /> Sync
                                                         </button>
                                                     )}
+                                                    <button
+                                                        onClick={() => navigate(`/organizer/events/${event.id}/attendees`)}
+                                                        className="action-icon-btn"
+                                                        title="View Attendees"
+                                                    >
+                                                        <Users size={16} />
+                                                    </button>
                                                     <button className="action-icon-btn">
                                                         <Edit3 size={16} />
                                                     </button>

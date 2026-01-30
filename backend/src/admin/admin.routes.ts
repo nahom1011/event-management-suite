@@ -14,8 +14,8 @@ import {
 import { authenticate, authorize } from '../middlewares/authMiddleware';
 
 export async function adminRoutes(server: FastifyInstance) {
-    // Admin ONLY: Moderation
-    const adminOnlyHandlers = [authenticate, authorize('admin')];
+    // Admin & Super Admin: Moderation
+    const adminOnlyHandlers = [authenticate, authorize('admin', 'super_admin')];
 
     // Organizer Moderation
     server.get('/pending-organizers', {

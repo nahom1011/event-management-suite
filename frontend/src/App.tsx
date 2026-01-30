@@ -9,6 +9,7 @@ import OrdersPage from './pages/OrdersPage';
 import ProfilePage from './pages/ProfilePage';
 import AdminDashboard from './pages/AdminDashboard';
 import OrganizerDashboard from './pages/OrganizerDashboard';
+import AttendeeListPage from './pages/AttendeeListPage';
 import CreateEventPage from './pages/CreateEventPage';
 import SuperAdminDashboard from './pages/SuperAdminDashboard';
 import { AuthProvider, useAuth } from './store/AuthContext';
@@ -56,6 +57,10 @@ const AppRoutes = () => {
       <Route
         path="/organizer"
         element={isAuthenticated && isOrganizer ? <OrganizerDashboard /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/organizer/events/:id/attendees"
+        element={isAuthenticated && isOrganizer ? <AttendeeListPage /> : <Navigate to="/" />}
       />
       <Route
         path="/events/create"

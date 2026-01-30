@@ -1,0 +1,181 @@
+.attendee-list-container {
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.attendee-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+}
+
+.attendee-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+}
+
+.attendee-title {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin: 0;
+}
+
+.attendee-subtitle {
+    color: var(--text-dim);
+    font-size: 1.125rem;
+    margin-top: 0.5rem;
+}
+
+.back-link-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.back-link-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-4px);
+}
+
+.attendee-content-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+}
+
+.attendee-table-wrapper {
+    overflow-x: auto;
+}
+
+.attendee-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.attendee-th {
+    text-align: left;
+    padding: 1.25rem 2rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.attendee-tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: background 0.2s ease;
+}
+
+.attendee-tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.attendee-td {
+    padding: 1.5rem 2rem;
+}
+
+.attendee-identity {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.attendee-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--primary-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: white;
+}
+
+.attendee-name {
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+}
+
+.attendee-email {
+    font-size: 0.8125rem;
+    color: var(--text-dim);
+}
+
+.ticket-type-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.order-id-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.empty-attendees {
+    padding: 6rem 2rem;
+    text-align: center;
+    color: var(--text-dim);
+}
+
+.empty-attendees-icon {
+    margin-bottom: 1.5rem;
+    opacity: 0.2;
+}
+
+.empty-attendees h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .attendee-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .attendee-title {
+        font-size: 2.5rem;
+    }
+}
