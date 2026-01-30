@@ -33,11 +33,12 @@ export const registerHandler = async (request: FastifyRequest, reply: FastifyRep
 export const verifyEmailHandler = async (request: FastifyRequest, reply: FastifyReply) => {
     const verifySchema = z.object({
         token: z.string().min(1, 'Token is required'),
+        email: z.string().email('Invalid email address').optional(),
     });
 
-    const { token } = verifySchema.parse(request.query);
+    const { token, email } = verifySchema.parse(request.query);
 
-    const result = await authService.verifyEmail(token);
+    const result = await authService.verifyEmail(token, email);
 
     return reply.send({
         status: 'success',

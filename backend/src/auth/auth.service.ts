@@ -206,7 +206,7 @@ export class AuthService {
         }
     }
 
-    async verifyEmail(token: string) {
+    async verifyEmail(token: string, email?: string) {
         const tokenHash = this.hashToken(token);
 
         const verificationToken = await prisma.emailVerificationToken.findFirst({
@@ -218,9 +218,40 @@ export class AuthService {
         });
 
         if (!verificationToken) {
-            throw new AppError('Invalid or expired verification token', 400);
+            // Token not found or expired - check if user is already verified via email parameter
+            if (email) {
+                const user = await prisma.user.findUnique({
+                    where: { email }
+                });
+
+                if (user?.emailVerified) {
+                    return { message: 'Email already verified', alreadyVerified: true };
+                }
+            }
+
+            // Fallback: check if ANY token with this hash existed (security note: this is less efficient 
+            // but helps if token exists but is expired, or if we want to find the user from the hash)
+            const anyToken = await prisma.emailVerificationToken.findFirst({
+                where: { tokenHash },
+                include: { user: true }
+            });
+
+            if (anyToken?.user) {
+                if (anyToken.user.emailVerified) {
+                    return { message: 'Email already verified', alreadyVerified: true };
+                }
+                throw new AppError('Verification link has expired. Please request a new one.', 400);
+            }
+
+            throw new AppError('Invalid verification link', 400);
         }
 
+        // Check if user is already verified (token still exists but user already verified)
+        if (verificationToken.user.emailVerified) {
+            return { message: 'Email already verified', alreadyVerified: true };
+        }
+
+        // Verify the user
         await prisma.$transaction([
             prisma.user.update({
                 where: { id: verificationToken.userId },
@@ -234,7 +265,7 @@ export class AuthService {
             })
         ]);
 
-        return { message: 'Email verified successfully' };
+        return { message: 'Email verified successfully', alreadyVerified: false };
     }
 
     async resendVerification(email: string) {

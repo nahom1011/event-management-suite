@@ -12,10 +12,14 @@ const envSchema = z.object({
     JWT_SECRET: z.string().min(1, 'JWT_SECRET is required'),
     JWT_REFRESH_SECRET: z.string().min(1, 'JWT_REFRESH_SECRET is required'),
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-    EMAIL_HOST: z.string().default('localhost'),
-    EMAIL_PORT: z.string().default('1025'),
+    // Email Service - SMTP (Gmail, etc.) OR SendGrid
+    EMAIL_HOST: z.string().optional(),
+    EMAIL_PORT: z.string().optional(),
     EMAIL_USER: z.string().optional(),
     EMAIL_PASS: z.string().optional(),
+    SENDGRID_API_KEY: z.string().optional(),
+    EMAIL_FROM: z.string().default('noreply@eventsuite.com'),
+    EMAIL_FROM_NAME: z.string().default('Event Management Suite'),
     FRONTEND_URL: z.string().default('http://localhost:5173'),
 });
 

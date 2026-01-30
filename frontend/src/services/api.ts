@@ -58,7 +58,7 @@ export const auth = {
     register: (data: any) => api.post('/auth/register', data),
     login: (data: any) => api.post('/auth/login', data),
     logout: () => api.post('/auth/logout'),
-    verifyEmail: (token: string) => api.get(`/auth/verify-email?token=${token}`),
+    verifyEmail: (token: string, email?: string) => api.get(`/auth/verify-email?token=${token}${email ? `&email=${email}` : ''}`),
     resendVerification: (email: string) => api.post('/auth/resend-verification', { email }),
 };
 

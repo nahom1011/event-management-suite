@@ -6,6 +6,7 @@ const VerifyEmailPage: React.FC = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const token = searchParams.get('token');
+    const email = searchParams.get('email');
     const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
     const [message, setMessage] = useState('');
 
@@ -18,9 +19,16 @@ const VerifyEmailPage: React.FC = () => {
             }
 
             try {
-                await auth.verifyEmail(token);
+                const response = await auth.verifyEmail(token, email || undefined);
                 setStatus('success');
-                setMessage('Your email has been verified successfully!');
+
+                // Check if already verified
+                if (response.data.alreadyVerified) {
+                    setMessage('Your email is already verified! You can log in now.');
+                } else {
+                    setMessage('Your email has been verified successfully!');
+                }
+
                 setTimeout(() => navigate('/login'), 3000);
             } catch (err: any) {
                 setStatus('error');
