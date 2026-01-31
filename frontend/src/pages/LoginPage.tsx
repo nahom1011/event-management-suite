@@ -89,7 +89,7 @@ const LoginPage = () => {
                             animate={{ y: 0 }}
                             className="login-icon-box"
                         >
-                            <Calendar className="text-white" size={40} />
+                            <Calendar size={40} />
                         </motion.div>
                         <h1 className="login-title">Welcome</h1>
                         <p className="login-subtitle">Gatekeeper to Extraordinary Experiences.</p>

@@ -49,7 +49,7 @@ const SignupPage = () => {
 
                     <div className="signup-header">
                         <div className="signup-icon-box">
-                            <Calendar className="text-white" size={32} />
+                            <Calendar size={32} />
                         </div>
                         <h1 className="signup-title">Join Eventify</h1>
                         <p className="signup-subtitle">Create an account to host and join amazing events.</p>
@@ -117,7 +117,7 @@ const SignupPage = () => {
                                 <div className="loading-spinner-signup" />
                             ) : (
                                 <>
-                                    <UserPlus size={18} className="group-hover:scale-110 transition-transform" />
+                                    <UserPlus size={18} />
                                     <span>Create Account</span>
                                 </>
                             )}
