@@ -15,9 +15,12 @@ interface GoogleUser {
     email: string;
     name: string;
     picture?: string;
+    email_verified?: boolean;
 }
 
 export class AuthService {
+    // ... (keep hashToken and generateVerificationToken as is)
+
     private hashToken(token: string): string {
         return crypto.createHash('sha256').update(token).digest('hex');
     }
@@ -46,11 +49,16 @@ export class AuthService {
 
     async verifyGoogleToken(idToken: string): Promise<GoogleUser> {
         try {
+            console.log('Verifying Google Token with Client ID:', env.GOOGLE_CLIENT_ID.substring(0, 10) + '...');
+            console.log('Token (truncated):', idToken.substring(0, 20) + '...');
+
             const ticket = await client.verifyIdToken({
                 idToken,
                 audience: env.GOOGLE_CLIENT_ID,
             });
             const payload = ticket.getPayload();
+
+            console.log('Google Payload:', JSON.stringify(payload, null, 2));
 
             if (!payload || !payload.email) {
                 throw new AppError('Invalid Google Token payload', 400);
@@ -60,9 +68,16 @@ export class AuthService {
                 email: payload.email,
                 name: payload.name || 'Unknown',
                 picture: payload.picture,
+                email_verified: payload.email_verified,
             };
-        } catch (error) {
-            throw new AppError('Google authentication failed', 401);
+        } catch (error: any) {
+            console.error('Google verification error details:', {
+                message: error.message,
+                stack: error.stack,
+                // Log full error object if it has other properties like 'response'
+                ...error
+            });
+            throw new AppError('Google authentication failed: ' + error.message, 401);
         }
     }
 
@@ -175,6 +190,20 @@ export class AuthService {
                     status: 'ACTIVE',
                 },
             });
+        } else {
+            // User exists - check if verified
+            // If the user exists but isn't verified, AND Google says the email is indeed verified,
+            // we should trust Google and verify the local user.
+            if (!user.emailVerified && googleUser.email_verified) {
+                console.log(`Auto-verifying user ${user.email} based on trusted Google Sign-In.`);
+                user = await prisma.user.update({
+                    where: { id: user.id },
+                    data: {
+                        emailVerified: true,
+                        status: 'ACTIVE'
+                    }
+                });
+            }
         }
 
         if (user.isBanned) {
