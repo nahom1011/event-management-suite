@@ -1,0 +1,146 @@
+[
+  {
+    "id": "df3ca567-c872-4feb-b7a8-4390324a8f89",
+    "organizerId": "3a4c1d11-ac5b-4f5d-9c8e-bb4cf3fd9ddd",
+    "title": "Neon Nights Music Festival",
+    "description": "Experience the ultimate electronic music festival with top DJs and stunning light shows.",
+    "location": "San Francisco, CA",
+    "startDate": "2026-07-15T20:00:00.000Z",
+    "endDate": "2026-07-16T04:00:00.000Z",
+    "status": "live",
+    "createdAt": "2026-02-01T09:15:12.307Z",
+    "updatedAt": "2026-02-01T09:15:12.307Z",
+    "ticketTypes": [
+      {
+        "id": "b2dcbab4-5125-4124-a017-e663d2b9e073",
+        "eventId": "df3ca567-c872-4feb-b7a8-4390324a8f89",
+        "name": "General Admission",
+        "price": "45",
+        "currency": "USD",
+        "quantity": 100,
+        "sold": 0,
+        "status": "AVAILABLE",
+        "createdAt": "2026-02-01T09:15:12.307Z",
+        "updatedAt": "2026-02-01T09:15:12.307Z"
+      },
+      {
+        "id": "63bd1cfe-611c-4b3e-987d-bcf6ed18372d",
+        "eventId": "df3ca567-c872-4feb-b7a8-4390324a8f89",
+        "name": "VIP Pass",
+        "price": "120",
+        "currency": "USD",
+        "quantity": 20,
+        "sold": 0,
+        "status": "AVAILABLE",
+        "createdAt": "2026-02-01T09:15:12.307Z",
+        "updatedAt": "2026-02-01T09:15:12.307Z"
+      }
+    ],
+    "organizer": {
+      "id": "3a4c1d11-ac5b-4f5d-9c8e-bb4cf3fd9ddd",
+      "userId": "ab5d5100-5754-49fa-87ff-80fd0e20f966",
+      "organizationName": "Dream Events",
+      "phone": null,
+      "verificationStatus": "pending",
+      "payoutDetails": null,
+      "createdAt": "2026-02-01T09:15:12.033Z",
+      "updatedAt": "2026-02-01T09:15:12.033Z"
+    }
+  },
+  {
+    "id": "02bb9b9b-495a-437d-a16a-338256c3e532",
+    "organizerId": "3a4c1d11-ac5b-4f5d-9c8e-bb4cf3fd9ddd",
+    "title": "MEGA NEON FESTIVAL 2026",
+    "description": "Experience the ultimate electronic music festival with top DJs and stunning light shows.",
+    "location": "San Francisco, CA",
+    "startDate": "2026-07-15T20:00:00.000Z",
+    "endDate": "2026-07-16T04:00:00.000Z",
+    "status": "live",
+    "createdAt": "2026-02-01T09:21:57.023Z",
+    "updatedAt": "2026-02-01T09:21:57.023Z",
+    "ticketTypes": [
+      {
+        "id": "ec0c62e6-69b8-465a-a37b-3e5a1435ce98",
+        "eventId": "02bb9b9b-495a-437d-a16a-338256c3e532",
+        "name": "General Admission",
+        "price": "45",
+        "currency": "USD",
+        "quantity": 100,
+        "sold": 0,
+        "status": "AVAILABLE",
+        "createdAt": "2026-02-01T09:21:57.023Z",
+        "updatedAt": "2026-02-01T09:21:57.023Z"
+      },
+      {
+        "id": "047be928-8b6b-4b9e-8698-36a500d9adb4",
+        "eventId": "02bb9b9b-495a-437d-a16a-338256c3e532",
+        "name": "VIP Pass",
+        "price": "120",
+        "currency": "USD",
+        "quantity": 20,
+        "sold": 0,
+        "status": "AVAILABLE",
+        "createdAt": "2026-02-01T09:21:57.023Z",
+        "updatedAt": "2026-02-01T09:21:57.023Z"
+      }
+    ],
+    "organizer": {
+      "id": "3a4c1d11-ac5b-4f5d-9c8e-bb4cf3fd9ddd",
+      "userId": "ab5d5100-5754-49fa-87ff-80fd0e20f966",
+      "organizationName": "Dream Events",
+      "phone": null,
+      "verificationStatus": "pending",
+      "payoutDetails": null,
+      "createdAt": "2026-02-01T09:15:12.033Z",
+      "updatedAt": "2026-02-01T09:15:12.033Z"
+    }
+  },
+  {
+    "id": "ca7ee068-e854-43fe-a82e-e9aef309aaee",
+    "organizerId": "db561f3f-5140-4ae3-8207-4b2ccc1f2d66",
+    "title": "MEGA NEON FESTIVAL 2026",
+    "description": "Experience the ultimate electronic music festival with top DJs and stunning light shows.",
+    "location": "San Francisco, CA",
+    "startDate": "2026-07-15T20:00:00.000Z",
+    "endDate": "2026-07-16T04:00:00.000Z",
+    "status": "live",
+    "createdAt": "2026-02-01T09:58:16.877Z",
+    "updatedAt": "2026-02-01T09:58:16.877Z",
+    "ticketTypes": [
+      {
+        "id": "52268d6f-d3a8-4b94-a54c-d33e7d1ef48b",
+        "eventId": "ca7ee068-e854-43fe-a82e-e9aef309aaee",
+        "name": "General Admission",
+        "price": "45",
+        "currency": "USD",
+        "quantity": 100,
+        "sold": 0,
+        "status": "AVAILABLE",
+        "createdAt": "2026-02-01T09:58:16.877Z",
+        "updatedAt": "2026-02-01T09:58:16.877Z"
+      },
+      {
+        "id": "ad13203e-edd7-4ce6-8c39-ccf60a3f29fb",
+        "eventId": "ca7ee068-e854-43fe-a82e-e9aef309aaee",
+        "name": "VIP Pass",
+        "price": "120",
+        "currency": "USD",
+        "quantity": 20,
+        "sold": 0,
+        "status": "AVAILABLE",
+        "createdAt": "2026-02-01T09:58:16.877Z",
+        "updatedAt": "2026-02-01T09:58:16.877Z"
+      }
+    ],
+    "organizer": {
+      "id": "db561f3f-5140-4ae3-8207-4b2ccc1f2d66",
+      "userId": "c343fa1f-acc9-4eb8-a994-aafed3ac5821",
+      "organizationName": "Dream Events",
+      "phone": null,
+      "verificationStatus": "pending",
+      "payoutDetails": null,
+      "createdAt": "2026-02-01T09:58:16.867Z",
+      "updatedAt": "2026-02-01T09:58:16.867Z"
+    }
+  }
+]
