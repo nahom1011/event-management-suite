@@ -106,13 +106,13 @@ const OrdersPage = () => {
                                         <div className="order-info-item">
                                             <p className="order-info-label">Grade</p>
                                             <p className="order-info-value text-white/90">
-                                                {order.ticket.type}
+                                                {order.ticketType?.name || 'Standard'}
                                             </p>
                                         </div>
                                         <div className="order-info-item">
                                             <p className="order-info-label">Credit</p>
                                             <p className="font-black text-xl tracking-tighter text-primary">
-                                                ${order.totalAmount}
+                                                ${order.amount}
                                             </p>
                                         </div>
                                     </div>
@@ -125,7 +125,7 @@ const OrdersPage = () => {
                                         <QrCode size={120} className="text-bg" />
                                     </div>
                                     <p className="qr-code-text">
-                                        {order.qrCode}
+                                        {order.tickets?.[0]?.code || 'PENDING'}
                                     </p>
 
                                     <div className="ticket-actions">

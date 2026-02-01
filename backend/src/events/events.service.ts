@@ -1,7 +1,6 @@
-import { PrismaClient, EventStatus, Prisma } from '@prisma/client';
+import { EventStatus, Prisma } from '@prisma/client';
+import { prisma } from '../utils/db';
 import { AppError } from '../utils/AppError';
-
-const prisma = new PrismaClient();
 
 export class EventsService {
     async createEvent(data: {
@@ -22,16 +21,16 @@ export class EventsService {
                 endDate: data.endDate,
                 organizerId: data.organizerId,
                 status: EventStatus.draft,
-                tickets: {
+                ticketTypes: { // Changed from tickets to ticketTypes
                     create: data.tickets.map(t => ({
-                        type: t.type,
+                        name: t.type, // Changed from type to name
                         price: new Prisma.Decimal(t.price),
                         quantity: t.quantity
                     }))
                 }
             },
             include: {
-                tickets: true
+                ticketTypes: true // Changed from tickets to ticketTypes
             }
         });
     }
@@ -42,7 +41,7 @@ export class EventsService {
                 ...filters,
             },
             include: {
-                tickets: true,
+                ticketTypes: true, // Changed from tickets to ticketTypes
             },
         });
     }
@@ -51,7 +50,7 @@ export class EventsService {
         const event = await prisma.event.findUnique({
             where: { id },
             include: {
-                tickets: true,
+                ticketTypes: true, // Changed from tickets to ticketTypes
                 organizer: true,
             },
         });
@@ -80,7 +79,7 @@ export class EventsService {
         return await prisma.event.update({
             where: { id },
             data,
-            include: { tickets: true }
+            include: { ticketTypes: true } // Changed from tickets to ticketTypes
         });
     }
 

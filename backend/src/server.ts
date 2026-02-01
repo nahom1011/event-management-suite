@@ -7,6 +7,8 @@ import { eventRoutes } from './events/events.routes';
 import { ordersRoutes } from './orders/orders.routes';
 import { organizerRoutes } from './organizer/organizer.routes';
 import { adminRoutes } from './admin/admin.routes';
+import { paymentRoutes } from './payment/payment.routes';
+import rawBody from 'fastify-raw-body';
 
 import { globalErrorHandler } from './middlewares/errorHandler';
 
@@ -24,6 +26,12 @@ server.register(cors, {
     origin: ['http://localhost:5173'],
     credentials: true,
 });
+server.register(rawBody, {
+    field: 'rawBody',
+    global: false, // We only need it for webhook
+    encoding: 'utf8',
+    runFirst: true,
+});
 
 // Health Check
 server.get('/health', async (request, reply) => {
@@ -36,6 +44,7 @@ server.register(eventRoutes, { prefix: '/api/v1/events' });
 server.register(ordersRoutes, { prefix: '/api/v1/orders' });
 server.register(organizerRoutes, { prefix: '/api/v1/organizer' });
 server.register(adminRoutes, { prefix: '/api/v1/admin' });
+server.register(paymentRoutes, { prefix: '/api/v1/payments' });
 
 const start = async () => {
     try {

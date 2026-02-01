@@ -5,6 +5,8 @@ import SignupConfirmationPage from './pages/SignupConfirmationPage';
 import VerifyEmailPage from './pages/VerifyEmailPage';
 import Dashboard from './pages/Dashboard';
 import EventDetailPage from './pages/EventDetailPage';
+import PaymentSuccessPage from './pages/PaymentSuccessPage';
+import PaymentCancelPage from './pages/PaymentCancelPage';
 import OrdersPage from './pages/OrdersPage';
 import ProfilePage from './pages/ProfilePage';
 import AdminDashboard from './pages/AdminDashboard';
@@ -43,6 +45,14 @@ const AppRoutes = () => {
       <Route
         path="/events/:id"
         element={isAuthenticated ? <EventDetailPage /> : <Navigate to="/login" />}
+      />
+      <Route
+        path="/payment/success"
+        element={isAuthenticated ? <PaymentSuccessPage /> : <Navigate to="/login" />}
+      />
+      <Route
+        path="/payment/cancel"
+        element={isAuthenticated ? <PaymentCancelPage /> : <Navigate to="/login" />}
       />
       <Route
         path="/orders"

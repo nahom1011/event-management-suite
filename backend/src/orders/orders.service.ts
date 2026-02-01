@@ -1,32 +1,31 @@
 import { PrismaClient, PaymentStatus } from '@prisma/client';
 import { AppError } from '../utils/AppError';
 import { v4 as uuidv4 } from 'uuid';
-
-const prisma = new PrismaClient();
+import { prisma } from '../utils/db'; // Use singleton
 
 export class OrdersService {
-    async createOrder(userId: string, eventId: string, ticketId: string) {
+    async createOrder(userId: string, eventId: string, ticketTypeId: string) {
         // 1. Verify event and ticket exist
         const event = await prisma.event.findUnique({
             where: { id: eventId },
-            include: { tickets: { where: { id: ticketId } } },
+            include: { ticketTypes: { where: { id: ticketTypeId } } },
         });
 
         if (!event) throw new AppError('Event not found', 404);
-        const ticket = event.tickets[0];
-        if (!ticket) throw new AppError('Ticket type not found for this event', 404);
+        const ticketType = event.ticketTypes[0];
+        if (!ticketType) throw new AppError('Ticket type not found for this event', 404);
 
         // 2. Check availability
-        if (ticket.quantity <= 0) {
+        if (ticketType.quantity <= ticketType.sold) {
             throw new AppError('Tickets are sold out', 400);
         }
 
         // 3. Create order in a transaction
         return await prisma.$transaction(async (tx) => {
-            // Decrement ticket quantity
-            await tx.ticket.update({
-                where: { id: ticketId },
-                data: { quantity: { decrement: 1 } },
+            // Increment ticket sold count
+            await tx.ticketType.update({
+                where: { id: ticketTypeId },
+                data: { sold: { increment: 1 } },
             });
 
             // Create order
@@ -34,14 +33,28 @@ export class OrdersService {
                 data: {
                     userId,
                     eventId,
-                    ticketId,
-                    totalAmount: ticket.price,
-                    paymentStatus: PaymentStatus.completed, // Mocking successful payment
-                    qrCode: `EVENT-${eventId}-TKT-${uuidv4().split('-')[0].toUpperCase()}`,
+                    ticketTypeId,
+                    amount: ticketType.price,
+                    currency: ticketType.currency,
+                    status: 'PAID', // Mocking successful payment
+                    stripeSessionId: `MOCK-${uuidv4()}`,
                 },
                 include: {
                     event: true,
-                    ticket: true,
+                    ticketType: true,
+                    tickets: true
+                }
+            });
+
+            // Create Ticket
+            await tx.ticket.create({
+                data: {
+                    orderId: order.id,
+                    ticketTypeId,
+                    eventId,
+                    userId,
+                    code: `MOCK-${uuidv4().substring(0, 8)}`,
+                    status: 'ACTIVE'
                 }
             });
 
@@ -60,10 +73,16 @@ export class OrdersService {
                         location: true,
                     }
                 },
-                ticket: {
+                ticketType: {
                     select: {
-                        type: true,
+                        name: true,
                         price: true,
+                    }
+                },
+                tickets: {
+                    select: {
+                        code: true,
+                        qrCode: true
                     }
                 }
             },

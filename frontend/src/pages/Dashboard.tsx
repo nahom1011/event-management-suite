@@ -136,7 +136,7 @@ const Dashboard = () => {
 
                                     <div className="event-price-actions">
                                         <div className="event-price">
-                                            {event.tickets?.[0]?.price ? `$${event.tickets[0].price}` : <span className="free-badge">Free</span>}
+                                            {event.ticketTypes?.[0]?.price ? `$${event.ticketTypes[0].price}` : <span className="free-badge">Free</span>}
                                         </div>
                                         <div className="action-icon-box">
                                             <TrendingUp size={18} />

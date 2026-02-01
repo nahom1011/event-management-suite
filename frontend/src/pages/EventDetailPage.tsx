@@ -11,7 +11,6 @@ const EventDetailPage = () => {
     const [event, setEvent] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [purchasing, setPurchasing] = useState(false);
-    const [purchaseSuccess, setPurchaseSuccess] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,16 +27,23 @@ const EventDetailPage = () => {
         fetchEvent();
     }, [id]);
 
-    const handlePurchase = async (ticketId: string) => {
+    const handlePurchase = async (ticketTypeId: string) => {
         setPurchasing(true);
         try {
-            await api.post('/orders', { eventId: id, ticketId });
-            setPurchaseSuccess(true);
-            setTimeout(() => navigate('/orders'), 2000);
+            const { data } = await api.post('/payments/checkout', {
+                eventId: id,
+                ticketTypeId,
+                quantity: 1
+            });
+
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                alert('Payment initialization failed. Please try again.');
+            }
         } catch (error) {
             console.error('Purchase failed:', error);
             alert('Something went wrong with the purchase.');
-        } finally {
             setPurchasing(false);
         }
     };
@@ -183,35 +189,31 @@ const EventDetailPage = () => {
 
                             <div className="tickets-container">
                                 <h4 className="tickets-h4">Access Passes</h4>
-                                {event.tickets?.length > 0 ? (
+                                {event.ticketTypes?.length > 0 ? (
                                     <div className="space-y-4">
-                                        {event.tickets.map((t: any) => (
+                                        {event.ticketTypes.map((t: any) => (
                                             <div
                                                 key={t.id}
                                                 className="ticket-item"
                                             >
                                                 <div className="ticket-header">
                                                     <div>
-                                                        <p className="ticket-name">{t.type}</p>
-                                                        <p className="ticket-quantity">{t.quantity} Units Available</p>
+                                                        <p className="ticket-name">{t.name}</p>
+                                                        <p className="ticket-quantity">{t.quantity - (t.sold || 0)} Units Available</p>
                                                     </div>
                                                     <div className="ticket-price">${t.price}</div>
                                                 </div>
                                                 <button
-                                                    disabled={purchasing || purchaseSuccess || t.quantity <= 0}
+                                                    disabled={purchasing || t.quantity <= t.sold}
                                                     onClick={() => handlePurchase(t.id)}
-                                                    className={`buy-btn ${purchaseSuccess
-                                                        ? 'buy-btn-success'
-                                                        : t.quantity <= 0
-                                                            ? 'buy-btn-disabled'
-                                                            : 'buy-btn-default'
+                                                    className={`buy-btn ${t.quantity <= t.sold
+                                                        ? 'buy-btn-disabled'
+                                                        : 'buy-btn-default'
                                                         }`}
                                                 >
-                                                    {purchaseSuccess ? (
-                                                        <span className="flex items-center justify-center gap-2"><CheckCircle2 size={16} /> Sync Complete</span>
-                                                    ) : purchasing ? (
+                                                    {purchasing ? (
                                                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mx-auto" />
-                                                    ) : t.quantity <= 0 ? (
+                                                    ) : t.quantity <= t.sold ? (
                                                         "Supply Exhausted"
                                                     ) : (
                                                         "Aquire Pass"

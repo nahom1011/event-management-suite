@@ -22,6 +22,7 @@ model User {
   updatedAt        DateTime          @updatedAt
   auditLogs        AuditLog[]        @relation("Actor")
   orders           Order[]
+  tickets          Ticket[]
   organizerProfile OrganizerProfile?
   verificationToken EmailVerificationToken?
 
@@ -67,40 +68,84 @@ model Event {
   updatedAt   DateTime         @updatedAt
   organizer   OrganizerProfile @relation(fields: [organizerId], references: [id])
   orders      Order[]
+  ticketTypes TicketType[]
   tickets     Ticket[]
 
   @@map("events")
 }
 
-model Ticket {
+
+model TicketType {
   id        String   @id @default(uuid())
   eventId   String
-  type      String
+  name      String
   price     Decimal  @db.Decimal(10, 2)
+  currency  String   @default("USD")
   quantity  Int
+  sold      Int      @default(0)
+  status    TicketTypeStatus @default(AVAILABLE)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   orders    Order[]
+  tickets   Ticket[]
   event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("ticket_types")
+}
+
+model Ticket {
+  id           String     @id @default(uuid())
+  orderId      String
+  ticketTypeId String
+  eventId      String
+  userId       String
+  code         String     @unique // Unique ticket code
+  qrCode       String?    // URL or data for QR code
+  status       TicketStatus @default(ACTIVE)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  
+  order        Order      @relation(fields: [orderId], references: [id])
+  ticketType   TicketType @relation(fields: [ticketTypeId], references: [id])
+  event        Event      @relation(fields: [eventId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
 
   @@map("tickets")
 }
 
 model Order {
-  id            String        @id @default(uuid())
-  userId        String
-  eventId       String
-  paymentStatus PaymentStatus @default(pending)
-  qrCode        String?
-  totalAmount   Decimal       @db.Decimal(10, 2)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  ticketId      String
-  event         Event         @relation(fields: [eventId], references: [id])
-  ticket        Ticket        @relation(fields: [ticketId], references: [id])
-  user          User          @relation(fields: [userId], references: [id])
+  id              String        @id @default(uuid())
+  userId          String
+  eventId         String
+  ticketTypeId    String
+  stripeSessionId String?       @unique
+  amount          Decimal       @db.Decimal(10, 2)
+  currency        String        @default("USD")
+  status          OrderStatus   @default(PENDING)
+  quantity        Int           @default(1)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  event           Event         @relation(fields: [eventId], references: [id])
+  ticketType      TicketType    @relation(fields: [ticketTypeId], references: [id])
+  user            User          @relation(fields: [userId], references: [id])
+  tickets         Ticket[]
+  refunds         Refund[]
 
   @@map("orders")
+}
+
+model Refund {
+  id             String   @id @default(uuid())
+  orderId        String
+  amount         Decimal  @db.Decimal(10, 2)
+  stripeRefundId String   @unique
+  reason         String?
+  createdAt      DateTime @default(now())
+  
+  order          Order    @relation(fields: [orderId], references: [id])
+
+  @@map("refunds")
 }
 
 model AuditLog {
@@ -141,4 +186,23 @@ enum PaymentStatus {
   completed
   failed
   refunded
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum TicketTypeStatus {
+  AVAILABLE
+  SOLD_OUT
+  DISABLED
+}
+
+enum TicketStatus {
+  ACTIVE
+  USED
+  CANCELLED
 }
