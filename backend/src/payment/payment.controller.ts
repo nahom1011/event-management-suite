@@ -137,4 +137,76 @@ export class PaymentController {
 
         return { received: true };
     }
+
+    /**
+     * Verify payment session and complete order (alternative to webhooks)
+     */
+    static async verifySession(request: FastifyRequest, reply: FastifyReply) {
+        const { sessionId } = request.params as { sessionId: string };
+
+        if (!sessionId) {
+            throw new AppError('Session ID is required', 400);
+        }
+
+        try {
+            // Verify payment with Stripe
+            const verification = await StripeService.verifySessionPayment(sessionId);
+
+            if (!verification.paid) {
+                return { success: false, message: 'Payment not completed' };
+            }
+
+            // Find the order by session ID
+            const order = await prisma.order.findUnique({
+                where: { stripeSessionId: sessionId },
+            });
+
+            if (!order) {
+                throw new AppError('Order not found', 404);
+            }
+
+            // If already paid, return success
+            if (order.status === 'PAID') {
+                return { success: true, message: 'Order already completed', orderId: order.id };
+            }
+
+            // Complete the order in a transaction
+            await prisma.$transaction(async (tx) => {
+                // 1. Update Order Status
+                await tx.order.update({
+                    where: { id: order.id },
+                    data: { status: 'PAID' },
+                });
+
+                // 2. Increment Ticket Sales
+                await tx.ticketType.update({
+                    where: { id: order.ticketTypeId },
+                    data: { sold: { increment: order.quantity } },
+                });
+
+                // 3. Generate Tickets
+                for (let i = 0; i < order.quantity; i++) {
+                    await tx.ticket.create({
+                        data: {
+                            orderId: order.id,
+                            ticketTypeId: order.ticketTypeId,
+                            eventId: order.eventId,
+                            userId: order.userId,
+                            code: `${order.eventId.slice(0, 4)}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
+                            status: 'ACTIVE',
+                        },
+                    });
+                }
+            });
+
+            return {
+                success: true,
+                message: 'Payment verified and order completed',
+                orderId: order.id
+            };
+        } catch (error: any) {
+            console.error('Session verification error:', error);
+            throw new AppError(error.message || 'Failed to verify session', 500);
+        }
+    }
 }

@@ -22,7 +22,8 @@ const envSchema = z.object({
     EMAIL_FROM_NAME: z.string().default('Event Management Suite'),
     FRONTEND_URL: z.string().default('http://localhost:5173'),
     STRIPE_SECRET_KEY: z.string().min(1, 'STRIPE_SECRET_KEY is required'),
-    STRIPE_WEBHOOK_SECRET: z.string().min(1, 'STRIPE_WEBHOOK_SECRET is required'),
+    STRIPE_PUBLISHABLE_KEY: z.string().min(1, 'STRIPE_PUBLISHABLE_KEY is required'),
+    STRIPE_WEBHOOK_SECRET: z.string().optional(), // Optional for local development without webhooks
 });
 
 const _env = envSchema.safeParse(process.env);
