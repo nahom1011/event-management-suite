@@ -70,9 +70,10 @@ export class PaymentController {
             });
 
             return { url: session.url };
-        } catch (error) {
+        } catch (error: any) {
+            console.error('Stripe Checkout Error:', error);
             // If payment initiation fails, we might want to fail the order or leave it pending
-            throw new AppError('Payment initiation failed', 500);
+            throw new AppError(`Payment initiation failed: ${error.message}`, 500);
         }
     }
 

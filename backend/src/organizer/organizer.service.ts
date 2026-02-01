@@ -46,8 +46,8 @@ export class OrganizerService {
             include: {
                 tickets: true,
                 orders: {
-                    where: { paymentStatus: 'completed' },
-                    select: { totalAmount: true }
+                    where: { status: 'PAID' },
+                    select: { amount: true }
                 }
             }
         });
@@ -57,7 +57,7 @@ export class OrganizerService {
             sum + event.orders.length, 0
         );
         const totalRevenue = events.reduce((sum: number, event: any) =>
-            sum + event.orders.reduce((rev: number, order: any) => rev + Number(order.totalAmount), 0), 0
+            sum + event.orders.reduce((rev: number, order: any) => rev + Number(order.amount), 0), 0
         );
 
         const eventStatusBreakdown = events.reduce((acc: any, event: any) => {
@@ -103,9 +103,9 @@ export class OrganizerService {
                         email: true
                     }
                 },
-                ticket: {
+                ticketType: {
                     select: {
-                        type: true,
+                        name: true,
                         price: true
                     }
                 }

@@ -19,14 +19,23 @@ const LoginPage = () => {
 
     const handleGoogleSuccess = async (credentialResponse: any) => {
         try {
+            console.log('🔵 Google Sign-In Response:', credentialResponse);
+            console.log('🔵 Credential Token:', credentialResponse.credential?.substring(0, 50) + '...');
+
             const { data } = await api.post('/auth/login', {
                 idToken: credentialResponse.credential,
             });
+
+            console.log('✅ Login successful:', data);
             login(data.data.user, data.data.accessToken);
             navigate('/');
         } catch (err: any) {
-            setError('Google sign-in failed. Please try again.');
-            console.error('Login failed:', err);
+            console.error('❌ Google Sign-In Error:', err);
+            console.error('❌ Error Response:', err.response?.data);
+            console.error('❌ Error Status:', err.response?.status);
+
+            const errorMessage = err.response?.data?.message || 'Google sign-in failed. Please try again.';
+            setError(errorMessage);
         }
     };
 

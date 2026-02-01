@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CheckCircle2, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
 import Layout from '../components/Layout';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import api from '../services/api';
 
 const PaymentSuccessPage = () => {
     const navigate = useNavigate();
@@ -23,15 +23,15 @@ const PaymentSuccessPage = () => {
             }
 
             try {
-                const token = localStorage.getItem('token');
+                const token = localStorage.getItem('accessToken');
                 if (!token) {
                     setStatus('error');
                     setMessage('Please log in to verify your payment');
                     return;
                 }
 
-                const response = await axios.get(
-                    `${import.meta.env.VITE_API_BASE_URL}/payment/verify-session/${sessionId}`,
+                const response = await api.get(
+                    `/payments/verify-session/${sessionId}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

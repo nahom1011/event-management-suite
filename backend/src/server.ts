@@ -8,7 +8,7 @@ import { ordersRoutes } from './orders/orders.routes';
 import { organizerRoutes } from './organizer/organizer.routes';
 import { adminRoutes } from './admin/admin.routes';
 import { paymentRoutes } from './payment/payment.routes';
-import rawBody from 'fastify-raw-body';
+// Removed: import rawBody from 'fastify-raw-body'; - Not needed for session verification
 
 import { globalErrorHandler } from './middlewares/errorHandler';
 
@@ -23,15 +23,10 @@ server.setErrorHandler(globalErrorHandler);
 // Register Plugins
 server.register(cookie);
 server.register(cors, {
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
     credentials: true,
 });
-server.register(rawBody, {
-    field: 'rawBody',
-    global: false, // We only need it for webhook
-    encoding: 'utf8',
-    runFirst: true,
-});
+// Removed rawBody plugin - not needed since we're using session verification instead of webhooks
 
 // Health Check
 server.get('/health', async (request, reply) => {

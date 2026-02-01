@@ -16,6 +16,14 @@ export class StripeService {
         currency: string = 'usd',
         quantity: number = 1
     ) {
+        console.log('Creating Stripe Checkout Session with params:', {
+            userId,
+            email,
+            eventId,
+            ticketTypeId,
+            amount,
+            quantity
+        });
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             mode: 'payment',
@@ -45,6 +53,7 @@ export class StripeService {
             cancel_url: `${process.env.FRONTEND_URL}/payment/cancel`,
         });
 
+        console.log('Stripe Session Created Successfully:', session.id);
         return session;
     }
 
