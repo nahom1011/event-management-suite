@@ -180,6 +180,28 @@ export class PaymentController {
                         code: true,
                         qrCode: true,
                         status: true,
+                        event: {
+                            select: {
+                                title: true,
+                                description: true,
+                                location: true,
+                                startDate: true,
+                                endDate: true,
+                            }
+                        },
+                        ticketType: {
+                            select: {
+                                name: true,
+                                price: true,
+                                currency: true,
+                            }
+                        },
+                        user: {
+                            select: {
+                                name: true,
+                                email: true,
+                            }
+                        }
                     }
                 });
 
@@ -224,7 +246,7 @@ export class PaymentController {
                 }
             });
 
-            // Fetch the created tickets with QR codes
+            // Fetch the created tickets with QR codes and event details
             const tickets = await prisma.ticket.findMany({
                 where: { orderId: order.id },
                 select: {
@@ -232,6 +254,28 @@ export class PaymentController {
                     code: true,
                     qrCode: true,
                     status: true,
+                    event: {
+                        select: {
+                            title: true,
+                            description: true,
+                            location: true,
+                            startDate: true,
+                            endDate: true,
+                        }
+                    },
+                    ticketType: {
+                        select: {
+                            name: true,
+                            price: true,
+                            currency: true,
+                        }
+                    },
+                    user: {
+                        select: {
+                            name: true,
+                            email: true,
+                        }
+                    }
                 }
             });
 
