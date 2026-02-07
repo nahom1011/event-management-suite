@@ -3,6 +3,7 @@ import { prisma } from '../utils/db';
 import { StripeService } from './stripe.service';
 import { AppError } from '../utils/AppError';
 import { z } from 'zod';
+import QRCode from 'qrcode';
 
 const checkoutSchema = z.object({
     eventId: z.string().uuid(),
@@ -118,13 +119,17 @@ export class PaymentController {
                     // 3. Generate Tickets
                     // Loop and create 'quantity' tickets
                     for (let i = 0; i < order.quantity; i++) {
+                        const ticketCode = `${order.eventId.slice(0, 4)}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+                        const qrCodeData = await QRCode.toDataURL(ticketCode);
+
                         await tx.ticket.create({
                             data: {
                                 orderId: order.id,
                                 ticketTypeId: order.ticketTypeId,
                                 eventId: order.eventId,
                                 userId: order.userId,
-                                code: `${order.eventId.slice(0, 4)}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
+                                code: ticketCode,
+                                qrCode: qrCodeData,
                                 status: 'ACTIVE',
                             },
                         });
@@ -166,9 +171,24 @@ export class PaymentController {
                 throw new AppError('Order not found', 404);
             }
 
-            // If already paid, return success
+            // If already paid, return success with tickets
             if (order.status === 'PAID') {
-                return { success: true, message: 'Order already completed', orderId: order.id };
+                const tickets = await prisma.ticket.findMany({
+                    where: { orderId: order.id },
+                    select: {
+                        id: true,
+                        code: true,
+                        qrCode: true,
+                        status: true,
+                    }
+                });
+
+                return {
+                    success: true,
+                    message: 'Order already completed',
+                    orderId: order.id,
+                    tickets
+                };
             }
 
             // Complete the order in a transaction
@@ -187,23 +207,39 @@ export class PaymentController {
 
                 // 3. Generate Tickets
                 for (let i = 0; i < order.quantity; i++) {
+                    const ticketCode = `${order.eventId.slice(0, 4)}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+                    const qrCodeData = await QRCode.toDataURL(ticketCode);
+
                     await tx.ticket.create({
                         data: {
                             orderId: order.id,
                             ticketTypeId: order.ticketTypeId,
                             eventId: order.eventId,
                             userId: order.userId,
-                            code: `${order.eventId.slice(0, 4)}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
+                            code: ticketCode,
+                            qrCode: qrCodeData,
                             status: 'ACTIVE',
                         },
                     });
                 }
             });
 
+            // Fetch the created tickets with QR codes
+            const tickets = await prisma.ticket.findMany({
+                where: { orderId: order.id },
+                select: {
+                    id: true,
+                    code: true,
+                    qrCode: true,
+                    status: true,
+                }
+            });
+
             return {
                 success: true,
                 message: 'Payment verified and order completed',
-                orderId: order.id
+                orderId: order.id,
+                tickets
             };
         } catch (error: any) {
             console.error('Session verification error:', error);
