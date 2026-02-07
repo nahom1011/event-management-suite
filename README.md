@@ -24,15 +24,25 @@ A professional-grade, multi-role event management ecosystem designed for reliabi
 - **RBAC:** Fine-grained Role-Based Access Control protecting every route and action.
 - **Verification:** Built-in email verification flow for new users.
 
-### 💳 Payments & Ecommerce
+### 💳 Payments & Digital Credentials
 - **Stripe Integration:** Secureized payment processing with Stripe Checkout.
 - **Tiered Ticketing:** Support for multiple ticket types (Early Bird, Standard, VIP).
-- **Auto-Notifications:** Automated transactional emails via SendGrid/Nodemailer.
+- **PDF Generation:** One-tap professional PDF ticket generation with embedded QR codes.
+- **Digital Vault:** Dedicated "My Tickets" portal for managing and downloading credentials.
 
-### 🎨 Stunning User Interface
+### 🎨 Premium User Experience
+- **Aurora UI:** Vibrant, moving background gradients and advanced glassmorphism.
 - **Dynamic Animations:** Fluid transitions powered by Framer Motion.
+- **Refined Interaction:** Shimmering buttons, glossy reflective layers, and spring-based physics.
 - **Modern Styling:** Responsive, utility-first design with Tailwind CSS.
-- **Rich Feedback:** Intuitive loading states and interactive UI components.
+
+---
+
+## 💎 Recently Added: The Premium Vault
+We've recently overhauled the post-purchase experience:
+- **Aurora Success Page:** A stunning, immersive success screen with deep backdrop filters.
+- **Physical-Style Tickets:** Digital passes designed with "notched" corners to mimic real-world tickets.
+- **Shared Utility Core:** A centralized PDF/QR generation engine ensuring consistency across the platform.
 
 ---
 
@@ -42,7 +52,7 @@ A professional-grade, multi-role event management ecosystem designed for reliabi
 
 | Area | Technologies |
 | :--- | :--- |
-| **Frontend** | React 19, Vite, TypeScript, Tailwind CSS, Framer Motion, Axios |
+| **Frontend** | React 19, Vite, TypeScript, Tailwind CSS, Framer Motion, **jsPDF**, Axios |
 | **Backend** | Node.js, Fastify, TypeScript, Zod (Validation), IORedis |
 | **Persistence** | PostgreSQL, Prisma ORM |
 | **DevOps** | Docker, Docker Compose |
