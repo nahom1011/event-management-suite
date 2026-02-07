@@ -69,20 +69,31 @@ export class OrdersService {
                 event: {
                     select: {
                         title: true,
-                        startDate: true,
+                        description: true,
                         location: true,
+                        startDate: true,
+                        endDate: true,
                     }
                 },
                 ticketType: {
                     select: {
                         name: true,
                         price: true,
+                        currency: true,
                     }
                 },
                 tickets: {
                     select: {
+                        id: true,
                         code: true,
-                        qrCode: true
+                        qrCode: true,
+                        status: true,
+                        user: {
+                            select: {
+                                name: true,
+                                email: true,
+                            }
+                        }
                     }
                 }
             },

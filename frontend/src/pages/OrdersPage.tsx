@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
-import { Ticket, Calendar, MapPin, QrCode, Download, ExternalLink, ChevronRight, Hash } from 'lucide-react';
+import { Calendar, MapPin, Download, ExternalLink, Hash, FileText, QrCode as QrIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { downloadQRCode, generatePDFTicket } from '../utils/ticketUtils';
 import './OrdersPage.css';
 
 const OrdersPage = () => {
@@ -25,6 +26,33 @@ const OrdersPage = () => {
         fetchOrders();
     }, []);
 
+    const handleDownloadPDF = (order: any, ticket: any) => {
+        // Construct the expected TicketData structure
+        const ticketData = {
+            id: ticket.id,
+            code: ticket.code,
+            qrCode: ticket.qrCode,
+            status: ticket.status,
+            event: {
+                title: order.event.title,
+                description: order.event.description,
+                location: order.event.location,
+                startDate: order.event.startDate,
+                endDate: order.event.endDate,
+            },
+            ticketType: {
+                name: order.ticketType.name,
+                price: order.amount / order.quantity, // Estimate price per ticket
+                currency: order.ticketType.currency || 'USD',
+            },
+            user: {
+                name: ticket.user.name,
+                email: ticket.user.email,
+            }
+        };
+        generatePDFTicket(ticketData);
+    };
+
     return (
         <Layout>
             <div className="orders-container">
@@ -36,7 +64,7 @@ const OrdersPage = () => {
                     >
                         <div>
                             <div className="orders-page-badge">
-                                <Ticket size={14} />
+                                <QrIcon size={14} />
                                 Vaulted Access
                             </div>
                             <h1 className="orders-page-title">My Tickets</h1>
@@ -45,7 +73,7 @@ const OrdersPage = () => {
                         <div className="flex gap-4">
                             <div className="stats-card">
                                 <span className="stats-label">Active</span>
-                                <span className="stats-value">{orders.length}</span>
+                                <span className="stats-value">{orders.reduce((acc, obj) => acc + (obj.tickets?.length || 0), 0)}</span>
                             </div>
                         </div>
                     </motion.div>
@@ -68,20 +96,6 @@ const OrdersPage = () => {
                                 className="order-card"
                             >
                                 <div className="order-card-main">
-                                    <div className="bg-decoration-ticket">
-                                        <Ticket size={120} className="rotate-12" />
-                                    </div>
-
-                                    <div className="transaction-info">
-                                        <div className="transaction-icon-box">
-                                            <Hash size={18} />
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="transaction-label">Transaction Record</span>
-                                            <span className="transaction-id">{order.id.split('-')[0]}</span>
-                                        </div>
-                                    </div>
-
                                     <h2 className="order-event-title">
                                         {order.event.title}
                                     </h2>
@@ -118,24 +132,32 @@ const OrdersPage = () => {
                                     </div>
                                 </div>
 
-                                <div className="ticket-column">
-                                    <div className="ticket-gradient" />
+                                <div className="tickets-column">
+                                    {order.tickets?.map((ticket: any) => (
+                                        <div key={ticket.id} className="ticket-item">
+                                            <div className="qr-preview">
+                                                <img src={ticket.qrCode} alt="QR Code" className="qr-img" />
+                                                <div className="ticket-badge">
+                                                    <Hash size={10} /> {ticket.code}
+                                                </div>
+                                            </div>
 
-                                    <div className="qr-container">
-                                        <QrCode size={120} className="text-bg" />
-                                    </div>
-                                    <p className="qr-code-text">
-                                        {order.tickets?.[0]?.code || 'PENDING'}
-                                    </p>
-
-                                    <div className="ticket-actions">
-                                        <button className="download-pass-btn">
-                                            <Download size={16} /> Save Pass
-                                        </button>
-                                        <button className="explore-event-btn">
-                                            Explore Event <ChevronRight size={14} />
-                                        </button>
-                                    </div>
+                                            <div className="ticket-actions">
+                                                <button
+                                                    onClick={() => handleDownloadPDF(order, ticket)}
+                                                    className="action-btn pdf"
+                                                >
+                                                    <FileText size={16} /> PDF
+                                                </button>
+                                                <button
+                                                    onClick={() => downloadQRCode(ticket.qrCode, ticket.code)}
+                                                    className="action-btn qr"
+                                                >
+                                                    <Download size={16} /> QR
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </motion.div>
                         ))}
@@ -143,7 +165,7 @@ const OrdersPage = () => {
                 ) : (
                     <div className="empty-vault-container">
                         <div className="empty-vault-icon-box">
-                            <Ticket className="text-text-dim/20" size={48} />
+                            <QrIcon className="text-text-dim/20" size={48} />
                         </div>
                         <h3 className="empty-vault-title">Empty Vault</h3>
                         <p className="empty-vault-description">
